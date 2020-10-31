@@ -2,12 +2,63 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    siteUrl: 'https://siteurl.com/',
+    siteUrl: process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/',
     author: {
       name: '@DnCDevelopment',
     },
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+            {
+              allSitePage(filter: {path: {ne: "/404.html"}}) {
+                nodes {
+                  path
+                }
+              }
+              site {
+                siteMetadata {
+                  siteUrl
+                }
+              }
+            }
+          `,
+        serialize: ({
+          site: {
+            siteMetadata: { siteUrl },
+          },
+          allSitePage,
+        }) => {
+          const langRE = /^(\/ua)?\//;
+          return allSitePage.nodes.map(({ path }) => {
+            const res = {
+              url: siteUrl + path,
+              changefreq: 'daily',
+              priority: 0.7,
+            };
+            if (langRE.test(path)) {
+              res.links = [
+                {
+                  lang: 'ru',
+                  url: siteUrl + path.replace(langRE, '/'),
+                },
+                {
+                  lang: 'ua',
+                  url: siteUrl + path.replace(langRE, '/ua/'),
+                },
+                {
+                  lang: 'x-default',
+                  url: siteUrl + path.replace(langRE, '/'),
+                },
+              ];
+            }
+            return res;
+          });
+        },
+      },
+    },
     {
       resolve: 'gatsby-plugin-layout',
       options: {

@@ -56,8 +56,6 @@ const Form: React.FC<IFormProps> = ({
 
   // eslint-disable-next-line no-nested-ternary
   const buttonType = type === 'yellow-form' ? 'yellow-form' : type === 'modal-window' ? 'modal-window' : 'primary';
-  // console.log(buttonType);
-  console.log(type);
 
   const { language } = useContext(context);
 
