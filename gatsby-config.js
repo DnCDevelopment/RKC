@@ -117,8 +117,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://siteurl.com/',
-        sitemap: 'https://siteurl.com/sitemap.xml',
+        host: process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/',
+        sitemap: `${process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/'}sitemap.xml`,
         policy: [
           {
             userAgent: '*',
