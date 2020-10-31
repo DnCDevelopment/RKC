@@ -39,6 +39,7 @@ export interface ISubCategoriesQuery {
   image: {
     value: ICockpitImage;
   };
+  lang: string;
   link: {
     value: string;
   };

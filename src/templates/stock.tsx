@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 
+import Seo from '../components/SEO/SEO';
 import Stock from '../components/Stock/Stock';
 
 import { ISingleStockQuery } from './Types';
@@ -21,7 +22,12 @@ const SingleStock: React.FC<ISingleStockQuery> = ({ data }): JSX.Element => {
     },
   } = data;
 
-  return <Stock imgSrc={fluid} deadline={deadline} link={link} title={title} description={description} lang={lang} />;
+  return (
+    <>
+      <Seo description={description} lang={lang as 'ru' | 'ua'} path={link} title={title} />
+      <Stock imgSrc={fluid} deadline={deadline} link={link} title={title} description={description} lang={lang} />
+    </>
+  );
 };
 
 export const STOCK_DATA_QUERY = graphql`

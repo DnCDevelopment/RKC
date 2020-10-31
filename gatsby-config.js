@@ -2,10 +2,10 @@ require('dotenv').config();
 
 module.exports = {
   siteMetadata: {
-    siteUrl: process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/',
     author: {
-      name: '@DnCDevelopment',
+      name: 'РКЦ',
     },
+    siteUrl: process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/',
   },
   plugins: [
     {

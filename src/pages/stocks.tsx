@@ -1,7 +1,11 @@
 import React from 'react';
+
+import Seo from '../components/SEO/SEO';
 import Stocks from '../components/Stocks/Stocks';
 import Subheader from '../components/Subheader/Subheader';
 import StocksBannerNew from '../components/StocksBanner/StocksBanner';
+
+import { SEO_ITEMS } from '../constants/SEOItems';
 
 const crumbs = [
   {
@@ -16,6 +20,7 @@ const crumbs = [
 
 const StocksPage = () => (
   <div className="stock-page page">
+    <Seo description={SEO_ITEMS.ru.stocksPage.description} lang="ru" path="/about" title={SEO_ITEMS.ru.stocksPage.title} />
     <Subheader crumbs={crumbs} />
     <StocksBannerNew />
     <Stocks />

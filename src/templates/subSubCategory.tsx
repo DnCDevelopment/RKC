@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import CategoryBanner from '../components/CategoryBanner/CategoryBanner';
 import Goods from '../components/Goods/Goods';
+import Seo from '../components/SEO/SEO';
 import Subheader from '../components/Subheader/Subheader';
 
 import { ISubSubCategoriesProps } from './Types';
@@ -33,6 +34,7 @@ const SubSubCategory: React.FC<ISubSubCategoriesProps> = ({ data }): JSX.Element
           childImageSharp: { fluid },
         },
       },
+      lang,
       link: { value: linkValue },
       title: { value: titleValue },
     },
@@ -65,6 +67,7 @@ const SubSubCategory: React.FC<ISubSubCategoriesProps> = ({ data }): JSX.Element
 
   return (
     <div className="big-container">
+      <Seo description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
       <Goods goods={nodes} />
@@ -74,7 +77,7 @@ const SubSubCategory: React.FC<ISubSubCategoriesProps> = ({ data }): JSX.Element
 
 export const query = graphql`
   query($path: String!) {
-    cockpitSubSubCategories(link: { value: { eq: $path } }) {
+    cockpitSubSubCategories(link: { value: { eq: $path } }, lang: { ne: "any" }) {
       subCategory {
         value {
           link {
@@ -107,6 +110,7 @@ export const query = graphql`
           }
         }
       }
+      lang
       link {
         value
       }

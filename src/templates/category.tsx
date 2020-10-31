@@ -3,6 +3,7 @@ import { graphql } from 'gatsby';
 
 import Catalog from '../components/Catalog/Catalog';
 import CategoryBanner from '../components/CategoryBanner/CategoryBanner';
+import Seo from '../components/SEO/SEO';
 import Subheader from '../components/Subheader/Subheader';
 
 import { ICategoriesProps } from './Types';
@@ -23,6 +24,7 @@ const Category: React.FC<ICategoriesProps> = ({ data }): JSX.Element => {
       },
       link: { value: linkValue },
       title: { value: titleValue },
+      lang,
     },
   } = data;
 
@@ -45,6 +47,7 @@ const Category: React.FC<ICategoriesProps> = ({ data }): JSX.Element => {
 
   return (
     <div className="catalog-page page">
+      <Seo description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
       <Catalog nodes={nodes} title={TRANSLATE[language as 'ua' | 'ru'].subCategory} />
@@ -54,7 +57,7 @@ const Category: React.FC<ICategoriesProps> = ({ data }): JSX.Element => {
 
 export const query = graphql`
   query($path: String!) {
-    cockpitCategories(link: { value: { eq: $path } }) {
+    cockpitCategories(link: { value: { eq: $path } }, lang: { ne: "any" }) {
       description {
         value
       }
@@ -67,6 +70,7 @@ export const query = graphql`
           }
         }
       }
+      lang
       link {
         value
       }
