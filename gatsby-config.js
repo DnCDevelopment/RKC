@@ -24,8 +24,8 @@ module.exports = {
     {
       resolve: '@fika/gatsby-source-cockpit',
       options: {
-        token: '570e62327e33a920aa6f364f8ae2ba',
-        baseUrl: 'http://rck-content.dncapp.website',
+        token: process.env.COCKPIT_TOKEN,
+        baseUrl: process.env.COCKPIT_URL,
         locales: ['ru', 'ua'],
         collections: [],
       },
