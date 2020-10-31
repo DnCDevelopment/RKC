@@ -1,0 +1,217 @@
+* {
+  box-sizing: border-box;
+  outline: none;
+
+  --transparent: rgba(0, 0, 0, 0);
+  --border-color: #cfcfcf;
+  --black: #212122;
+  --dark-grey: #212121;
+  --grey: #323232;
+  --grey-transparent: rgba(50, 50, 50, 0.1);
+  --grey-low-transparent: rgba(50, 50, 50, 0.7);
+  --header-grey: rgb(64, 64, 64);
+  --inherit: inherit;
+  --light-grey: #f0f0f0;
+  --orange: #ff9605;
+  --red: #ff3333;
+  --transparent: transparent;
+  --white: #ffffff;
+  --white-transparent: rgba(256, 256, 256, 0.5);
+  --white-grey: #7d7d7d;
+  --ya-gray-transparent: rgba(33, 33, 34, 0.65);
+  --yellow: #ffca08;
+  --light-yellow: #ffe278;
+
+  --yellow-shadow: rgba(255, 202, 8, 0.25);
+  --offices-shadow: 0px 4px 15px rgba(0, 0, 0, 0.77);
+  --button-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  --offices-border: 5px;
+  --primary-radius: 10px;
+  --button-radius: 40px;
+  --button-transition: background-color 0.3s ease-in;
+
+  --small-font-size: 12px;
+  --normal-font-size: 14px;
+  --primary-font-size: 16px;
+  --common-font-size: 18px;
+  --massive-font-size: 24px;
+  --big-font-size: 30px;
+  --little-bigger-than-big-font: 36px;
+  --lil-large-font-size: 44px;
+  --large-font-size: 48px;
+  --extra-large-font-size: 64px;
+  --xx-large-font-size: 144px;
+
+  --small-container: 360px;
+  --medium-container: 1100px;
+  --big-container: 1200px;
+
+  --font-family: 'Montserrat', sans-serif;
+
+  --bold-font: 700;
+  --hard-font: 600;
+  --fat-font: 500;
+  --thin-font: 400;
+  --light-font: 300;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow-x: hidden;
+  font-size: var(--primary-font-size);
+  font-family: var(--font-family);
+
+  #gatsby-focus-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    header {
+      flex: 0 0 auto;
+    }
+
+    main {
+      flex: 1 0 auto;
+    }
+
+    footer {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+a {
+  color: var(--inherit);
+  text-decoration: none;
+  -webkit-tap-highlight-color: var(--transparent);
+}
+
+.big-container {
+  max-width: var(--big-container);
+  margin: 0 auto 130px auto;
+  padding: 10px;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0;
+}
+
+.fixed {
+  overflow: hidden;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: var(--inherit);
+  -webkit-text-fill-color: var(--inherit);
+  -webkit-box-shadow: 0 0 0px 1000px var(--transparent);
+  box-shadow: 0 0 0px 1000px var(--transparent);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.medium-container {
+  max-width: var(--medium-container);
+  margin: 90px auto;
+  padding: 0 15px;
+}
+
+.carousel {
+  &-range-number {
+    padding: 0 15px;
+    color: var(--white);
+    font-weight: var(--bold-font);
+    font-size: var(--normal-font-size);
+  }
+  &-buttons {
+    & div {
+      cursor: pointer;
+    }
+  }
+  &-dots {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    &-item {
+      box-sizing: content-box;
+      width: 10px;
+      height: 10px;
+      margin: 10px;
+      background-color: var(--black);
+      border: 8px solid var(--white);
+      border-radius: 100%;
+      cursor: pointer;
+      &-current {
+        border-color: var(--border-color);
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1030px) {
+  .big-container {
+    padding: 0;
+  }
+
+  .medium-container {
+    padding: 0;
+  }
+}
+
+input[type='range'] {
+  width: 100%;
+  height: 3px;
+  background: var(--white-transparent);
+  -webkit-appearance: none;
+  :focus {
+    outline: none;
+  }
+
+  ::-ms-track {
+    width: 100%;
+    overflow: hidden;
+    color: var(--transparent);
+    background: var(--transparent);
+    border-color: var(--transparent);
+    cursor: pointer;
+  }
+  ::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: var(--yellow);
+    cursor: pointer;
+  }
+  ::-ms-thumb {
+    width: 10px;
+    height: 10px;
+    background: var(--yellow);
+    cursor: pointer;
+  }
+  &::-webkit-slider-thumb {
+    width: 10px;
+    height: 10px;
+    background: var(--yellow);
+    border-radius: 100%;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  :focus::-webkit-slider-runnable-track {
+    background: var(--white);
+  }
+}

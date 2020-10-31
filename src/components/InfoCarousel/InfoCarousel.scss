@@ -1,0 +1,48 @@
+.info-carousel {
+  max-width: 100%;
+  overflow: hidden;
+  &-title {
+    display: block;
+    width: min-content;
+    margin: 50px auto 20px;
+    font-size: var(--common-font-size);
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .carousel {
+    margin-bottom: 20px;
+    &-list {
+      margin: 30px 0;
+      &-item {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .info-carousel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    &-title {
+      font-size: var(--massive-font-size);
+    }
+    .carousel {
+      margin: 20px auto 20px;
+      overflow: visible;
+      &-list {
+        width: 335px;
+        margin: 30px auto 20px;
+        overflow: visible;
+        &-item-current {
+          .info-carousel-item {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}

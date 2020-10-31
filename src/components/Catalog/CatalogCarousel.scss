@@ -1,0 +1,108 @@
+.catalog-carousel {
+  &-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    padding: 20px;
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      background-color: var(--black);
+      opacity: 0.6;
+      content: '';
+    }
+    &-title {
+      color: var(--white);
+      font-size: var(--normal-font-size);
+      text-transform: uppercase;
+    }
+    &-text {
+      display: -webkit-box;
+      height: 55px;
+      overflow: hidden;
+      color: var(--white);
+      font-weight: var(--thin-font);
+      font-size: var(--normal-font-size);
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+    &-wrapper {
+      position: relative;
+      height: 165px;
+      margin: 0 5px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+  }
+  &-wrapper {
+    width: 100%;
+    margin: 10px auto;
+    .carousel {
+      margin: 0 -5px;
+    }
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .catalog-carousel-wrapper {
+    width: var(--small-container);
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .catalog-carousel {
+    &-item {
+      &-wrapper {
+        height: 100%;
+        margin: 0;
+      }
+      &-title {
+        font-size: var(--primary-font-size);
+      }
+      &-text {
+        height: 35px;
+        -webkit-line-clamp: 2;
+      }
+    }
+    &-wrapper {
+      width: var(--medium-container);
+      .carousel {
+        margin: 0;
+        &-list {
+          display: grid;
+          grid-gap: 10px;
+          grid-template-columns: 32fr 23fr;
+          transform: none !important;
+          transition: none !important;
+          &-item {
+            &:first-of-type {
+              grid-row: 1 / span 2;
+              grid-column: 1;
+              .catalog-carousel-item {
+                padding: 25px 65px;
+                &-text {
+                  -webkit-line-clamp: 3;
+                }
+              }
+            }
+          }
+        }
+        &-dots {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .catalog-carousel-wrapper {
+    width: var(--big-container);
+  }
+}

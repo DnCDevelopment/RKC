@@ -1,0 +1,31 @@
+h2.stocks-header {
+  margin: 50px auto;
+  font-size: var(--big-font-size);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.stocks-container {
+  width: var(--small-container);
+  max-width: var(--small-container);
+  margin: 50px auto;
+}
+
+.stocks-cards-container {
+  display: grid;
+  grid-auto-flow: row;
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 1100px) {
+  .stocks-container {
+    width: var(--medium-container);
+    max-width: var(--medium-container);
+  }
+
+  .stocks-cards-container {
+    grid-template-columns: 5fr 3fr;
+  }
+}

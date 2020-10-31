@@ -1,0 +1,35 @@
+.modal {
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+    width: 100vw;
+    height: 100vh;
+    background: var(--grey-low-transparent);
+  }
+
+  &-window-container {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    max-width: 400px;
+    padding: 20px;
+    color: var(--black);
+    background: var(--white);
+    border-radius: var(--primary-radius);
+    transform: translate(-50%, -50%);
+
+    .close {
+      height: 20px;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    svg {
+      float: right;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

@@ -1,0 +1,76 @@
+.current-office {
+  position: relative;
+  margin: auto 20px;
+  color: var(--white);
+  font-size: var(--primary-font-size);
+
+  &:after {
+    position: absolute;
+    top: 2px;
+    right: -25px;
+    width: 10px;
+    height: 10px;
+    border-color: var(--white);
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    content: '';
+  }
+
+  & > svg {
+    position: absolute;
+    left: -25px;
+    height: 20px;
+  }
+}
+
+.office {
+  cursor: pointer;
+}
+
+.offices {
+  position: absolute;
+  top: 45px;
+  right: -5px;
+  z-index: 10;
+  display: none;
+  padding: 5px 10px;
+  color: var(--white);
+  line-height: 1.5;
+  background-color: var(--grey);
+  border-radius: var(--offices-border);
+  box-shadow: var(--offices-shadow);
+
+  &-container {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+  }
+
+  &-open {
+    display: block;
+  }
+}
+
+.vacancies-header>.city-select-wrapper {
+  .current-office {
+    color: var(--black);
+
+    &:after {
+      border-color: var(--black);
+    }
+  }
+}
+
+@media only screen and (min-width: 1030px) {
+  .offices {
+    right: auto;
+    left: 0;
+    width: 180px;
+
+    &-container {
+      order: -1;
+      margin: 0 85px 10px 30px;
+    }
+  }
+}

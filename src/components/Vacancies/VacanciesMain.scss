@@ -1,0 +1,73 @@
+.vacancies-wrapper{
+  width: 100%;
+  margin-bottom: 50px;
+
+  .vacancies-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 50px;
+  }
+
+  .vacancies-wrapper-info-title {
+    text-transform: uppercase;
+  }
+
+  .city-select-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .vacancies-wrapper-city-select {
+      margin-right: 20px;
+    }
+
+    svg {
+      path {
+        fill: var(--black);
+      }
+    }
+  }
+
+  .vacancies-cards-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 100px;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .vacancies-wrapper {
+    width: var(--small-container);
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .vacancies-wrapper{
+    width: var(--big-container);
+    
+    .vacancies-header {
+      flex-direction: row;
+    }
+
+    .city-select-wrapper {
+      flex-direction: row-reverse;
+    }
+
+    .vacancies-cards-container {
+      display: grid;
+      grid-column-gap: 35px;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-bottom: 100px;
+    }
+  }
+
+  .cv-steps {
+    &-container {
+      display: grid;
+      grid-column-gap: 95px;
+      grid-template-columns: 9fr 8fr;
+      width: var(--big-container);
+    }
+  }
+}

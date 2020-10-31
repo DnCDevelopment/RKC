@@ -1,0 +1,134 @@
+.main-stocks {
+  width: 100%;
+  background-color: var(--yellow);
+  &-info {
+    padding: 50px 15px;
+    &-header {
+      font-size: var(--common-font-size);
+      text-transform: uppercase;
+    }
+    &-name {
+      font-size: var(--primary-font-size);
+      text-transform: uppercase;
+    }
+    &-price {
+      font-size: var(--little-bigger-than-big-font);
+    }
+    &-link {
+      padding: 15px 50px;
+      font-weight: var(--bold-font);
+      font-size: var(--primary-font-size);
+      text-transform: uppercase;
+      border: 1px solid var(--dark-grey);
+      border-radius: 30px;
+    }
+  }
+  &-image {
+    z-index: 0;
+    width: 100%;
+  }
+  &-stock {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    font-weight: var(--bold-font);
+    font-size: var(--massive-font-size);
+    background-color: var(--yellow);
+    border-radius: 100%;
+    box-shadow: 0px 0px 0px 10px var(--yellow-shadow);
+  }
+  .carousel {
+    &-list {
+      z-index: 0;
+      &-item {
+        position: relative;
+      }
+    }
+    &-buttons {
+      position: absolute;
+      bottom: 30px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      pointer-events: none;
+      & div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px;
+        pointer-events: all;
+        & svg {
+          width: 15px;
+          height: 25px;
+          & * {
+            fill: var(--white);
+          }
+        }
+      }
+      div:nth-child(2) {
+        transform: rotate(180deg);
+      }
+    }
+    &-range {
+      position: absolute;
+      bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 25px;
+      padding: 0 50px;
+    }
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .main-stocks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 500px;
+    &-info {
+      grid-column: 2;
+      box-sizing: content-box;
+      max-width: 500px;
+      padding: 75px 85px;
+      &-header {
+        margin: 0 0 30px 0;
+        font-size: var(--massive-font-size);
+      }
+      &-name {
+        font-size: var(--common-font-size);
+      }
+    }
+    &-stock {
+      top: unset;
+      bottom: 20px;
+      left: 25px;
+      width: 130px;
+      height: 130px;
+      font-size: var(--lil-large-font-size);
+    }
+    .carousel {
+      grid-row: 1;
+      &-list {
+        max-height: 100%;
+      }
+      &-buttons {
+        right: 0;
+        width: calc(100% - 225px);
+      }
+      &-range {
+        right: 0;
+        width: calc(100% - 225px);
+      }
+    }
+  }
+}

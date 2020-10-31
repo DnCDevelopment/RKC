@@ -1,0 +1,140 @@
+.product-gallery {
+  width: 100%;
+
+  &-title {
+    width: 100%;
+    margin: 30px auto;
+    font-weight: var(--bold-font);
+    font-size: var(--common-font-size);
+    text-transform: uppercase;
+  }
+  &-banner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 400px;
+    overflow: hidden;
+    text-align: center;
+    &-wrapper {
+      width: 100%;
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background-color: var(--black);
+        opacity: 0.7;
+        content: '';
+      }
+    }
+    &-title {
+      margin-bottom: 30px;
+      color: var(--white);
+      font-weight: var(--bold-font);
+      font-size: var(--normal-font-size);
+      text-align: center;
+      text-transform: uppercase;
+    }
+    &-text {
+      width: 100%;
+      color: var(--white);
+      font-size: var(--normal-font-size);
+    }
+  }
+  &-carousel {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .product-gallery {
+    &-title {
+      width: var(--small-container);
+    }
+    &-banner {
+      &-wrapper {
+        width: var(--small-container);
+        margin: 0 auto;
+      }
+    }
+    &-carousel {
+      width: var(--small-container);
+      margin: 40px 0;
+      &-item {
+        width: var(--small-container);
+        height: 210px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .product-gallery {
+    &-title {
+      width: var(--medium-container);
+      font-size: var(--massive-font-size);
+    }
+    &-banner {
+      justify-content: flex-end;
+      min-height: 550px;
+      padding: 85px 0;
+      &-wrapper {
+        width: var(--medium-container);
+        margin: 0 auto;
+      }
+      &-title {
+        width: 40%;
+        font-size: var(--common-font-size);
+        text-align: left;
+      }
+      &-text {
+        width: 40%;
+        font-size: var(--primary-font-size);
+        text-align: left;
+      }
+    }
+
+    &-carousel {
+      width: 50%;
+      .carousel {
+        overflow: visible;
+        &-dots {
+          margin: 20px 0;
+        }
+        &-list {
+          overflow: visible;
+          &-item {
+            transform: scale(0.8);
+            transition: transform 0.2s ease-in-out;
+            &-current {
+              transform: scale(1);
+            }
+          }
+        }
+      }
+      &-item {
+        width: 100%;
+        height: 360px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .product-gallery {
+    &-title {
+      width: var(--big-container);
+    }
+    &-banner {
+      &-wrapper {
+        width: var(--big-container);
+        margin: 0 auto;
+      }
+    }
+  }
+}

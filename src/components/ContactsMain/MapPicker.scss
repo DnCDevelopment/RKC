@@ -1,0 +1,54 @@
+.contacts-map {
+  svg {
+    #pointer {
+      visibility: hidden;
+    }
+    path[id] {
+      cursor: pointer;
+      transition: fill 0.4s, stroke 0.4s;
+      &:hover {
+        fill: var(--orange);
+        stroke: var(--grey);
+      }
+      &.active {
+        fill: var(--orange);
+        stroke: var(--grey);
+      }
+
+      &.active ~ #pointer {
+        visibility: visible;
+      }
+      &.active[data-city='odessa'] ~ #pointer {
+        transform: translate(20px, 275px);
+      }
+      &.active[data-city='kyiv'] ~ #pointer {
+        transform: translate(5px, 5px);
+      }
+      &.active[data-city='lvov'] ~ #pointer {
+        transform: translate(-305px, 45px);
+      }
+      &.active[data-city='ivanofrankovsk'] ~ #pointer {
+        transform: translate(-275px, 110px);
+      }
+      &.active[data-city='hmelnitski'] ~ #pointer {
+        transform: translate(-165px, 90px);
+      }
+      &.active[data-city='zaporozhie'] ~ #pointer {
+        transform: translate(230px, 195px);
+      }
+      &.active[data-city='kharkiv'] ~ #pointer {
+        transform: translate(285px, 50px);
+      }
+      &.active[data-city='poltava'] ~ #pointer {
+        transform: translate(215px, 70px);
+      }
+      &.active[data-city='kyiv'] ~ [data-city='kyiv-obl'] {
+        fill: var(--orange);
+        stroke: var(--grey);
+      }
+      &.active[data-city='dnepr'] ~ #pointer {
+        transform: translate(215px, 165px);
+      }
+    }
+  }
+}

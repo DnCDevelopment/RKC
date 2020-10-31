@@ -1,0 +1,43 @@
+.button {
+  font-weight: var(--bold-font);
+  text-transform: uppercase;
+  border-radius: var(--button-radius);
+  outline: none;
+  cursor: pointer;
+
+  &-primary {
+    background-color: var(--yellow);
+    border: none;
+  }
+
+  &-stock {
+    padding: 0 20px;
+    color: var(--white);
+    background: var(--transparent);
+    border: var(--white) solid 2px;
+    transition: var(--button-transition);
+
+    &:hover {
+      background: var(--white-transparent);
+    }
+  }
+
+  &-yellow-form {
+    background: var(--transparent);
+    border: var(--black) solid 2px;
+  }
+
+  &-modal-window {
+    background-color: var(--yellow);
+    border: none;
+  }
+}
+
+form {
+  .button {
+    &-primary {
+      box-shadow: var(--button-shadow);
+      transition: var(--button-transition);
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.info-carousel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 275px;
+  padding: 25px;
+  background-color: var(--dark-grey);
+  border-radius: 15px;
+  transition: transform 0.2s;
+  &-svg {
+    width: 85px;
+    height: 85px;
+    fill: var(--white);
+  }
+  &-header {
+    color: var(--yellow);
+    font-size: var(--common-font-size);
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &-description {
+    color: var(--white);
+    font-size: var(--normal-font-size);
+    text-align: center;
+  }
+}

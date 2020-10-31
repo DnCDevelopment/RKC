@@ -1,0 +1,24 @@
+.goods-categories-card {
+  width: 275px;
+  height: 100%;
+  padding: 20px;
+  padding-top: 30px;
+  text-align: center;
+  background: var(--dark-grey);
+  border-radius: 30px;
+
+  .goods-categories-card-img {
+    height: 64px;
+  }
+
+  h3 {
+    color: var(--yellow);
+    font-size: var(--primary-font-size);
+    text-transform: uppercase;
+  }
+
+  p {
+    margin-bottom: 0;
+    color: var(--white);
+  }
+}

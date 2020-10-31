@@ -1,0 +1,41 @@
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  &-link {
+    color: var(--ya-gray-transparent);
+    font-size: var(--normal-font-size);
+  }
+
+  &-dot {
+    width: 5px;
+    height: 5px;
+    margin: 0 10px;
+    background-color: var(--ya-gray-transparent);
+    border-radius: 50%;
+  }
+
+  &-break {
+    flex-basis: 100%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .breadcrumbs {
+    &-break {
+      display: none;
+    }
+  }
+}
+
+.about-our-company, .single-stock {
+  .breadcrumbs {
+    &-link {
+      color: var(--white);
+    }
+    &-dot {
+      background-color: var(--white);
+    }
+  }
+}

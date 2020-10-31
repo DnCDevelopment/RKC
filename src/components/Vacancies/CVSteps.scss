@@ -1,0 +1,40 @@
+.cv-steps-list {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 75px auto;
+  max-width: var(--small-container);
+  margin-bottom: 50px;
+  
+  &-index {
+    position: relative;
+    display: flex;
+    grid-column: 1;
+    align-items: center;
+    justify-content: flex-end;
+    width: 75px;
+    height: 75px;
+    font-weight: var(--bold-font);
+    font-size: var(--little-bigger-than-big-font);
+    text-decoration: left;
+    svg {
+      position: absolute;
+      left: 0;
+    }
+    span {
+      z-index: 1;
+    }
+  }
+  &-text {
+    grid-column: 2;
+    font-weight: var(--thin-font);
+    font-size: var(--primary-font-size);
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .cv-steps-list {
+    grid-row-gap: 45px;
+    align-self: baseline;
+    max-width: 100%;
+  }
+}

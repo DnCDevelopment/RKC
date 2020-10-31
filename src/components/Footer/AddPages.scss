@@ -1,0 +1,12 @@
+.add-pages {
+  &-link {
+    display: block;
+  }
+
+  a {
+    margin-bottom: 31px;
+    color: var(--white);
+    text-transform: capitalize;
+    text-decoration: none;
+  }
+}

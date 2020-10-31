@@ -1,0 +1,13 @@
+.vacancy-card {
+  margin-bottom: 30px;
+
+  .card-info-title {
+    margin-bottom: 20px;
+    font-size: var(--common-font-size);
+    text-transform: uppercase;
+  }
+  .card-info-desc {
+    margin-bottom: 40px;
+    font-size: var(--primary-font-size);
+  }
+}

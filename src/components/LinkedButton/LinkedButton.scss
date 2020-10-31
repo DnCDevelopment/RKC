@@ -1,0 +1,10 @@
+.linked-button {
+  cursor: pointer;
+}
+
+.action-card {
+  .linked-button {
+    padding: 0 20px;
+    font-size: var(--normal-font-size);
+  }
+}

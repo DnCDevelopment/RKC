@@ -1,0 +1,42 @@
+.contacts-steps {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 30px 0;
+  }
+  &-title {
+    color: var(--gray);
+    font-size: var(-common-font-size);
+    text-transform: uppercase;
+  }
+}
+@media only screen and (min-width: 360px) {
+  .contacts-steps-title {
+    width: var(--small-container);
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .contacts-steps {
+    &-wrapper {
+      display: grid;
+      grid-column-gap: 95px;
+      grid-template-columns: 9fr 8fr;
+      width: var(--medium-container);
+    }
+    &-title {
+      grid-column: 1 / span 2;
+    }
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .contacts-steps {
+    &-wrapper {
+      grid-row-gap: 30px;
+      width: var(--big-container);
+    }
+  }
+}
