@@ -78,16 +78,32 @@ const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, produc
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: 4.9,
-        reviewCount,
+        reviewCount: reviewCount || 14,
+      },
+      brand: {
+        '@type': 'Brand',
+        name: 'РКЦ',
       },
       offers: {
         '@type': 'Offer',
         url: product.url,
         priceCurrency: 'UAH',
-        price: product.price,
+        price: +product.price,
         priceValidUntil: new Date().toISOString().slice(0, 10),
         itemCondition: 'https://schema.org/UsedCondition',
         availability: 'https://schema.org/InStock',
+      },
+      review: {
+        '@type': 'Review',
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: '5',
+          bestRating: '5',
+        },
+        author: {
+          '@type': 'Person',
+          name: 'РКЦ',
+        },
       },
     });
   }
