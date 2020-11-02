@@ -20,7 +20,13 @@ const crumbs = [
 
 const StocksPage = () => (
   <div className="stock-page page">
-    <Seo description={SEO_ITEMS.ua.stocksPage.description} lang="ua" path="/ua/about" title={SEO_ITEMS.ua.stocksPage.title} />
+    <Seo
+      breadcrumbs={crumbs}
+      description={SEO_ITEMS.ua.stocksPage.description}
+      lang="ua"
+      path="/ua/about"
+      title={SEO_ITEMS.ua.stocksPage.title}
+    />
     <Subheader crumbs={crumbs} />
     <StocksBanner />
     <Stocks />

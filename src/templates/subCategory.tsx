@@ -38,12 +38,12 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
 
   const crumbs = [
     {
-      title: TRANSLATE[language as 'ru' | 'ua'].primaryPage,
-      link: LANGUAGES[language as 'ru' | 'ua'],
+      title: TRANSLATE[lang as 'ru' | 'ua'].primaryPage,
+      link: LANGUAGES[lang as 'ru' | 'ua'],
     },
     {
       title: 'Каталог',
-      link: `${LANGUAGES[language as 'ru' | 'ua']}catalog`,
+      link: `${LANGUAGES[lang as 'ru' | 'ua']}catalog`,
     },
     {
       title: categoryTitle,
@@ -57,7 +57,7 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
 
   return (
     <div className="big-container catalog-page">
-      <Seo description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
+      <Seo breadcrumbs={crumbs} description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
       <Catalog nodes={nodes} title={TRANSLATE[language as 'ua' | 'ru'].subCategory} />

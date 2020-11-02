@@ -20,7 +20,13 @@ const crumbs = [
 const Contacts: React.FC = (): JSX.Element => {
   return (
     <div className="vacancies-page page">
-      <Seo description={SEO_ITEMS.ru.vacanciesPage.description} lang="ru" path="/vacancies" title={SEO_ITEMS.ru.aboutPage.title} />
+      <Seo
+        breadcrumbs={crumbs}
+        description={SEO_ITEMS.ru.vacanciesPage.description}
+        lang="ru"
+        path="/vacancies"
+        title={SEO_ITEMS.ru.aboutPage.title}
+      />
       <Subheader crumbs={crumbs} />
       <VacanciesMain />
     </div>

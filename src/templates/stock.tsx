@@ -6,6 +6,8 @@ import Stock from '../components/Stock/Stock';
 
 import { ISingleStockQuery } from './Types';
 
+import { LANGUAGES, TRANSLATE } from '../constants/languages';
+
 const SingleStock: React.FC<ISingleStockQuery> = ({ data }): JSX.Element => {
   const {
     cockpitStocks: {
@@ -22,10 +24,25 @@ const SingleStock: React.FC<ISingleStockQuery> = ({ data }): JSX.Element => {
     },
   } = data;
 
+  const crumbs = [
+    {
+      title: TRANSLATE[lang as 'ru' | 'ua'].primaryPage,
+      link: LANGUAGES[lang as 'ru' | 'ua'],
+    },
+    {
+      title: TRANSLATE[lang as 'ru' | 'ua'].stockPage,
+      link: `${LANGUAGES[lang as 'ru' | 'ua']}stocks`,
+    },
+    {
+      title,
+      link,
+    },
+  ];
+
   return (
     <>
-      <Seo description={description} lang={lang as 'ru' | 'ua'} path={link} title={title} />
-      <Stock imgSrc={fluid} deadline={deadline} link={link} title={title} description={description} lang={lang} />
+      <Seo breadcrumbs={crumbs} description={description} lang={lang as 'ru' | 'ua'} path={link} title={title} />
+      <Stock crumbs={crumbs} imgSrc={fluid} deadline={deadline} title={title} description={description} lang={lang} />
     </>
   );
 };

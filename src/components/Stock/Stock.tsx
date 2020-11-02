@@ -1,35 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Img from 'gatsby-background-image';
 
 import Subheader from '../Subheader/Subheader';
 import LinkedButton from '../LinkedButton/LinkedButton';
 
-import { TRANSLATE, LANGUAGES } from '../../constants/languages';
+import { TRANSLATE } from '../../constants/languages';
 
 import { IStockProps } from './Types';
 
-import context from '../../context/context';
-
 import './Stock.scss';
 
-const Stock: React.FC<IStockProps> = ({ imgSrc, deadline, link, title, description, lang }) => {
-  const { language } = useContext(context);
-
-  const crumbs = [
-    {
-      title: TRANSLATE[language as 'ru' | 'ua'].primaryPage,
-      link: LANGUAGES[language as 'ru' | 'ua'],
-    },
-    {
-      title: TRANSLATE[language as 'ru' | 'ua'].stockPage,
-      link: `${LANGUAGES[language as 'ru' | 'ua']}stocks`,
-    },
-    {
-      title,
-      link,
-    },
-  ];
-
+const Stock: React.FC<IStockProps> = ({ crumbs, imgSrc, deadline, title, description, lang }) => {
   return (
     <Img fluid={imgSrc} className="single-stock">
       <div className="single-stock-wrapper">

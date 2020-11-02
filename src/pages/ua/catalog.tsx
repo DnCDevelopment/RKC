@@ -59,7 +59,13 @@ const CatalogPage: React.FC = (): JSX.Element => {
 
   return (
     <div className="catalog-page page">
-      <Seo description={SEO_ITEMS.ua.catalogPage.description} lang="ua" path="/ua/catalog" title={SEO_ITEMS.ua.catalogPage.title} />
+      <Seo
+        breadcrumbs={crumbs}
+        description={SEO_ITEMS.ua.catalogPage.description}
+        lang="ua"
+        path="/ua/catalog"
+        title={SEO_ITEMS.ua.catalogPage.title}
+      />
       <Subheader crumbs={crumbs} />
       <CatalogCarousel />
       <Catalog nodes={nodes} title={TRANSLATE[language as 'ua' | 'ru'].catalog} />

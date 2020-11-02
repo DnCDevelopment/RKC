@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 import CategoryBanner from '../components/CategoryBanner/CategoryBanner';
@@ -9,8 +9,6 @@ import Subheader from '../components/Subheader/Subheader';
 import { ISubSubCategoriesProps } from './Types';
 
 import { TRANSLATE, LANGUAGES } from '../constants/languages';
-
-import context from '../context/context';
 
 const SubSubCategory: React.FC<ISubSubCategoriesProps> = ({ data }): JSX.Element => {
   const {
@@ -40,16 +38,14 @@ const SubSubCategory: React.FC<ISubSubCategoriesProps> = ({ data }): JSX.Element
     },
   } = data;
 
-  const { language } = useContext(context);
-
   const crumbs = [
     {
-      title: TRANSLATE[language as 'ru' | 'ua'].primaryPage,
-      link: LANGUAGES[language as 'ru' | 'ua'],
+      title: TRANSLATE[lang as 'ru' | 'ua'].primaryPage,
+      link: LANGUAGES[lang as 'ru' | 'ua'],
     },
     {
       title: 'Каталог',
-      link: `${LANGUAGES[language as 'ru' | 'ua']}catalog`,
+      link: `${LANGUAGES[lang as 'ru' | 'ua']}catalog`,
     },
     {
       title: categoryTitle,
@@ -67,7 +63,7 @@ const SubSubCategory: React.FC<ISubSubCategoriesProps> = ({ data }): JSX.Element
 
   return (
     <div className="big-container">
-      <Seo description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
+      <Seo breadcrumbs={crumbs} description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
       <Goods goods={nodes} />

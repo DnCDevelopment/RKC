@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 import Subheader from '../components/Subheader/Subheader';
@@ -15,9 +15,7 @@ import { IProductProps } from './Types';
 
 import { LANGUAGES, TRANSLATE } from '../constants/languages';
 
-import context from '../context/context';
-
-const product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Element => {
+const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Element => {
   const {
     name: { value: name },
     lang,
@@ -57,16 +55,14 @@ const product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
     },
   } = cockpitProduct;
 
-  const { language } = useContext(context);
-
   const productCrumbs = [
     {
-      title: TRANSLATE[language as 'ru' | 'ua'].primaryPage,
-      link: LANGUAGES[language as 'ru' | 'ua'],
+      title: TRANSLATE[lang as 'ru' | 'ua'].primaryPage,
+      link: LANGUAGES[lang as 'ru' | 'ua'],
     },
     {
       title: 'Каталог',
-      link: `${LANGUAGES[language as 'ru' | 'ua']}catalog`,
+      link: `${LANGUAGES[lang as 'ru' | 'ua']}catalog`,
     },
     {
       title: categoryTitle,
@@ -88,7 +84,7 @@ const product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
 
   return (
     <div className="page">
-      <Seo description={description} lang={lang as 'ru' | 'ua'} path={productLink} title={name} />
+      <Seo breadcrumbs={productCrumbs} description={description} lang={lang as 'ru' | 'ua'} path={productLink} title={name} />
       <Subheader crumbs={productCrumbs} />
       <ProductBar />
       <ProductInfo name={name} description={description} price={price} images={images} />
@@ -109,7 +105,7 @@ const product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
   );
 };
 
-export default product;
+export default Product;
 
 export const productQuery = graphql`
   query($path: String!) {

@@ -1,4 +1,8 @@
+import { IBreadcrumb } from '../Breadcrumbs/Types';
+import { IOffice } from '../Types';
+
 export interface ISeoProps {
+  breadcrumbs: IBreadcrumb[];
   description: string;
   lang: 'ru' | 'ua';
   path: string;
@@ -6,6 +10,9 @@ export interface ISeoProps {
 }
 
 export interface ISiteQueryProps {
+  allCockpitOffices: {
+    nodes: IOffice[];
+  };
   site: {
     siteMetadata: {
       author: {

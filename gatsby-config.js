@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 require('dotenv').config();
 
 module.exports = {
@@ -8,6 +9,18 @@ module.exports = {
     siteUrl: process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/',
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'gatsby-starter-default',
+        short_name: 'starter',
+        start_url: '/',
+        background_color: '#323232',
+        theme_color: '#323232',
+        display: 'minimal-ui',
+        icon: 'src/assets/images/gm-favicon.png',
+      },
+    },
     {
       resolve: 'gatsby-plugin-sitemap',
       options: {

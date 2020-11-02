@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 import BackgroundImage from 'gatsby-background-image';
+
 import PhoneSVG from '../../assets/icons/phone.svg';
 import MailSVG from '../../assets/icons/mail.svg';
 import MarkerSVG from '../../assets/icons/marker.svg';
-import './MainOffice.scss';
+
+import { TRANSLATE } from '../../constants/languages';
 
 import context from '../../context/context';
-import { TRANSLATE } from '../../constants/languages';
+
+import './MainOffice.scss';
 
 const MAIN_OFFICE_BG_QUERY = graphql`
   query mainOfficeFileQuery {

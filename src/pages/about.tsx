@@ -22,7 +22,13 @@ const crumbs = [
 const About: React.FC = (): JSX.Element => {
   return (
     <div className="about-page page">
-      <Seo description={SEO_ITEMS.ru.aboutPage.description} lang="ru" path="/about" title={SEO_ITEMS.ru.aboutPage.title} />
+      <Seo
+        breadcrumbs={crumbs}
+        description={SEO_ITEMS.ru.aboutPage.description}
+        lang="ru"
+        path="/about"
+        title={SEO_ITEMS.ru.aboutPage.title}
+      />
       <AboutOurCompany crumbs={crumbs} />
       <OurBranches />
       <GoodsCategories />

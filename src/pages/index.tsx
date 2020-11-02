@@ -13,7 +13,18 @@ import { SEO_ITEMS } from '../constants/SEOItems';
 const IndexPage: React.FC = (): JSX.Element => {
   return (
     <div className="home-page">
-      <Seo description={SEO_ITEMS.ru.indexPage.description} lang="ru" path="/" title={SEO_ITEMS.ru.indexPage.title} />
+      <Seo
+        breadcrumbs={[
+          {
+            title: 'Главная',
+            link: '/',
+          },
+        ]}
+        description={SEO_ITEMS.ru.indexPage.description}
+        lang="ru"
+        path="/"
+        title={SEO_ITEMS.ru.indexPage.title}
+      />
       <Banner />
       <InfoCarousel />
       <Advantages />
