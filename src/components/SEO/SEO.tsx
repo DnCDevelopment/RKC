@@ -88,7 +88,7 @@ const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, produc
         '@type': 'Offer',
         url: product.url,
         priceCurrency: 'UAH',
-        price: +product.price,
+        price: product.price,
         priceValidUntil: new Date().toISOString().slice(0, 10),
         itemCondition: 'https://schema.org/UsedCondition',
         availability: 'https://schema.org/InStock',
