@@ -11,7 +11,7 @@ const ProductSpecifications: React.FC<IProductSpecificationsProps> = ({ data, ti
     </h2>
     <div className="product-specifications">
       {Object.keys(data).map(key => (
-        <div className="specification">
+        <div key={key} className="specification">
           <div className="specification-characteristic">{key}</div>
           <div className="specification-underline" />
           <div className="specification-value">{data[key]}</div>
