@@ -11,6 +11,8 @@ import { LANGUAGES, TRANSLATE } from '../constants/languages';
 const SingleStock: React.FC<ISingleStockQuery> = ({ data }): JSX.Element => {
   const {
     cockpitStocks: {
+      cockpitCreated,
+      cockpitModified,
       title: { value: title },
       description: { value: description },
       link: { value: link },
@@ -39,9 +41,16 @@ const SingleStock: React.FC<ISingleStockQuery> = ({ data }): JSX.Element => {
     },
   ];
 
+  const article = {
+    datePublished: cockpitCreated,
+    dateModified: cockpitModified,
+    seoImages: [fluid.src],
+    url: link,
+  };
+
   return (
     <>
-      <Seo breadcrumbs={crumbs} description={description} lang={lang as 'ru' | 'ua'} path={link} title={title} />
+      <Seo article={article} breadcrumbs={crumbs} description={description} lang={lang as 'ru' | 'ua'} path={link} title={title} />
       <Stock crumbs={crumbs} imgSrc={fluid} deadline={deadline} title={title} description={description} lang={lang} />
     </>
   );
@@ -50,6 +59,8 @@ const SingleStock: React.FC<ISingleStockQuery> = ({ data }): JSX.Element => {
 export const STOCK_DATA_QUERY = graphql`
   query($path: String!) {
     cockpitStocks(link: { value: { eq: $path } }, lang: { ne: "any" }) {
+      cockpitCreated(fromNow: false)
+      cockpitModified(fromNow: false)
       link {
         value
       }

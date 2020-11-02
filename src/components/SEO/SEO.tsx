@@ -30,7 +30,7 @@ const SITE_QUERY = graphql`
   }
 `;
 
-const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, product, title }): JSX.Element => {
+const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, path, product, title }): JSX.Element => {
   const {
     allCockpitOffices: { nodes },
     site: {
@@ -103,6 +103,33 @@ const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, produc
         author: {
           '@type': 'Person',
           name: 'РКЦ',
+        },
+      },
+    });
+  }
+
+  if (article) {
+    schemaOrgJSONLD.push({
+      '@context': shemaContext,
+      '@type': 'NewsArticle',
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': article.url,
+      },
+      headline: title,
+      image: article.seoImages,
+      datePublished: article.datePublished,
+      dateModified: article.dateModified,
+      author: {
+        '@type': 'Person',
+        name: 'РКЦ',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'РКЦ',
+        logo: {
+          '@type': 'ImageObject',
+          url: favicon,
         },
       },
     });

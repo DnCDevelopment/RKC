@@ -1,6 +1,13 @@
 import { IBreadcrumb } from '../Breadcrumbs/Types';
 import { IOffice } from '../Types';
 
+export interface IArticle {
+  datePublished: string;
+  dateModified: string;
+  seoImages: string[];
+  url: string;
+}
+
 export interface IProduct {
   price: string;
   seoImages: string[];
@@ -8,6 +15,7 @@ export interface IProduct {
 }
 
 export interface ISeoProps {
+  article?: IArticle;
   breadcrumbs: IBreadcrumb[];
   description: string;
   lang: 'ru' | 'ua';

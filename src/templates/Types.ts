@@ -141,6 +141,8 @@ export interface IProductProps {
 export interface ISingleStockQuery {
   data: {
     cockpitStocks: {
+      cockpitCreated: string;
+      cockpitModified: string;
       title: {
         value: string;
       };
