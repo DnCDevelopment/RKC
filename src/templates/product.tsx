@@ -98,7 +98,14 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
 
   return (
     <div className="page">
-      <Seo breadcrumbs={productCrumbs} description={description} lang={lang as 'ru' | 'ua'} path={productLink} title={name} />
+      <Seo
+        breadcrumbs={productCrumbs}
+        description={description}
+        lang={lang as 'ru' | 'ua'}
+        path={productLink}
+        product={product}
+        title={name}
+      />
       <Subheader crumbs={productCrumbs} />
       <ProductBar />
       <ProductInfo name={name} description={description} price={price} images={images} />
