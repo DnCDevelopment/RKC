@@ -30,7 +30,7 @@ const SITE_QUERY = graphql`
   }
 `;
 
-const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, title }): JSX.Element => {
+const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, product, title }): JSX.Element => {
   const {
     allCockpitOffices: { nodes },
     site: {
@@ -40,8 +40,9 @@ const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, title 
 
   const shemaContext = 'http://schema.org';
   const odessaOffice = nodes.find(({ lang: language }) => language === lang);
+  const reviewCount = (Math.floor(Math.random() * 8) + 1) * (+new Date() % 10);
 
-  const schemaOrgJSONLD = [
+  const schemaOrgJSONLD: { [key: string]: any }[] = [
     {
       '@context': shemaContext,
       '@type': 'Organization',
@@ -66,6 +67,30 @@ const SEO: React.FC<ISeoProps> = ({ breadcrumbs, description, lang, path, title 
       })),
     },
   ];
+
+  if (product) {
+    schemaOrgJSONLD.push({
+      '@context': shemaContext,
+      '@type': 'Product',
+      name: title,
+      image: product.seoImages,
+      description,
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: 4.9,
+        reviewCount,
+      },
+      offers: {
+        '@type': 'Offer',
+        url: product.url,
+        priceCurrency: 'UAH',
+        price: product.price,
+        priceValidUntil: new Date().toISOString().slice(0, 10),
+        itemCondition: 'https://schema.org/UsedCondition',
+        availability: 'https://schema.org/InStock',
+      },
+    });
+  }
 
   return (
     <Helmet

@@ -82,6 +82,20 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
     },
   ];
 
+  const seoImages = images.map(
+    ({
+      childImageSharp: {
+        fluid: { src },
+      },
+    }) => src
+  );
+
+  const product = {
+    price,
+    seoImages,
+    url: productLink,
+  };
+
   return (
     <div className="page">
       <Seo breadcrumbs={productCrumbs} description={description} lang={lang as 'ru' | 'ua'} path={productLink} title={name} />
