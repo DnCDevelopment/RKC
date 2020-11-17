@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { graphql, useStaticQuery } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 
 import { ISubCategoriesProps } from './Types';
 import { ISubCategoriesQuery } from '../Types';
@@ -31,7 +31,7 @@ const SUBCATEGORIES_QUERY = graphql`
   }
 `;
 
-const SubCategories: React.FC<ISubCategoriesProps> = ({ isActive, category, index, setSubCategory }): JSX.Element => {
+const SubCategories: React.FC<ISubCategoriesProps> = ({ isActive, category, index }): JSX.Element => {
   const {
     allCockpitSubCategories: { nodes },
   }: ISubCategoriesQuery = useStaticQuery(SUBCATEGORIES_QUERY);
@@ -54,9 +54,9 @@ const SubCategories: React.FC<ISubCategoriesProps> = ({ isActive, category, inde
       {!!subCategories.length && (
         <div className={`sub-categories sub-categories-${index} ${!isActive ? 'not-visible' : ''}`}>
           {subCategories.map(({ link: { value: linkValue }, title: { value } }) => (
-            <div key={linkValue} className="category sub-category" onClick={() => setSubCategory(linkValue)}>
+            <Link key={linkValue} className="category sub-category" to={linkValue}>
               {value}
-            </div>
+            </Link>
           ))}
         </div>
       )}

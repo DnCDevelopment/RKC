@@ -24,7 +24,7 @@ const MENU_QUERY = graphql`
   }
 `;
 
-const Categories: React.FC<ICategoriesProps> = ({ isActive, link, setActive, setCategory, setSubCategory }): JSX.Element => {
+const Categories: React.FC<ICategoriesProps> = ({ isActive, link, setActive, setCategory }): JSX.Element => {
   const {
     allCockpitCategories: { nodes },
   }: ICategoryQuery = useStaticQuery(MENU_QUERY);
@@ -34,12 +34,7 @@ const Categories: React.FC<ICategoriesProps> = ({ isActive, link, setActive, set
   const categoriesRef = useRef<HTMLDivElement>();
 
   const handleClickOutside = useCallback(e => {
-    if (
-      categoriesRef &&
-      !categoriesRef.current.contains(e.target) &&
-      !e.target.classList.contains('catalog-title-wrapper') &&
-      !e.target.classList.contains('sub-category')
-    ) {
+    if (categoriesRef && !categoriesRef.current.contains(e.target) && !e.target.classList.contains('catalog-title-wrapper')) {
       setActive(false);
     }
   }, []);
@@ -62,7 +57,6 @@ const Categories: React.FC<ICategoriesProps> = ({ isActive, link, setActive, set
           className="category"
           onClick={() => {
             setCategory({ subCategory: linkValue, index });
-            setSubCategory(undefined);
           }}
         >
           {value}

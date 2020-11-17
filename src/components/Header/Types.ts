@@ -7,7 +7,6 @@ export interface ICategoriesProps {
   link: string | undefined;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   setCategory: React.Dispatch<React.SetStateAction<ISubCategory>>;
-  setSubCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface ISubCategory {
