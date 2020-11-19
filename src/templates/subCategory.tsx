@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { graphql } from 'gatsby';
 
 import CategoryBanner from '../components/CategoryBanner/CategoryBanner';
+import Goods from '../components/Goods/Goods';
 import Seo from '../components/SEO/SEO';
 import Subheader from '../components/Subheader/Subheader';
 
@@ -9,12 +10,9 @@ import { ISubCategoriesProps } from './Types';
 
 import { TRANSLATE, LANGUAGES } from '../constants/languages';
 
-import context from '../context/context';
-import Catalog from '../components/Catalog/Catalog';
-
 const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
   const {
-    allCockpitSubSubCategories: { nodes },
+    allCockpitProduct: { nodes },
     cockpitSubCategories: {
       category: {
         value: {
@@ -33,8 +31,6 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
       title: { value: titleValue },
     },
   } = data;
-
-  const { language } = useContext(context);
 
   const crumbs = [
     {
@@ -60,7 +56,7 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
       <Seo breadcrumbs={crumbs} description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
-      <Catalog nodes={nodes} title={TRANSLATE[language as 'ua' | 'ru'].subCategory} />
+      <Goods goods={nodes} />
     </div>
   );
 };
@@ -98,9 +94,8 @@ export const query = graphql`
         value
       }
     }
-    allCockpitSubSubCategories(filter: { subCategory: { value: { link: { value: { eq: $path } } } }, lang: { ne: "any" } }) {
+    allCockpitProduct(filter: { subcategory: { value: { link: { value: { eq: $path } } } }, lang: { ne: "any" } }) {
       nodes {
-        id
         image {
           value {
             childImageSharp {
@@ -110,11 +105,13 @@ export const query = graphql`
             }
           }
         }
-        lang
         link {
           value
         }
-        title {
+        price {
+          value
+        }
+        name {
           value
         }
       }

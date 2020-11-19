@@ -35,7 +35,9 @@ const Catalog: React.FC<ICatalogProps> = ({ isMobile }): JSX.Element => {
     <div className={`catalog-container ${isActive ? 'is-catalog-active' : ''}`}>
       <div className="catalog-title">
         <div className="catalog-title-wrapper" onClick={handleCatalogOpen}>
-          <CatalogIcon />
+          <div className="catalog-icon">
+            <CatalogIcon />
+          </div>
           {TRANSLATE[language as 'ru' | 'ua'].catalog}
         </div>
       </div>

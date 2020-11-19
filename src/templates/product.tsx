@@ -26,29 +26,21 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
     galleryTitle: { value: galleryTitle },
     galleryText: { value: galleryText },
     galleryBackground: { value: galleryBackground },
-    galleryImages: { value: galleryImages },
+    galleryImages,
     productScopeText: { value: productScopeText },
     productScopes: { value: productScopes },
     commonProducts,
     productPairs,
-    specifications: {
-      value: { data: specifications },
-    },
+    specifications,
     code: { value: code },
     subcategory: {
       value: {
-        title: { value: subSubCategoryTitle },
-        link: { value: subSubCategoryLink },
-        subCategory: {
+        title: { value: subCategoryTitle },
+        link: { value: subCategoryLink },
+        category: {
           value: {
-            title: { value: subCategoryTitle },
-            link: { value: subCategoryLink },
-            category: {
-              value: {
-                title: { value: categoryTitle },
-                link: { value: categoryLink },
-              },
-            },
+            title: { value: categoryTitle },
+            link: { value: categoryLink },
           },
         },
       },
@@ -71,10 +63,6 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
     {
       title: subCategoryTitle,
       link: subCategoryLink,
-    },
-    {
-      title: subSubCategoryTitle,
-      link: subSubCategoryLink,
     },
     {
       title: name,
@@ -109,9 +97,11 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
       <Subheader crumbs={productCrumbs} />
       <ProductBar />
       <ProductInfo name={name} description={description} price={price} images={images} />
-      {commonProducts && !!commonProducts.value.length && <ProductCommons products={commonProducts.value} />}
-      <ProductSpecifications data={specifications} title={name} />
-      <ProductGallery title={galleryTitle} description={galleryText} background={galleryBackground} images={galleryImages} />
+      {!!commonProducts?.value?.length && <ProductCommons products={commonProducts?.value} />}
+      {specifications?.value?.data && <ProductSpecifications data={specifications.value.data} title={name} />}
+      {galleryImages && (
+        <ProductGallery title={galleryTitle} description={galleryText} background={galleryBackground} images={galleryImages.value} />
+      )}
       <ProductScope desciption={productScopeText} scopes={productScopes} />
       {productPairs && !!productPairs.value.length && (
         <ProductPairs
@@ -256,23 +246,13 @@ export const productQuery = graphql`
           link {
             value
           }
-          subCategory {
+          category {
             value {
               title {
                 value
               }
               link {
                 value
-              }
-              category {
-                value {
-                  title {
-                    value
-                  }
-                  link {
-                    value
-                  }
-                }
               }
             }
           }

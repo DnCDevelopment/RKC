@@ -107,16 +107,11 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
+      resolve: 'gatsby-plugin-web-font-loader',
       options: {
-        fonts: [
-          {
-            family: 'Montserrat',
-            variants: ['300', '400', '500', '600', '700', '800', '900'],
-            subsets: ['cyrillic'],
-          },
-        ],
-        formats: ['woff', 'woff2', 'ttf', 'eot'],
+        google: {
+          families: ['Montserrat:300,400,500,600,700,800,900'],
+        },
       },
     },
     {

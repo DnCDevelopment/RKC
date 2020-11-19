@@ -17,7 +17,7 @@ export interface IGoodsQuery {
 
 export interface ISubCategoriesProps {
   data: {
-    allCockpitSubSubCategories: { nodes: ISubSubCategoriesQuery[] };
+    allCockpitProduct: IGoodsQuery;
     cockpitSubCategories: ISubCategoriesQuery;
   };
 }
@@ -59,7 +59,7 @@ export interface ICockpitProduct {
       data: {
         [key: string]: string;
       };
-    };
+    } | null;
   };
   name: {
     value: string;
@@ -86,16 +86,16 @@ export interface ICockpitProduct {
     value: string;
   };
   galleryImages: {
-    value: IProductPhoto[];
+    value: IProductPhoto[] | null;
   };
   productScopeText: {
     value: string;
   };
   productScopes: {
-    value: IProductScope[];
+    value: IProductScope[] | null;
   };
   commonProducts: {
-    value: ICommonProduct[];
+    value: ICommonProduct[] | null;
   };
   productPairs: { value: IProductPair[] };
   code: {
@@ -109,23 +109,13 @@ export interface ICockpitProduct {
       link: {
         value: string;
       };
-      subCategory: {
+      category: {
         value: {
           title: {
             value: string;
           };
           link: {
             value: string;
-          };
-          category: {
-            value: {
-              title: {
-                value: string;
-              };
-              link: {
-                value: string;
-              };
-            };
           };
         };
       };
