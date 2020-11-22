@@ -60,13 +60,13 @@
         height: 30px;
         margin: auto 10px;
         overflow: hidden;
-        font-size: var(--small-font-size);
         font-weight: var(--hard-font);
+        font-size: var(--small-font-size);
       }
 
       &-price {
-        font-weight: var(--bold-font);
         margin: auto 0;
+        font-weight: var(--bold-font);
       }
     }
   }
