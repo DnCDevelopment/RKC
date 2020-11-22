@@ -33,7 +33,7 @@ const ProductPhotos: React.FC<IProductPhotosProps> = ({ images }): JSX.Element =
           </div>
         </div>
         <div onClick={handleShowModal}>
-          <Img fluid={images[currentPhoto].childImageSharp.fluid} />
+          <Img fluid={images[currentPhoto].childImageSharp.fluid} imgStyle={{ objectFit: 'contain' }} />
         </div>
       </div>
       {showModal &&
