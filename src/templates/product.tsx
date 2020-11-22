@@ -23,9 +23,9 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
     description: { value: description },
     price: { value: price },
     images: { value: images },
-    galleryTitle: { value: galleryTitle },
-    galleryText: { value: galleryText },
-    galleryBackground: { value: galleryBackground },
+    galleryTitle,
+    galleryText,
+    galleryBackground,
     galleryImages,
     productScopeText: { value: productScopeText },
     productScopes: { value: productScopes },
@@ -100,7 +100,12 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
       {!!commonProducts?.value?.length && <ProductCommons products={commonProducts?.value} />}
       {specifications?.value?.data && <ProductSpecifications data={specifications.value.data} title={name} />}
       {galleryImages && (
-        <ProductGallery title={galleryTitle} description={galleryText} background={galleryBackground} images={galleryImages.value} />
+        <ProductGallery
+          title={galleryTitle?.value}
+          description={galleryText?.value}
+          background={galleryBackground?.value}
+          images={galleryImages.value}
+        />
       )}
       <ProductScope desciption={productScopeText} scopes={productScopes} />
       {productPairs && !!productPairs.value.length && (
