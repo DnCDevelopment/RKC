@@ -11,7 +11,7 @@ import './Good.scss';
 const Good: React.FC<IGoodProps> = ({ fluid, link, price, title }) => (
   <Link key={link} to={link} className="good">
     <div className="good-image-container">
-      <Img fluid={fluid} alt={title} />
+      <Img fluid={fluid} alt={title} imgStyle={{ objectFit: 'contain' }} />
       <p className="good-title">{title}</p>
       <div className="good-price-container">
         <span className="good-price">{price} грн</span>

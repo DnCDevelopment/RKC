@@ -99,13 +99,16 @@ const Searcher: React.FC = (): JSX.Element => {
         </div>
       </div>
       <div className="drop-list">
-        {foundProducts.slice(0, 5).map(({ item: { name, image, price, link } }, idx) => (
-          <Link key={`item${idx}`} to={link.value} className="drop-list-item">
-            <Img className="drop-list-item-image" fluid={image.value.childImageSharp.fluid} />
-            <p className="drop-list-item-name">{name.value}</p>
-            <p className="drop-list-item-price">{`${price.value} грн`}</p>
-          </Link>
-        ))}
+        {foundProducts
+          .slice(0, 5)
+          .filter(({ item: { lang } }) => lang === language)
+          .map(({ item: { name, image, price, link } }, idx) => (
+            <Link key={`item${idx}`} to={link.value} className="drop-list-item">
+              <Img className="drop-list-item-image" fluid={image.value.childImageSharp.fluid} />
+              <p className="drop-list-item-name">{name.value}</p>
+              <p className="drop-list-item-price">{`${price.value} грн`}</p>
+            </Link>
+          ))}
       </div>
     </div>
   );
