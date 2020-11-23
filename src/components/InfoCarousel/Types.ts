@@ -7,6 +7,9 @@ export interface IInfoItemsQuery {
 interface IInfoItem {
   id: string;
   lang: string;
+  link: {
+    value: string;
+  };
   name: {
     value: string;
   };
@@ -19,6 +22,7 @@ interface IInfoItem {
 }
 
 export interface IInfoItemProps {
+  link: string;
   name: string;
   description: string;
   svg: string;

@@ -1,5 +1,3 @@
-import { ICockpitProduct } from '../../templates/Types';
-
 export interface ICatalogProps {
   isMobile?: boolean;
 }
@@ -9,11 +7,6 @@ export interface ICategoriesProps {
   link: string | undefined;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   setCategory: React.Dispatch<React.SetStateAction<ISubCategory>>;
-}
-
-export interface IFuseProducts {
-  item: ICockpitProduct;
-  score: string;
 }
 
 export interface ISubCategory {

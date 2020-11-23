@@ -65,7 +65,7 @@ const MainStocks = () => {
       <Carousel infinity={false} withRange callback={val => setProduct(val)} buttonNext={<ArrowSVG />} buttonPrev={<ArrowSVG />}>
         {products.map(({ id, images: { value: images }, stock: { value: stock } }) => (
           <Fragment key={id}>
-            <Img className="main-stocks-image" fluid={images[0].childImageSharp.fluid} />
+            <Img className="main-stocks-image" fluid={images[0].childImageSharp.fluid} imgStyle={{ objectFit: 'contain' }} />
             <div className="main-stocks-stock">-{stock}%</div>
           </Fragment>
         ))}

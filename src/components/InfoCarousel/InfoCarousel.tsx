@@ -13,6 +13,9 @@ const INFO_ITEMS_QUERY = graphql`
       nodes {
         id
         lang
+        link {
+          value
+        }
         name {
           value
         }
@@ -38,8 +41,8 @@ const InfoCarousel: React.FC = (): JSX.Element => {
       <Carousel withDots>
         {nodes
           .filter(({ lang }) => lang === language)
-          .map(({ id, name: { value: name }, description: { value: description }, svg: { value: svg } }) => (
-            <InfoItem key={id} name={name} description={description} svg={svg} />
+          .map(({ id, link: { value: link }, name: { value: name }, description: { value: description }, svg: { value: svg } }) => (
+            <InfoItem key={id} link={link} name={name} description={description} svg={svg} />
           ))}
       </Carousel>
     </div>

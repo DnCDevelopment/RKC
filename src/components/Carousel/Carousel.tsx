@@ -134,7 +134,7 @@ const Carousel: React.FC<ICarousel> = ({
               setSlide(+value);
             }}
           />
-          <span className="carousel-range-number">0{children.length}</span>
+          <span className="carousel-range-number">{`${children.length < 10 ? 0 : ''}${children.length}`}</span>
         </div>
       )}
       {withDots && (
