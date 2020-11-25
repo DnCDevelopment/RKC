@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "n/a",
   "scripts": {
-    "build": "export GATSBY_STALL_TIMEOUT=100000 GATSBY_CONNECTION_TIMEOUT=100000 && gatsby build",
+    "build": "export GATSBY_STALL_TIMEOUT=100000 GATSBY_CONNECTION_TIMEOUT=100000 GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true && gatsby build",
     "clean": "rimraf public",
     "deploy": "rm -rf .cache public && gatsby build && firebase deploy",
     "deploy-prod": "rm -rf .cache public node-modules && npm i && gatsby build && firebase deploy",
