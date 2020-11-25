@@ -18,7 +18,7 @@
     "format": "prettier --write \"src/**/*.{ts,tsx}\"",
     "lint-css": "stylelint \"src/**/*.{scss,css}\" --fix",
     "lint": "eslint  \"src/**/*.{ts,tsx}\"",
-    "start": "export GATSBY_STALL_TIMEOUT=100000 GATSBY_CONNECTION_TIMEOUT=100000 && npm run dev",
+    "start": "export GATSBY_STALL_TIMEOUT=100000 GATSBY_CONNECTION_TIMEOUT=100000 GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true && npm run dev",
     "test": "npm run type-check && npm run lint",
     "type-check": "tsc"
   },
