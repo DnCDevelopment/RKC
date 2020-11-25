@@ -4,7 +4,6 @@ const path = require('path');
 
 const categoryPage = path.resolve('src/templates/category.tsx');
 const subCategoryPage = path.resolve('src/templates/subCategory.tsx');
-const subSubCategoryPage = path.resolve('src/templates/subSubCategory.tsx');
 const singleStockPage = path.resolve('src/templates/stock.tsx');
 const productPage = path.resolve('src/templates/product.tsx');
 
@@ -57,7 +56,6 @@ exports.createPages = async ({ actions, graphql }) => {
     const {
       allCockpitCategories: { nodes: categoriesNodes },
       allCockpitSubCategories: { nodes: subCategoriesNodes },
-      allCockpitSubSubCategories: { nodes: subSubCategoriesNodes },
       allCockpitStocks: { nodes: stocksNodes },
       allCockpitProduct: { nodes: productsNodes },
     } = data;
@@ -79,12 +77,6 @@ exports.createPages = async ({ actions, graphql }) => {
       createPage({
         path: value,
         component: subCategoryPage,
-      });
-    });
-    subSubCategoriesNodes.forEach(({ link: { value } }) => {
-      createPage({
-        path: value,
-        component: subSubCategoryPage,
       });
     });
 
