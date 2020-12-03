@@ -19,13 +19,6 @@ exports.createPages = async ({ actions, graphql }) => {
           }
         }
       }
-      allCockpitSubSubCategories(filter: { lang: { ne: "any" } }) {
-        nodes {
-          link {
-            value
-          }
-        }
-      }
       allCockpitStocks(filter: { lang: { ne: "any" } }) {
         nodes {
           link {
