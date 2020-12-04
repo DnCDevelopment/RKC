@@ -1,5 +1,7 @@
 .catalog {
-
+  &-icon {
+    pointer-events: none;
+  }
   &-container {
     position: relative;
     display: flex;
@@ -18,7 +20,7 @@
 
     &-wrapper {
       display: flex;
-      
+
       & svg {
         margin-right: 25px;
       }
@@ -40,7 +42,6 @@
 }
 
 header {
-  
   & > .catalog-container {
     background-color: var(--yellow);
     border: none;
@@ -58,7 +59,8 @@ header {
       border-bottom: none;
     }
 
-    & > .categories, & > .sub-categories {
+    & > .categories,
+    & > .sub-categories {
       position: fixed;
       top: 140px;
       z-index: 10;
@@ -68,20 +70,19 @@ header {
   }
 
   .category {
-
-     &:after {
-       right: 15px;
-     }
+    &:after {
+      right: 15px;
+    }
   }
 }
 
 @media only screen and (min-width: 1030px) {
-  header > .catalog-container { 
+  header > .catalog-container {
     display: none;
   }
 
   header .catalog-container {
-    width: 300px;
+    width: 370px;
     height: 65px;
     background-color: var(--yellow);
     border-bottom: none;
@@ -109,5 +110,4 @@ header {
     width: 285px;
     height: 60px;
   }
-
 }
