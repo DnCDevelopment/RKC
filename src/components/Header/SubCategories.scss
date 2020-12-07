@@ -16,7 +16,7 @@
 
   .sub-categories {
     top: 65px;
-    left: 285px;
+    left: 370px;
     width: 285px;
     border: 1px solid var(--border-color);
     border-bottom: none;
@@ -32,7 +32,7 @@
 
   @for $i from 0 through 300 {
     .sub-categories-#{$i} {
-      top: 65px + $i * 36px
+      top: 65px + $i * 36px;
     }
   }
 }
