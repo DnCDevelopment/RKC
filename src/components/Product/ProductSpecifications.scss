@@ -3,13 +3,19 @@
 
   .specification {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-top: 20px;
+    font-size: var(--small-font-size);
 
     &-underline {
-      flex-grow:1;
+      flex-grow: 1;
+      height: 0;
       margin: 0 10px;
       border-bottom: 1px solid var(--white-grey);
+    }
+    &-value {
+      text-align: right;
     }
   }
 
@@ -33,7 +39,6 @@
 
 @media only screen and (min-width: 360px) {
   .product-specifications {
-
     &-wrapper {
       width: var(--small-container);
     }
@@ -62,9 +67,8 @@
   }
 }
 
-@media only screen and (min-width: 1300px) {
+@media only screen and (min-width: 1200px) {
   .product-specifications {
-
     &-wrapper {
       width: var(--big-container);
     }
