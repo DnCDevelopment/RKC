@@ -5,12 +5,13 @@ cache: npm
 env:
   - COCKPIT_TOKEN=$COCKPIT_TOKEN COCKPIT_URL=$COCKPIT_URL
 install:
+  - npm install -g firebase-tools
   - npm install -g gatsby
   - npm ci
 script:
   - npm run build
 after_success:
-  - npx firebase deploy --except functions --token $FIREBASE_TOKEN
+  - firebase deploy --except functions --token $FIREBASE_TOKEN
 branches:
   only:
     - main
