@@ -73,6 +73,9 @@ header {
     &:after {
       right: 15px;
     }
+    &-icon {
+      display: flex;
+    }
   }
 }
 
