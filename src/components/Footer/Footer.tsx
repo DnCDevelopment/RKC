@@ -9,6 +9,7 @@ import Subscribe from './Subscribe';
 import { TRANSLATE } from '../../constants/languages';
 
 import context from '../../context/context';
+import DnCLogo from '../../assets/illustrations/dnc.svg';
 
 import './Footer.scss';
 
@@ -33,7 +34,13 @@ const Footer: React.FC = (): JSX.Element => {
             <ConnectWithUs />
           </div>
         </div>
-        <p className="copyright">{TRANSLATE[language as 'ru' | 'ua'].copyrightTitle}</p>
+        <div className="copyright-wrapper">
+          <p className="copyright">{TRANSLATE[language as 'ru' | 'ua'].copyrightTitle}</p>
+          <a href="https://dnc.net.ua/">
+            made by D&C Development
+            <DnCLogo />
+          </a>
+        </div>
       </div>
     </footer>
   );
