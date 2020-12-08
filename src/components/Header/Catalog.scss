@@ -1,5 +1,6 @@
 .catalog {
   &-icon {
+    display: flex;
     pointer-events: none;
   }
   &-container {
@@ -72,9 +73,6 @@ header {
   .category {
     &:after {
       right: 15px;
-    }
-    &-icon {
-      display: flex;
     }
   }
 }
