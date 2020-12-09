@@ -38,6 +38,8 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
     },
   } = useStaticQuery<ISiteQueryProps>(SITE_QUERY);
 
+  const seoDescription = description.replace(/<[^>]*>?/gm, '');
+
   const shemaContext = 'http://schema.org';
   const odessaOffice = nodes.find(({ lang: language }) => language === lang);
   const reviewCount = (Math.floor(Math.random() * 8) + 1) * (+new Date() % 10);
@@ -74,7 +76,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
       '@type': 'Product',
       name: title,
       image: product.seoImages,
-      description,
+      description: seoDescription,
       aggregateRating: {
         '@type': 'AggregateRating',
         ratingValue: 4.9,
@@ -144,7 +146,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
       meta={[
         {
           name: 'description',
-          content: description,
+          content: seoDescription,
         },
         {
           property: 'og:title',
@@ -152,7 +154,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
         },
         {
           property: 'og:description',
-          content: description,
+          content: seoDescription,
         },
         {
           property: 'og:type',
@@ -172,7 +174,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
         },
         {
           name: 'twitter:description',
-          content: description,
+          content: seoDescription,
         },
       ]}
     >

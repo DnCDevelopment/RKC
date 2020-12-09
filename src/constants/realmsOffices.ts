@@ -1,6 +1,6 @@
 export const REALMS_OFFICES: { [key: string]: string[] } = {
   'Odessa Oblast': ['Mykolaiv Oblast'],
-  Kyiv: ['Kyiv Oblast', 'Zhytomyr Oblast', 'Chernihiv Oblast', 'Cherkasy Oblast'],
+  'Київська міська громада': ['Kyiv Oblast', 'Zhytomyr Oblast', 'Chernihiv Oblast', 'Cherkasy Oblast'],
   'Dnipropetrovsk Oblast': ['Kirovohrad Oblast'],
   'Lviv Oblast': ['Volyn Oblast'],
   'Ivano-Frankivsk Oblast': ['Zakarpattia Oblast', 'Chernivtsi Oblast'],
@@ -12,7 +12,7 @@ export const REALMS_OFFICES: { [key: string]: string[] } = {
 
 export const OFFICES_ID: { [key: string]: string } = {
   'Odessa Oblast': 'Cockpit__Offices__5f554bf58b03fa1fb446a651',
-  Kyiv: 'Cockpit__Offices__5f554c14fddc9e43421a1154',
+  'Київська міська громада': 'Cockpit__Offices__5f554c14fddc9e43421a1154',
   'Dnipropetrovsk Oblast': 'Cockpit__Offices__5f554c85fdfef03ec8759a45',
   'Lviv Oblast': 'Cockpit__Offices__5f7a033017869f1772348d0d',
   'Ivano-Frankivsk Oblast': 'Cockpit__Offices__5f7a03748b04642e70080288',
