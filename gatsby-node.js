@@ -54,14 +54,12 @@ exports.createPages = async ({ actions, graphql }) => {
     } = data;
 
     categoriesNodes.forEach(({ link: { value } }) => {
-      console.log('category:', value);
       createPage({
         path: value,
         component: categoryPage,
       });
     });
     productsNodes.forEach(({ link: { value } }) => {
-      console.log('product:', value);
       createPage({
         path: value,
         component: productPage,
@@ -69,7 +67,6 @@ exports.createPages = async ({ actions, graphql }) => {
     });
 
     subCategoriesNodes.forEach(({ link: { value } }) => {
-      console.log('sub category:', value);
       createPage({
         path: value,
         component: subCategoryPage,
@@ -77,7 +74,6 @@ exports.createPages = async ({ actions, graphql }) => {
     });
 
     stocksNodes.forEach(({ link: { value } }) => {
-      console.log('stock:', value);
       createPage({
         path: value,
         component: singleStockPage,

@@ -164,6 +164,20 @@ select:-webkit-autofill:focus {
   }
 }
 
+.delivery-list {
+
+  li {
+    position: relative;
+    list-style: none;
+    
+    &::before {
+      position: absolute;
+      left: -10px;
+      content: "-";
+    }
+  }
+}
+
 .hidden {
   display: none;
 }
