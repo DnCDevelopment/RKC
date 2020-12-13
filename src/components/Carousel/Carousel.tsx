@@ -117,8 +117,12 @@ const Carousel: React.FC<ICarousel> = ({
           ))}
       </div>
       <div className="carousel-buttons">
-        <div onClick={handlePrevSlide}>{buttonPrev}</div>
-        <div onClick={handleNextSlide}>{buttonNext}</div>
+        <div className="carousel-buttons-prev" onClick={handlePrevSlide}>
+          {buttonPrev}
+        </div>
+        <div className="carousel-buttons-next" onClick={handleNextSlide}>
+          {buttonNext}
+        </div>
       </div>
       {withRange && (
         <div className="carousel-range">

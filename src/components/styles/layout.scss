@@ -148,6 +148,8 @@ select:-webkit-autofill:focus {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    max-width: calc(100vw - 60px);
+    margin: 0 auto;
     &-item {
       box-sizing: content-box;
       width: 10px;
@@ -165,15 +167,14 @@ select:-webkit-autofill:focus {
 }
 
 .delivery-list {
-
   li {
     position: relative;
     list-style: none;
-    
+
     &::before {
       position: absolute;
       left: -10px;
-      content: "-";
+      content: '-';
     }
   }
 }

@@ -48,6 +48,34 @@
   }
   &-carousel {
     width: 100%;
+    .carousel {
+      &-dots {
+        max-width: calc(100% - 40px);
+        margin: 20px auto;
+      }
+      &-buttons {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+        pointer-events: none;
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+        &-next,
+        &-prev {
+          display: flex;
+          pointer-events: all;
+          place-items: center;
+        }
+        &-next {
+          transform: rotate(180deg);
+        }
+      }
+    }
   }
 }
 
@@ -103,8 +131,12 @@
       width: 50%;
       .carousel {
         overflow: visible;
+        &-buttons {
+          margin-top: 30px;
+        }
         &-dots {
-          margin: 20px 0;
+          max-width: calc(100% - 40px);
+          margin: 20px auto;
         }
         &-list {
           overflow: visible;
