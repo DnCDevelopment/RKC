@@ -169,12 +169,22 @@ select:-webkit-autofill:focus {
 .delivery-list {
   li {
     position: relative;
-    list-style: none;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    list-style-position: outside;
+    list-style-type: decimal-leading-zero;
 
     &::before {
       position: absolute;
-      left: -10px;
-      content: '-';
+      top: -5px;
+      left: -40px;
+      z-index: -1;
+      width: 25px;
+      height: 25px;
+      background-image: url(../../cssSvg/stepElips.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      content: '';
     }
   }
 }
