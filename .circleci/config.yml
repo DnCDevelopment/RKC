@@ -20,7 +20,7 @@ jobs:
             - ./node_modules
       - run:
           name: Gatsby Build
-          command: npm run build
+          command: GATSBY_CPU_COUNT=2 npm run build
       - save_cache:
           key: always-{{ epoch }}
           paths:
