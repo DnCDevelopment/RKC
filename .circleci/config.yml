@@ -28,4 +28,4 @@ jobs:
             - .cache
       - run:
           name: Firebase Deploy
-          command: ./node_modules/.bin/firebase deploy --token "$FIREBASE_TOKEN"
+          command: npx firebase deploy --token "$FIREBASE_TOKEN"
