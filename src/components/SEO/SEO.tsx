@@ -8,7 +8,7 @@ import { ISeoProps, ISiteQueryProps } from './Types';
 
 const SITE_QUERY = graphql`
   {
-    allCockpitOffices(filter: { lang: { ne: "any" }, id: { regex: "/Cockpit__Offices__5f554bf58b03fa1fb446a651_/" } }) {
+    allCockpitOffices(filter: { lang: { ne: "any" }, id: { regex: "/Cockpit__Offices__5fda9651a105c9188179dbe1_/" } }) {
       nodes {
         lang
         address {
@@ -51,7 +51,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
       address: odessaOffice.address.value,
       url: siteUrl,
       name: 'РКЦ',
-      sameAs: ['https://www.facebook.com/globalmoney.ua', 'https://t.me/MyGM24', 'https://twitter.com/global24_ua'],
+      // sameAs: ['https://www.facebook.com/globalmoney.ua', 'https://t.me/MyGM24', 'https://twitter.com/global24_ua'],
       telephone: odessaOffice.phone.value,
     },
     {

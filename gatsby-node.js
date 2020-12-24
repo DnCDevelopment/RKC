@@ -26,7 +26,7 @@ exports.createPages = async ({ actions, graphql }) => {
           }
         }
       }
-      allCockpitCategories {
+      allCockpitCategories(filter: { lang: { ne: "any" } }) {
         nodes {
           link {
             value
@@ -59,6 +59,7 @@ exports.createPages = async ({ actions, graphql }) => {
         component: categoryPage,
       });
     });
+
     productsNodes.forEach(({ link: { value } }) => {
       createPage({
         path: value,

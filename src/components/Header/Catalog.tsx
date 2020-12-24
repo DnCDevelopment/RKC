@@ -28,6 +28,8 @@ const Catalog: React.FC<ICatalogProps> = ({ isMobile }): JSX.Element => {
   useEffect(() => {
     if (!isActive) {
       setCategory(undefined);
+    } else {
+      document.body.classList.add('fixed');
     }
   }, [isActive]);
 

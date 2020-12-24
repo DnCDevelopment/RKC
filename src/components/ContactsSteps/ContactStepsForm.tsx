@@ -1,16 +1,24 @@
-import React, { useReducer, FormEventHandler, useContext } from 'react';
+import React, { useReducer, useState, FormEventHandler, useContext } from 'react';
+
+import ThanksModal from '../ThanksModal/ThanksModal';
+
 import PersonSVG from '../../assets/icons/person.svg';
 import PhoneSVG from '../../assets/icons/phone.svg';
 import MailSVG from '../../assets/icons/mail.svg';
 import CheckBoxSVG from '../../assets/icons/checkbox.svg';
 
-import './ContactStepsForm.scss';
+import { IAction } from '../Types';
 import { IInitialState } from './Types';
 
 import context from '../../context/context';
+
+import { sendMessage } from '../../utils/sendMessage';
+
 import { TRANSLATE } from '../../constants/languages';
+import { OFFICES_BOT_ID } from '../../constants/realmsOffices';
 import { deleteKeyCodes, skipKeyCodes } from '../../constants/phoneMaskKeyCodes';
-import { IAction } from '../Types';
+
+import './ContactStepsForm.scss';
 
 const initialState: IInitialState = {
   name: {
@@ -52,24 +60,27 @@ const formReducer = (state: IInitialState, { type = 'change', name, value, check
 
 const ContactStepsForm: React.FC = (): JSX.Element => {
   const [{ name, email, phone, agree }, dispatch] = useReducer(formReducer, initialState);
-  const { language } = useContext(context);
+  const { language, office } = useContext(context);
+  const [openModal, setModalOpen] = useState(false);
+  const [isSuccess, setSuccess] = useState(true);
+
+  const handleShowModal = (success: boolean = false) => {
+    setModalOpen(!openModal);
+    setSuccess(success);
+    document.body.classList.toggle('fixed');
+  };
 
   const sendRequest: FormEventHandler = e => {
     e.preventDefault();
-    if (!(email.valid && name.valid && phone.valid && agree.value)) {
-      const url = '';
+    if (email.valid && name.valid && phone.valid && agree.value) {
       const body = {
-        name: name.value,
-        phone: phone.value,
-        email: email.value,
+        Заявка: 'Обратная связь',
+        Имя: name.value,
+        Телефон: phone.value,
+        Почта: email.value,
       };
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
+      const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
+      sendMessage(body, realm, handleShowModal);
     }
   };
 
@@ -104,7 +115,7 @@ const ContactStepsForm: React.FC = (): JSX.Element => {
       <div className="contact-steps-form-inner">
         <h3 className="contact-steps-form-title">{TRANSLATE[language as 'ua' | 'ru'].contactFormTitle}</h3>
         <p className="contact-steps-form-text">{TRANSLATE[language as 'ua' | 'ru'].contactFormText}</p>
-        <form className="contact-steps-form">
+        <form className="contact-steps-form" onSubmit={sendRequest}>
           <label htmlFor="name" className="contact-steps-form-label">
             <input
               type="text"
@@ -153,7 +164,6 @@ const ContactStepsForm: React.FC = (): JSX.Element => {
             className="contact-steps-form-submit"
             value={TRANSLATE[language as 'ru' | 'ua'].sendRequest}
             disabled={!(email.valid && name.valid && phone.valid && agree.value)}
-            onClick={sendRequest}
           />
           <label htmlFor="agree" className="contact-steps-form-checkbox">
             <input
@@ -174,6 +184,7 @@ const ContactStepsForm: React.FC = (): JSX.Element => {
           </label>
         </form>
       </div>
+      <ThanksModal isSuccess={isSuccess} handleShowModal={handleShowModal} showModal={openModal} />
     </div>
   );
 };

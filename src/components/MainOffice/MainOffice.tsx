@@ -26,7 +26,7 @@ const MAIN_OFFICE_BG_QUERY = graphql`
 
 const MainOffice: React.FC = (): JSX.Element => {
   const { language, offices } = useContext(context);
-  const odessaOffice = offices.find(({ id }) => id === `Cockpit__Offices__5f554bf58b03fa1fb446a651_${language}`);
+  const odessaOffice = offices.find(({ id }) => id === `Cockpit__Offices__5fda9651a105c9188179dbe1_${language}`);
   const {
     file: {
       childImageSharp: { fluid },

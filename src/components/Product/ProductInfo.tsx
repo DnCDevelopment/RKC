@@ -5,6 +5,7 @@ import context from '../../context/context';
 
 import { IProductInfoProps } from './Types';
 import { TRANSLATE } from '../../constants/languages';
+
 import './ProductInfo.scss';
 
 const ProductInfo: React.FC<IProductInfoProps> = ({ name, description, price, images }): JSX.Element => {
@@ -20,7 +21,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({ name, description, price, im
           <span className="product-info-price">{price} грн</span>
         </div>
         <span className="product-info-warning">{TRANSLATE[language as 'ru' | 'ua'].productBigPrice}</span>
-        <ProductForm />
+        <ProductForm title={name} />
       </div>
     </div>
   );

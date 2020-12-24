@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/camelcase */
 export const REALMS_OFFICES: { [key: string]: string[] } = {
   'Odessa Oblast': ['Mykolaiv Oblast'],
-  'Київська міська громада': ['Kyiv Oblast', 'Zhytomyr Oblast', 'Chernihiv Oblast', 'Cherkasy Oblast'],
+  Kyiv: ['Kyiv Oblast', 'Zhytomyr Oblast', 'Chernihiv Oblast', 'Cherkasy Oblast'],
   'Dnipropetrovsk Oblast': ['Kirovohrad Oblast'],
   'Lviv Oblast': ['Volyn Oblast'],
   'Ivano-Frankivsk Oblast': ['Zakarpattia Oblast', 'Chernivtsi Oblast'],
@@ -10,14 +11,26 @@ export const REALMS_OFFICES: { [key: string]: string[] } = {
   'Poltava Oblast': ['Sumy Oblast'],
 };
 
+export const OFFICES_BOT_ID: { [key: string]: string } = {
+  Cockpit__Offices__5fddf785c575172b485ec8e1: 'Frankovsk',
+  Cockpit__Offices__5fddf6f186fe6a26da6190d1: 'Lvov',
+  Cockpit__Offices__5fddf63753aa811f35392481: 'Dnepr',
+  Cockpit__Offices__5fda96e2a358bb47bc00df41: 'Kiev',
+  Cockpit__Offices__5fda9651a105c9188179dbe1: 'Odessa',
+  Cockpit__Offices__5fddf80c53b0fe38ad4e92c4: 'Khemlnitckiy',
+  Cockpit__Offices__5fddf9027969de1d4d5276b1: 'Zaporizhzhia',
+  Cockpit__Offices__5fddf9ef1a35562c98258501: 'Kharkiv',
+  Cockpit__Offices__5fddfa85761c2723b5314051: 'Poltava',
+};
+
 export const OFFICES_ID: { [key: string]: string } = {
-  'Odessa Oblast': 'Cockpit__Offices__5f554bf58b03fa1fb446a651',
-  'Київська міська громада': 'Cockpit__Offices__5f554c14fddc9e43421a1154',
-  'Dnipropetrovsk Oblast': 'Cockpit__Offices__5f554c85fdfef03ec8759a45',
-  'Lviv Oblast': 'Cockpit__Offices__5f7a033017869f1772348d0d',
-  'Ivano-Frankivsk Oblast': 'Cockpit__Offices__5f7a03748b04642e70080288',
-  'Khmelnytskyi Oblast': 'Cockpit__Offices__5f7a03d5dce1df37867458d1',
-  'Zaporizhzhya Oblast': 'Cockpit__Offices__5f7a041a8ee2ad1e1d770ed5',
-  'Kharkiv Oblast': 'Cockpit__Offices__5f7a04d8881c5a6c2d516f6b',
-  'Poltava Oblast': 'Cockpit__Offices__5f7a0505d7be964ca77e1aa8',
+  'Odessa Oblast': 'Cockpit__Offices__5fda9651a105c9188179dbe1',
+  Kyiv: 'Cockpit__Offices__5fda96e2a358bb47bc00df41',
+  'Dnipropetrovsk Oblast': 'Cockpit__Offices__5fddf63753aa811f35392481',
+  'Lviv Oblast': 'Cockpit__Offices__5fddf6f186fe6a26da6190d1',
+  'Ivano-Frankivsk Oblast': 'Cockpit__Offices__5fddf785c575172b485ec8e1',
+  'Khmelnytskyi Oblast': 'Cockpit__Offices__5fddf80c53b0fe38ad4e92c4',
+  'Zaporizhzhya Oblast': 'Cockpit__Offices__5fddf9027969de1d4d5276b1',
+  'Kharkiv Oblast': 'Cockpit__Offices__5fddf9ef1a35562c98258501',
+  'Poltava Oblast': 'Cockpit__Offices__5fddfa85761c2723b5314051',
 };

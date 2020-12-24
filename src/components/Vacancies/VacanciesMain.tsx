@@ -25,7 +25,7 @@ const VACANCIES_QUERY = graphql`
         description {
           value
         }
-        listOfCities: city {
+        listOfCities {
           value {
             city {
               value
@@ -56,7 +56,7 @@ const VacanciesMain: React.FC = (): JSX.Element => {
       return {
         title: title.value,
         description: description.value,
-        listOfCities: listOfCities.value.map(city => city.city.value),
+        listOfCities: listOfCities.value.map(({ city }) => city.value),
       };
     })
     .filter(({ listOfCities }) => listOfCities.includes(currentCity));

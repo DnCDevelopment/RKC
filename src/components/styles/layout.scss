@@ -1,6 +1,8 @@
 * {
   box-sizing: border-box;
   outline: none;
+  -webkit-locale: auto;
+  white-space: normal;
 
   --transparent: rgba(0, 0, 0, 0);
   --border-color: #cfcfcf;

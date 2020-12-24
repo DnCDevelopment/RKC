@@ -86,6 +86,10 @@ export interface ICommonProduct {
   };
 }
 
+export interface IProductFormProps {
+  title: string;
+}
+
 export interface IProductPairsProps {
   currentProductName: string;
   currentProductDesciption: string;

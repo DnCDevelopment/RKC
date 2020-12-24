@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Form from '../Form/Form';
-
 import Close from '../../assets/icons/close.svg';
 
 import { IModalProps } from './Types';

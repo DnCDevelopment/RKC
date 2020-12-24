@@ -1,9 +1,19 @@
-import React, { useReducer, FormEventHandler, useContext } from 'react';
+import React, { useReducer, useState, FormEventHandler, useContext } from 'react';
+
+import ThanksModal from '../ThanksModal/ThanksModal';
+
 import { IAction } from '../Types';
-import { IInitialProductFormState } from './Types';
+import { IInitialProductFormState, IProductFormProps } from './Types';
+
 import { deleteKeyCodes, skipKeyCodes } from '../../constants/phoneMaskKeyCodes';
+
+import { sendMessage } from '../../utils/sendMessage';
+
 import { TRANSLATE } from '../../constants/languages';
+import { OFFICES_BOT_ID } from '../../constants/realmsOffices';
+
 import context from '../../context/context';
+
 import PersonSVG from '../../assets/icons/person.svg';
 import PhoneSVG from '../../assets/icons/phone.svg';
 import CheckBoxSVG from '../../assets/icons/checkbox.svg';
@@ -40,25 +50,30 @@ const formReducer = (state: IInitialProductFormState, { type = 'change', name, v
   }
 };
 
-const ProductForm: React.FC = (): JSX.Element => {
+const ProductForm: React.FC<IProductFormProps> = ({ title }): JSX.Element => {
   const [{ name, phone, agree }, dispatch] = useReducer(formReducer, initialState);
-  const { language } = useContext(context);
+  const { language, office } = useContext(context);
+
+  const [openModal, setModalOpen] = useState(false);
+  const [isSuccess, setSuccess] = useState(true);
+
+  const handleShowModal = (success: boolean = false) => {
+    setModalOpen(!openModal);
+    setSuccess(success);
+    document.body.classList.toggle('fixed');
+  };
 
   const sendRequest: FormEventHandler = e => {
     e.preventDefault();
-    if (!(name.valid && phone.valid && agree.value)) {
-      const url = '';
+    if (name.valid && phone.valid && agree.value) {
+      const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
       const body = {
-        name: name.value,
-        phone: phone.value,
+        Заявка: 'Заказ',
+        Название: title,
+        Имя: name.value,
+        Телефон: phone.value,
       };
-      fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify(body),
-      });
+      sendMessage(body, realm, handleShowModal);
     }
   };
 
@@ -89,61 +104,64 @@ const ProductForm: React.FC = (): JSX.Element => {
   };
 
   return (
-    <form className="contact-steps-form">
-      <label htmlFor="name" className="contact-steps-form-label">
+    <>
+      <form className="contact-steps-form">
+        <label htmlFor="name" className="contact-steps-form-label">
+          <input
+            type="text"
+            name="name"
+            className={`contact-steps-form-label-input ${name.isTouched && !name.valid ? 'unvalid' : ''}`}
+            placeholder={TRANSLATE[language as 'ua' | 'ru'].formPlaceholderName}
+            value={name.value}
+            onBlur={({ target }) => {
+              dispatch({ type: 'blur', name: target.name });
+            }}
+            onChange={({ target }) => dispatch(target)}
+          />
+          <PersonSVG />
+        </label>
+        <label htmlFor="phone" className="contact-steps-form-label">
+          <input
+            type="phone"
+            name="phone"
+            className={`contact-steps-form-label-input ${phone.isTouched && !phone.valid ? 'unvalid' : ''}`}
+            placeholder={TRANSLATE[language as 'ua' | 'ru'].formPlaceholderPhone}
+            value={phone.value}
+            onKeyDown={handlePhoneMaskedInput}
+            onBlur={({ target }) => {
+              dispatch({ type: 'blur', name: target.name });
+            }}
+            onChange={({ target }) => dispatch(target)}
+          />
+          <PhoneSVG />
+        </label>
         <input
-          type="text"
-          name="name"
-          className={`contact-steps-form-label-input ${name.isTouched && !name.valid ? 'unvalid' : ''}`}
-          placeholder={TRANSLATE[language as 'ua' | 'ru'].formPlaceholderName}
-          value={name.value}
-          onBlur={({ target }) => {
-            dispatch({ type: 'blur', name: target.name });
-          }}
-          onChange={({ target }) => dispatch(target)}
+          type="submit"
+          className="contact-steps-form-submit"
+          value={TRANSLATE[language as 'ru' | 'ua'].sendRequest}
+          disabled={!(name.valid && phone.valid && agree.value)}
+          onClick={sendRequest}
         />
-        <PersonSVG />
-      </label>
-      <label htmlFor="phone" className="contact-steps-form-label">
-        <input
-          type="phone"
-          name="phone"
-          className={`contact-steps-form-label-input ${phone.isTouched && !phone.valid ? 'unvalid' : ''}`}
-          placeholder={TRANSLATE[language as 'ua' | 'ru'].formPlaceholderPhone}
-          value={phone.value}
-          onKeyDown={handlePhoneMaskedInput}
-          onBlur={({ target }) => {
-            dispatch({ type: 'blur', name: target.name });
-          }}
-          onChange={({ target }) => dispatch(target)}
-        />
-        <PhoneSVG />
-      </label>
-      <input
-        type="submit"
-        className="contact-steps-form-submit"
-        value={TRANSLATE[language as 'ru' | 'ua'].sendRequest}
-        disabled={!(name.valid && phone.valid && agree.value)}
-        onClick={sendRequest}
-      />
-      <label htmlFor="agree" className="contact-steps-form-checkbox">
-        <input
-          id="agree"
-          type="checkbox"
-          name="agree"
-          className="contact-steps-form-checkbox-input"
-          checked={agree.value}
-          onBlur={({ target }) => {
-            dispatch({ type: 'blur', name: target.name });
-          }}
-          onChange={({ target }) => dispatch(target)}
-        />
+        <label htmlFor="agree" className="contact-steps-form-checkbox">
+          <input
+            id="agree"
+            type="checkbox"
+            name="agree"
+            className="contact-steps-form-checkbox-input"
+            checked={agree.value}
+            onBlur={({ target }) => {
+              dispatch({ type: 'blur', name: target.name });
+            }}
+            onChange={({ target }) => dispatch(target)}
+          />
 
-        <p className="contact-steps-form-checkbox-text">
-          <CheckBoxSVG /> {TRANSLATE[language as 'ua' | 'ru'].contactFormAgreement}
-        </p>
-      </label>
-    </form>
+          <p className="contact-steps-form-checkbox-text">
+            <CheckBoxSVG /> {TRANSLATE[language as 'ua' | 'ru'].contactFormAgreement}
+          </p>
+        </label>
+      </form>
+      <ThanksModal isSuccess={isSuccess} handleShowModal={handleShowModal} showModal={openModal} />
+    </>
   );
 };
 
