@@ -23,15 +23,13 @@ const Catalog: React.FC<ICatalogProps> = ({ isMobile }): JSX.Element => {
     if (isMobile) {
       document.body.classList.toggle('fixed');
     }
-  }, [isActive, isMobile]);
 
-  useEffect(() => {
     if (!isActive) {
       setCategory(undefined);
-    } else {
+    } else if (isMobile) {
       document.body.classList.add('fixed');
     }
-  }, [isActive]);
+  }, [isActive, isMobile]);
 
   return (
     <div className={`catalog-container ${isActive ? 'is-catalog-active' : ''}`}>
