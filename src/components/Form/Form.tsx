@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import PhoneInput from 'react-phone-input-2';
 
@@ -71,16 +72,18 @@ const Form: React.FC<IFormProps> = ({
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      const baseForm = {
-        Заявка: 'Обратная связь',
-        Имя: nameRef.current.value,
-        Телефон: tel,
-      };
-      const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
-      if (mailRef.current) {
-        return sendMessage({ ...baseForm, Почта: mailRef.current.value }, realm, handleShowModal);
+      if (validForm) {
+        const baseForm = {
+          Заявка: 'Обратная связь',
+          Имя: nameRef.current.value,
+          Телефон: tel,
+        };
+        const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
+        if (mailRef.current) {
+          return sendMessage({ ...baseForm, Почта: mailRef.current.value }, realm, handleShowModal);
+        }
+        return sendMessage(baseForm, realm, handleShowModal);
       }
-      return sendMessage(baseForm, realm, handleShowModal);
     },
     [validForm, nameRef, mailRef, office, tel]
   );

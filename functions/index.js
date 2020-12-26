@@ -83,14 +83,20 @@ exports.sendMessage = functions.https.onRequest(async (req, res) => {
       .collection('users')
       .where('realm', '==', req.query.realm)
       .get();
-    users.forEach(doc => {
-      const message = Object.keys(body).reduce((acc, key) => {
-        acc += `${key}: ${body[key]}\n`;
-        return acc;
-      }, '');
-      bot.sendMessage(doc.data().id, message);
+      
+    if (users.size) {
+      users.forEach(doc => {
+        const message = Object.keys(body).reduce((acc, key) => {
+          acc += `${key}: ${body[key]}\n`;
+          return acc;
+        }, '');
+        bot.sendMessage(doc.data().id, message);
+      });
       return res.status(200).end();
-    });
+    } else {
+      return res
+        .status(400).end();
+    }
   } catch (err) {
     return res
       .status(500)
