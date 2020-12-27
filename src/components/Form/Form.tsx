@@ -74,18 +74,22 @@ const Form: React.FC<IFormProps> = ({
       e.preventDefault();
       if (validForm) {
         const baseForm = {
-          Заявка: 'Обратная связь',
+          Заявка: positionFieldValue ? 'Отзыв на вакансию' : 'Обратная связь',
           Имя: nameRef.current.value,
           Телефон: tel,
         };
         const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
         if (mailRef.current) {
+          if (positionFieldValue) {
+            return sendMessage({ ...baseForm, Почта: mailRef.current.value, Вакансия: positionFieldValue }, realm, handleShowModal);
+          }
+
           return sendMessage({ ...baseForm, Почта: mailRef.current.value }, realm, handleShowModal);
         }
         return sendMessage(baseForm, realm, handleShowModal);
       }
     },
-    [validForm, nameRef, mailRef, office, tel]
+    [validForm, nameRef, mailRef, office, positionFieldValue, tel]
   );
 
   // eslint-disable-next-line no-nested-ternary
