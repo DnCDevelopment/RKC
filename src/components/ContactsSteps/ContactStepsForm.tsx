@@ -150,7 +150,7 @@ const ContactStepsForm: React.FC = (): JSX.Element => {
               type="email"
               name="email"
               className={`contact-steps-form-label-input ${email.isTouched && !email.valid ? 'unvalid' : ''}`}
-              placeholder="Введите ваш e-mail"
+              placeholder="Введите Ваш e-mail"
               value={email.value}
               onBlur={({ target }) => {
                 dispatch({ type: 'blur', name: target.name });

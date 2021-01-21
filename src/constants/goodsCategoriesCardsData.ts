@@ -20,7 +20,7 @@ export const GOODS_CATEGORIES_CARDS_DATA = {
     },
     {
       icon: Icon2,
-      title: 'Скатная крыша ',
+      title: 'Скатная кровля ',
       label: 'Система крыши для устройства кровли в коттеджном и малом строительстве.',
     },
     {
