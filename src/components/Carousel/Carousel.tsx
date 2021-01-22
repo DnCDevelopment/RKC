@@ -48,21 +48,27 @@ const Carousel: React.FC<ICarousel> = ({
 
   const handleTouch = () => {
     let startX = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      const { screenX } = e.touches[0];
+    let startY = 0;
+    const handleTouchStart: EventListener = event => {
+      const e = event as TouchEvent;
+      const { screenX, screenY } = e.touches[0];
       startX = screenX;
+      startY = screenY;
       carousel.current.style.transition = 'none';
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      const { screenX } = e.changedTouches[0];
+    const handleTouchMove: EventListener = event => {
+      const e = event as TouchEvent;
+      const { screenX, screenY } = e.changedTouches[0];
+
       const { offsetWidth } = carousel.current;
       const delta = screenX - startX;
       if (infinity || (!(slide === children.length - 1 && delta < 0) && !(slide === 0 && delta > 0)))
         carousel.current.style.transform = `translateX(${-offsetWidth * (slide + +infinity * children.length) + delta}px)`;
     };
 
-    const handleTouchEnd = (e: TouchEvent) => {
+    const handleTouchEnd: EventListener = event => {
+      const e = event as TouchEvent;
       const { screenX } = e.changedTouches[0];
       const delta = screenX - startX;
       carousel.current.style.transition = `transform ${TRANSITION}ms`;
@@ -70,13 +76,19 @@ const Carousel: React.FC<ICarousel> = ({
       else if (delta > 40) handlePrevSlide();
       else carousel.current.style.transform = `translateX(-${100 * (slide + +infinity * children.length)}%)`;
     };
-    carousel.current.addEventListener('touchstart', handleTouchStart, { passive: true });
-    carousel.current.addEventListener('touchmove', handleTouchMove, { passive: false });
-    carousel.current.addEventListener('touchend', handleTouchEnd, { passive: true });
+    const items = document.querySelectorAll('.carousel-list-item');
+    items.forEach(el => {
+      el.addEventListener('touchstart', handleTouchStart, { passive: true });
+      el.addEventListener('touchmove', handleTouchMove, { passive: false });
+      el.addEventListener('touchend', handleTouchEnd, { passive: true });
+    });
+
     return () => {
-      carousel.current.removeEventListener('touchstart', handleTouchStart);
-      carousel.current.removeEventListener('touchmove', handleTouchMove);
-      carousel.current.removeEventListener('touchend', handleTouchEnd);
+      items.forEach(el => {
+        el.removeEventListener('touchstart', handleTouchStart);
+        el.removeEventListener('touchmove', handleTouchMove);
+        el.removeEventListener('touchend', handleTouchEnd);
+      });
     };
   };
 
