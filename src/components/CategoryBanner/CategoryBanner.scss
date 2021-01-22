@@ -1,7 +1,34 @@
 .category-banner {
   position: relative;
   height: 160px;
-  padding: 60px 20px 20px 20px;
+  border-radius: var(--primary-radius);
+
+  &-open {
+    height: unset;
+    p {
+      height: unset !important;
+    }
+  }
+  &-image {
+    padding: 20px 20px 20px 20px;
+    &:after,
+    &:before {
+      border-radius: var(--primary-radius);
+    }
+  }
+  &-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--transparent);
+    border: none;
+    svg {
+      transform: rotate(-90deg);
+      * {
+        fill: var(--white);
+      }
+    }
+  }
 
   h1 {
     margin-top: 0;
@@ -19,10 +46,6 @@
     font-size: var(--normal-font-size);
   }
 
-  &:after, &:before {
-    border-radius: var(--primary-radius);
-  }
-
   &-dark {
     position: absolute;
     top: 0;
@@ -38,8 +61,10 @@
 
 @media only screen and (min-width: 750px) {
   .category-banner {
-
     p {
+      width: 50%;
+    }
+    &-btn {
       width: 50%;
     }
   }
@@ -49,8 +74,15 @@
   .category-banner {
     width: var(--big-container);
     height: 300px;
-    padding: 150px 65px 45px 65px;
-
+    &-image {
+      padding: 150px 65px 45px 65px;
+    }
+    &-open {
+      height: unset;
+      p {
+        height: unset !important;
+      }
+    }
     h1 {
       font-size: var(--common-font-size);
     }

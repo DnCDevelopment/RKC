@@ -16,7 +16,7 @@ const VacancyCard: React.FC<IVacancyCardProps> = ({ title, desc, parentCallback 
   return (
     <div className="vacancy-card">
       <h3 className="card-info-title">{title}</h3>
-      <p className="card-info-desc">{desc}</p>
+      <div className="card-info-desc" dangerouslySetInnerHTML={{ __html: desc }} />
       <Button
         click={() => parentCallback(title)}
         height={50}
