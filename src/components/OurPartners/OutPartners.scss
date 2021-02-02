@@ -1,0 +1,31 @@
+.partner {
+  display: block;
+  width: 300px;
+  margin: 20px auto;
+
+  &-title {
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: var(--fat-font);
+  }
+
+  &-link {
+    margin-top: 0;
+    color: var(--yellow);
+    text-align: center;
+    font-size: var(--normal-font-size);
+  }
+}
+
+.partners {
+  &-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &-title {
+    text-align: center;
+  }
+}
+

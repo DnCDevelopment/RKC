@@ -20,7 +20,7 @@ const StockCard: React.FC<IStockCardProps> = ({ dl, title, desc, pic, link }): J
       <div className="image-container-wrapper">
         <div className="image-container">
           <Link to={link}>
-            <Img fluid={pic} />
+            <Img fluid={pic} alt={title} />
             <div className="image-container-dark" />
             <div className="info-over-image">
               <div className="card-info-dl">
