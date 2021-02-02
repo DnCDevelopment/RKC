@@ -5,23 +5,23 @@
 
   &-title {
     margin-bottom: 10px;
-    text-align: center;
     font-weight: var(--fat-font);
+    text-align: center;
   }
 
   &-link {
     margin-top: 0;
     color: var(--yellow);
-    text-align: center;
     font-size: var(--normal-font-size);
+    text-align: center;
   }
 }
 
 .partners {
   &-container {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   &-title {
