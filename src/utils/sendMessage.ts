@@ -5,11 +5,10 @@ export const sendMessage = (message: { [key: string]: string }, realm: string, h
     body: JSON.stringify(message),
   })
     .then(res => {
-      if (res.ok) {
-        handleShowModal(true);
-      } else {
+      if (!res.ok) {
         throw Error(res.statusText);
       }
+      handleShowModal(true);
     })
     .catch(() => {
       handleShowModal(false);

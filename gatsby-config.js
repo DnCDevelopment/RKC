@@ -126,8 +126,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/',
-        sitemap: `${process.env.VIRTUAL_HOST || 'https://rck-roof.web.app/'}sitemap.xml`,
+        host: process.env.VIRTUAL_HOST || 'https://rkc.ua',
+        sitemap: `${process.env.VIRTUAL_HOST || 'https://rkc.ua'}/sitemap.xml`,
         policy: [
           {
             userAgent: '*',
