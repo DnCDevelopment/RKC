@@ -49,7 +49,7 @@ export const TRANSLATE = {
     stockPage: 'Акции и скидки',
     sendRequest: 'Отправить заявку',
     selectYourCity: 'Выберите ваш город',
-    successOrder: 'Спасибо, оператор связжется с вами в ближайшее время',
+    successOrder: 'Спасибо, оператор свяжется с вами в ближайшее время',
     formPlaceholderName: 'Введите Ваше имя',
     formPlaceholderPhone: 'Введите Ваш номер телефона',
     formPlaceholderEmail: 'Введите Ваш e-mail адрес',
