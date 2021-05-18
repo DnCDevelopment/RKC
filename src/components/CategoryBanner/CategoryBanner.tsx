@@ -13,7 +13,7 @@ const CategoryBanner: React.FC<ICategoryBannerProps> = ({ description, fluid, ti
     <div className={`category-banner ${isOpen ? 'category-banner-open' : ''}`}>
       <Img fluid={fluid} className="category-banner-image">
         <h1>{title}</h1>
-        <p>{description}</p>
+        <p dangerouslySetInnerHTML={{ __html: description }} />
         {!isOpen && (
           <button
             className="category-banner-btn"

@@ -10,6 +10,7 @@ import './Catalog.scss';
 
 const Catalog: React.FC<ICatalogProps> = ({ nodes, title }): JSX.Element => {
   const { language } = useContext(context);
+
   return (
     <div className="catalog-wrapper">
       <h1 className="catalog-title">{title}</h1>

@@ -29,6 +29,7 @@ export interface ICockpitCategoriesQuery {
   allCockpitCategories: {
     nodes: ICatalogItem[];
   };
+  cockpitCatalogCarousel: ICategoriesCarouselItem;
 }
 
 export interface ICockpitCategoriesCarouselQuery {

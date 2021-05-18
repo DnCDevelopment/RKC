@@ -24,6 +24,11 @@
     font-weight: var(--bold-font);
     font-size: var(--massive-font-size);
   }
+  &-measurment {
+    color: var(--white-grey);
+    font-weight: var(--thin-font);
+    font-size: var(--small-font-size);
+  }
   &-warning {
     display: block;
     margin-bottom: 30px;
