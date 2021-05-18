@@ -180,6 +180,18 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
     >
       <link rel="canonical" href={path} />
       <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: ` gtag('event', 'page_view', {
+    'send_to': 'AW-368235489',
+    'value': 'replace with value',
+    'items': [{
+      'id': 'replace with value',
+      'google_business_vertical': 'retail'
+    }]
+  });`,
+        }}
+      />
     </Helmet>
   );
 };
