@@ -8,7 +8,7 @@ import { TRANSLATE } from '../../constants/languages';
 
 import './ProductInfo.scss';
 
-const ProductInfo: React.FC<IProductInfoProps> = ({ name, description, price, images }): JSX.Element => {
+const ProductInfo: React.FC<IProductInfoProps> = ({ name, description, price, images, measurment }): JSX.Element => {
   const { language } = useContext(context);
   return (
     <div className="product-info" id="product-info">
@@ -18,7 +18,10 @@ const ProductInfo: React.FC<IProductInfoProps> = ({ name, description, price, im
         <div className="product-info-text" dangerouslySetInnerHTML={{ __html: description }} />
         <div className="product-info-price-wrapper">
           <span className="product-info-price-title">{TRANSLATE[language as 'ru' | 'ua'].productPrice}</span>
-          <span className="product-info-price">{price} грн</span>
+          <span className="product-info-price">
+            {price} грн
+            {measurment && <span className="product-info-measurment"> / {measurment}</span>}
+          </span>
         </div>
         <span className="product-info-warning">{TRANSLATE[language as 'ru' | 'ua'].productBigPrice}</span>
         <ProductForm title={name} />

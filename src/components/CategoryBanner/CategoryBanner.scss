@@ -9,6 +9,7 @@
       height: unset !important;
     }
   }
+
   &-image {
     padding: 20px 20px 20px 20px;
     &:after,
@@ -44,6 +45,12 @@
     overflow: hidden;
     color: var(--white);
     font-size: var(--normal-font-size);
+  }
+
+  & &-text {
+    & p {
+      height: unset;
+    }
   }
 
   &-dark {

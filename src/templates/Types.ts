@@ -40,6 +40,9 @@ export interface ISubCategoriesQuery {
     value: ICockpitImage;
   };
   lang: string;
+  videoLink: {
+    value?: string;
+  } | null;
   link: {
     value: string;
   };
@@ -71,6 +74,9 @@ export interface ICockpitProduct {
     value: string;
   };
   price: {
+    value: string;
+  };
+  measurment: {
     value: string;
   };
   images: {
