@@ -27,7 +27,6 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
         },
       },
       lang,
-      videoLink,
       link: { value: linkValue },
       title: { value: titleValue },
     },
@@ -58,11 +57,6 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
       <Goods goods={nodes} />
-      {videoLink && videoLink.value && (
-        <div className="catalog-page-video-wrapper">
-          <iframe className="catalog-page-video" title="Catalog video" src={videoLink.value} />
-        </div>
-      )}
     </div>
   );
 };
@@ -94,9 +88,6 @@ export const query = graphql`
       }
       lang
       link {
-        value
-      }
-      videoLink {
         value
       }
       title {

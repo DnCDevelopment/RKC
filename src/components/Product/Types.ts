@@ -15,6 +15,7 @@ export interface IProductInfoProps {
   description: string;
   measurment: string;
   price: string;
+  isAvailable: boolean | null;
   images: IProductPhoto[];
 }
 

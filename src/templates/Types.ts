@@ -40,15 +40,15 @@ export interface ISubCategoriesQuery {
     value: ICockpitImage;
   };
   lang: string;
-  videoLink: {
-    value?: string;
-  } | null;
   link: {
     value: string;
   };
   title: {
     value: string;
   };
+  videoLink: {
+    value: string;
+  } | null;
 }
 
 export interface ICockpitProduct {
@@ -64,6 +64,9 @@ export interface ICockpitProduct {
       };
     } | null;
   };
+  isAvailable: {
+    value: boolean;
+  } | null;
   name: {
     value: string;
   };

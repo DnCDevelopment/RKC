@@ -3,6 +3,11 @@
   flex-direction: column;
   justify-content: center;
   width: 100%;
+  &-is-available {
+    color: var(--white-grey);
+    font-weight: var(--bold-font);
+    font-size: var(--normal-font-size);
+  }
   &-title {
     display: none;
   }
