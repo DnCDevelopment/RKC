@@ -104,7 +104,7 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
         price={price}
         images={images}
         measurment={measurment?.value}
-        isAvailable={isAvailable?.value}
+        isAvailable={isAvailable?.value || null}
       />
       {!!commonProducts?.value?.length && <ProductCommons products={commonProducts?.value} />}
       {specifications?.value?.data && <ProductSpecifications data={specifications.value.data} title={name} />}
