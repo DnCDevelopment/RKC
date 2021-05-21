@@ -40,6 +40,11 @@ export interface ISubCategoriesQuery {
     value: ICockpitImage;
   };
   lang: string;
+  priceList: {
+    value: {
+      publicURL: string;
+    };
+  } | null;
   link: {
     value: string;
   };

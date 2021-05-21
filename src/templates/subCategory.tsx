@@ -27,6 +27,7 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
         },
       },
       lang,
+      priceList,
       link: { value: linkValue },
       title: { value: titleValue },
     },
@@ -55,7 +56,7 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
     <div className="big-container catalog-page">
       <Seo breadcrumbs={crumbs} description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
-      <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
+      <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} priceList={priceList?.value.publicURL || null} />
       <Goods goods={nodes} />
     </div>
   );
@@ -76,6 +77,11 @@ export const query = graphql`
       }
       description {
         value
+      }
+      priceList {
+        value {
+          publicURL
+        }
       }
       image {
         value {
