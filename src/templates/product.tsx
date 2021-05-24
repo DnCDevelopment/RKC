@@ -108,7 +108,7 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
       />
       {!!commonProducts?.value?.length && <ProductCommons products={commonProducts?.value} />}
       {specifications?.value?.data && <ProductSpecifications data={specifications.value.data} title={name} />}
-      {galleryImages && (
+      {galleryImages && galleryBackground && galleryBackground && galleryTitle && (
         <ProductGallery
           title={galleryTitle?.value}
           description={galleryText?.value}
