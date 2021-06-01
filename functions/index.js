@@ -83,7 +83,7 @@ exports.sendMessage = functions.https.onRequest(async (req, res) => {
       .collection('users')
       .where('realm', '==', req.query.realm)
       .get();
-      
+
     if (users.size) {
       users.forEach(doc => {
         const message = Object.keys(body).reduce((acc, key) => {
@@ -136,4 +136,9 @@ exports.newUserKharkiv = functions.https.onRequest((req, res) => {
 exports.newUserPoltava = functions.https.onRequest((req, res) => {
   return addNewUser(req, res, 'Poltava');
 });
+
+exports.newUserOdessa = functions.https.onRequest((req, res) => {
+  return addNewUser(req, res, 'Odessa');
+});
+
 
