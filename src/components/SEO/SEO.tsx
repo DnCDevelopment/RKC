@@ -196,6 +196,28 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
           gtag('config', 'G-WRCRVNLS9M');
       `}
       </script>
+      <script>
+        {`
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:2436918,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+        `}
+      </script>
+      <script>
+        {`
+        window.smartlook||(function(d) {
+          var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+          var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+          c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+          })(document);
+          smartlook('init', '9a0b24afbc93737b5eac99fcb7bec95446370661');
+        `}
+      </script>
     </Helmet>
   );
 };
