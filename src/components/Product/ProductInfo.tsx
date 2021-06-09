@@ -24,7 +24,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({ name, description, price, im
         <div className="product-info-price-wrapper">
           <span className="product-info-price-title">{TRANSLATE[language as 'ru' | 'ua'].productPrice}</span>
           <span className="product-info-price">
-            {price} грн
+            {!Number.isNaN(+price) ? `${price} грн` : <span className="product-info-price-not-a-number">{price}</span>}
             {measurment && <span className="product-info-measurment"> / за {measurment}</span>}
           </span>
         </div>

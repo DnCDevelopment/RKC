@@ -20,6 +20,7 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
           title: { value: categoryTitle },
         },
       },
+      videoLink,
       description: { value: descriptionValue },
       image: {
         value: {
@@ -58,6 +59,11 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} priceList={priceList?.value.publicURL || null} />
       <Goods goods={nodes} />
+      {videoLink && videoLink.value && (
+        <div className="catalog-page-video-wrapper">
+          <iframe className="catalog-page-video" title="Catalog video" src={videoLink.value} />
+        </div>
+      )}
     </div>
   );
 };
@@ -97,6 +103,9 @@ export const query = graphql`
         value
       }
       title {
+        value
+      }
+      videoLink {
         value
       }
     }

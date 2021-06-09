@@ -15,6 +15,9 @@
     font-size: var(--normal-font-size);
   }
   &-price {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &-wrapper {
       display: flex;
       align-items: center;
@@ -28,6 +31,9 @@
     }
     font-weight: var(--bold-font);
     font-size: var(--massive-font-size);
+    &-not-a-number {
+      font-size: var(--normal-font-size);
+    }
   }
   &-measurment {
     color: var(--white-grey);
@@ -85,6 +91,9 @@
       }
       padding-right: 20px;
       font-size: var(--little-bigger-than-big-font);
+      &-not-a-number {
+        font-size: var(--common-font-size);
+      }
     }
   }
 }

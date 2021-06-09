@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { graphql, useStaticQuery } from 'gatsby';
 
 import Catalog from '../components/Catalog/Catalog';
-import CatalogCarousel from '../components/Catalog/CatalogCarousel';
 import Seo from '../components/SEO/SEO';
 import Subheader from '../components/Subheader/Subheader';
 
@@ -12,7 +11,6 @@ import { SEO_ITEMS } from '../constants/SEOItems';
 import { TRANSLATE } from '../constants/languages';
 
 import context from '../context/context';
-import CategoryBanner from '../components/CategoryBanner/CategoryBanner';
 import CatalogBanner from '../components/Catalog/CatalogBanner';
 
 const CATALOG_QUERY = graphql`
