@@ -84,9 +84,27 @@ export interface ICockpitProduct {
   price: {
     value: string;
   };
+  price2: {
+    value: string;
+  } | null;
+  price3: {
+    value: string;
+  } | null;
+  price4: {
+    value: string;
+  } | null;
   measurment: {
     value: string;
   };
+  measurment2: {
+    value: string;
+  } | null;
+  measurment3: {
+    value: string;
+  } | null;
+  measurment4: {
+    value: string;
+  } | null;
   images: {
     value: IProductPhoto[];
   };

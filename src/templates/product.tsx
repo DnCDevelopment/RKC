@@ -22,7 +22,13 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
     link: { value: productLink },
     description: { value: description },
     price: { value: price },
+    price2,
+    price3,
+    price4,
     measurment,
+    measurment2,
+    measurment3,
+    measurment4,
     isAvailable,
     images: { value: images },
     galleryTitle,
@@ -102,8 +108,14 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
         name={name}
         description={description}
         price={price}
-        images={images}
+        price2={price2?.value}
+        price3={price3?.value}
+        price4={price4?.value}
         measurment={measurment?.value}
+        measurment2={measurment2?.value}
+        measurment3={measurment3?.value}
+        measurment4={measurment4?.value}
+        images={images}
         isAvailable={isAvailable?.value || null}
       />
       {!!commonProducts?.value?.length && <ProductCommons products={commonProducts?.value} />}
@@ -151,7 +163,25 @@ export const productQuery = graphql`
       measurment {
         value
       }
+      measurment2 {
+        value
+      }
+      measurment3 {
+        value
+      }
+      measurment4 {
+        value
+      }
       price {
+        value
+      }
+      price2 {
+        value
+      }
+      price3 {
+        value
+      }
+      price4 {
         value
       }
       specifications {

@@ -13,8 +13,14 @@ export interface IInitialProductFormState {
 export interface IProductInfoProps {
   name: string;
   description: string;
-  measurment: string;
   price: string;
+  price2: string;
+  price3: string;
+  price4: string;
+  measurment: string;
+  measurment2: string;
+  measurment3: string;
+  measurment4: string;
   isAvailable: boolean | null;
   images: IProductPhoto[];
 }
