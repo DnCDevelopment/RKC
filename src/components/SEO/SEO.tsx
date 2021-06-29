@@ -196,6 +196,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
           gtag('config', 'G-WRCRVNLS9M');
       `}
       </script>
+      <script src="//code-ya.jivosite.com/widget/0L1T4wN5dF" async />
       <script>
         {`
         (function(h,o,t,j,a,r){
