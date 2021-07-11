@@ -4,7 +4,9 @@
 	"version": "1.0.0",
 	"private": true,
 	"author": "https://dnc.net.ua/",
-	"keywords": [ "gatsby" ],
+	"keywords": [
+		"gatsby"
+	],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
@@ -36,6 +38,7 @@
 		"firebase": "^7.13.2",
 		"firebase-admin": "^8.10.0",
 		"firebase-functions": "^3.5.0",
+		"formik": "^2.2.9",
 		"fuse.js": "^3.4.3",
 		"gatsby": "^2.20.6",
 		"gatsby-background-image": "^1.1.2",
@@ -59,7 +62,8 @@
 		"react-dom": "^16.13.1",
 		"react-helmet": "^5.2.1",
 		"react-inlinesvg": "^2.0.1",
-		"react-phone-input-2": "^2.13.8"
+		"react-phone-input-2": "^2.13.8",
+		"yup": "^0.32.9"
 	},
 	"devDependencies": {
 		"@fika/gatsby-source-cockpit": "^1.1.2",
@@ -91,7 +95,10 @@
 		"typescript": "^3.8.3"
 	},
 	"stylelint": {
-		"extends": [ "stylelint-config-recommended", "stylelint-config-rational-order" ],
+		"extends": [
+			"stylelint-config-recommended",
+			"stylelint-config-rational-order"
+		],
 		"plugins": [
 			"stylelint-order",
 			"stylelint-scss",
@@ -113,9 +120,18 @@
 				}
 			],
 			"sh-waqar/declaration-use-variable": [
-				[ "/color/", "font-size", "font-family", "font-weight" ],
+				[
+					"/color/",
+					"font-size",
+					"font-family",
+					"font-weight"
+				],
 				{
-					"ignoreValues": [ "transparent", "inherit", "/regexForspecialFunc/" ]
+					"ignoreValues": [
+						"transparent",
+						"inherit",
+						"/regexForspecialFunc/"
+					]
 				}
 			],
 			"order/properties-order": [],
@@ -129,7 +145,9 @@
 			"selector-type-no-unknown": [
 				true,
 				{
-					"ignore": [ "custom-elements" ]
+					"ignore": [
+						"custom-elements"
+					]
 				}
 			],
 			"no-descending-specificity": true,

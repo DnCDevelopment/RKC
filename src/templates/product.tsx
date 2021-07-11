@@ -16,6 +16,8 @@ import { IProductProps } from './Types';
 import { LANGUAGES, TRANSLATE } from '../constants/languages';
 
 const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Element => {
+  console.log(cockpitProduct);
+
   const {
     name: { value: name },
     lang,

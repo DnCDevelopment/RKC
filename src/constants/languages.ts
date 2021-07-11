@@ -257,3 +257,30 @@ export const HAPPY_TO_HELP = {
     `РКЦ- це ваш надійний партнер для якісного будівництва.`,
   ],
 };
+
+export const CART = {
+  ru: {
+    title: 'оформление заказа',
+    inOrder: 'товары в заказе',
+    totalPay: 'всего к оплате',
+    form: {
+      namePlaceholder: 'Имя',
+      surnamePlaceholder: 'Фамилия',
+      countryPlaceholder: 'Страна',
+      cityPlaceholder: 'Город',
+      payMethodPlaceholder: 'Способ оплаты',
+    },
+  },
+  ua: {
+    title: 'оформлення замовлення',
+    inOrder: 'товари в замовленні',
+    totalPay: 'всього до сплати',
+    form: {
+      namePlaceholder: "Ім'я",
+      surnamePlaceholder: 'Фамілія',
+      countryPlaceholder: 'Країна',
+      cityPlaceholder: 'Місто',
+      payMethodPlaceholder: 'Спосіб оплати',
+    },
+  },
+};
