@@ -2,19 +2,20 @@
   & .cart {
     &__products {
       width: 100%;
-      background-color: #f4f4f4;
+      background-color: var(--very-light-gray);
       &-wrapper {
         box-sizing: border-box;
-        margin: 0 20px;
+        margin: 25px 20px 0;
         padding: 0 0 40px 0;
-        background-color: white;
+        background-color: var(--white);
         border-radius: 20px;
       }
       &-title {
         margin: unset;
+        padding: 0 20px;
         color: var(--black);
         font-weight: var(--bold-font);
-        font-size: 17px;
+        font-size: var(--primary-font-size);
         line-height: 21px;
         text-transform: uppercase;
       }
