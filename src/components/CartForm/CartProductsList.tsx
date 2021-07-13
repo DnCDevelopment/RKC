@@ -1,68 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import './CartProductsList.scss';
 
 import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import CartProduct from './CartProduct';
-import { ProductTypes } from './Types';
+import { ICardProductListProps } from './Types';
 
-const exampleProduct: ProductTypes[] = [
-  {
-    id: 1,
-    amount: 1,
-    name: 'Техноеласт ЕКП сланец серый',
-    code: '131232',
-    img: '/static/ccf6f40587a000cc6f87ba018c9a6e64/ee604/5fddf621ca2e6-.png',
-    measurment: 'кв.м',
-    measurment1: 'кв.см',
-    measurment2: null,
-    measurment3: null,
-    price: {
-      value: '167.82',
-    },
-    price1: {
-      value: '16.8',
-    },
-    price2: {
-      value: '16.8',
-    },
-    price3: {
-      value: '16.8',
-    },
-  },
-  {
-    id: 2,
-    amount: 1,
-    name: 'Техноеласт ЕКП сланец серый',
-    code: '131232',
-    img: '/static/ccf6f40587a000cc6f87ba018c9a6e64/ee604/5fddf621ca2e6-.png',
-    measurment: 'кв.м3',
-    measurment1: 'кв.см3',
-    measurment2: null,
-    measurment3: null,
-    price: {
-      value: '137.82',
-    },
-    price1: {
-      value: '12.8',
-    },
-    price2: {
-      value: '16.8',
-    },
-    price3: {
-      value: '16.8',
-    },
-  },
-];
-
-const CartProducts: React.FC = () => {
-  const [products, setProducts] = useState<ProductTypes[]>(exampleProduct);
+const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProducts }) => {
   const { language } = useContext(context);
 
   const handleChangeAmount = (id: number, type: 'dec' | 'inc') => {
-    setProducts(
-      products.map(product =>
+    setProducts(prev =>
+      prev.map(product =>
         product.id === id
           ? {
               ...product,
@@ -73,16 +23,58 @@ const CartProducts: React.FC = () => {
     );
   };
 
+  const handleCurrentMeasure = (id: number, measure: number) => {
+    setProducts(prev =>
+      prev.map(product =>
+        product.id === id
+          ? {
+              ...product,
+              currentMeasure: measure,
+            }
+          : product
+      )
+    );
+  };
+
+  const totalSum = products.reduce((acc, current) => {
+    switch (current.currentMeasure) {
+      case 0:
+        return acc + +current.price.value * +current.amount;
+      case 1:
+        return acc + +current.price1.value * +current.amount;
+      case 2:
+        return acc + +current.price2.value * +current.amount;
+      case 3:
+        return acc + +current.price3.value * +current.amount;
+      default:
+        return acc + +current.price.value * +current.amount;
+    }
+  }, 0);
+
   return (
     <div className="cart__products">
       <h2 className="cart__products-title">{CART[language as 'ru' | 'ua'].inOrder}</h2>
       <div className="cart__products-wrapper">
         {products.map(product => (
-          <CartProduct key={product.id} product={product} onAmountChange={(id, type) => handleChangeAmount(id, type)} />
+          <CartProduct
+            key={product.id}
+            product={product}
+            onAmountChange={(id: number, type: 'dec' | 'inc') => handleChangeAmount(id, type)}
+            onCurrentMeasureChange={(id: number, measure: number) => handleCurrentMeasure(id, measure)}
+          />
         ))}
+        <div className="cart__products-total">
+          <p className="cart__products-total-text">
+            {CART[language as 'ru' | 'ua'].totalPay}
+            <span className="cart__products-total-amount">{totalSum.toFixed(2)} грн</span>
+          </p>
+          <button type="button" className="cart__products-order-btn">
+            {CART[language as 'ru' | 'ua'].orderBtn}
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default CartProducts;
+export default CartProductsList;

@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 0 7px;
-    padding: 20px 25px;
+    padding: 25px 20px;
     & img {
       grid-row: 1/4;
       grid-column: 1;
@@ -59,6 +59,7 @@
       background-color: var(--white);
       border: none;
       outline: none;
+      cursor: pointer;
     }
     &-dec {
       &::before {
@@ -95,9 +96,13 @@
       width: 85px;
       height: 30px;
       margin-left: 30px;
+      padding: 0 10px;
       color: var(--black);
       font-size: var(--primary-font-size);
       line-height: 21px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 10px;
+      cursor: pointer;
       &-measure {
         margin-right: 5px;
       }
@@ -135,6 +140,26 @@
         & svg {
           transform: rotate(90deg);
         }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .cart {
+    &__product {
+      grid-template-columns: 1fr 4fr;
+      &-code {
+        max-width: 110px;
+        margin: unset;
+      }
+      &-price {
+        margin-top: 15px;
+      }
+      &-action {
+        grid-row: 3;
+        margin: unset;
+        margin-left: auto;
       }
     }
   }

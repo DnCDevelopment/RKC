@@ -1,9 +1,17 @@
-export interface ProductProps {
-  product: ProductTypes;
-  onAmountChange: (arg0: number, type: 'dec' | 'inc') => void;
+import { Dispatch, SetStateAction } from 'react';
+
+export interface IProductProps {
+  product: IProductTypes;
+  onAmountChange: (id: number, type: 'dec' | 'inc') => void;
+  onCurrentMeasureChange: (id: number, measure: number) => void;
 }
 
-export interface ProductTypes {
+export interface ICardProductListProps {
+  products: IProductTypes[];
+  setProducts: Dispatch<SetStateAction<IProductTypes[]>>;
+}
+
+export interface IProductTypes {
   [key: string]:
     | number
     | string
@@ -15,6 +23,7 @@ export interface ProductTypes {
   name: string;
   code: string;
   img: string;
+  currentMeasure: number;
   measurment: string | null;
   measurment1: string | null;
   measurment2: string | null;

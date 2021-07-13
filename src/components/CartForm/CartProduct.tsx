@@ -2,9 +2,9 @@ import React, { useMemo, useState } from 'react';
 import './CartProduct.scss';
 import ArrowSVG from '../../assets/icons/arrow.svg';
 import PlusSVG from '../../assets/icons/plus.svg';
-import { ProductProps } from './Types';
+import { IProductProps } from './Types';
 
-const CartProduct: React.FC<ProductProps> = ({ product, onAmountChange }) => {
+const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurrentMeasureChange }) => {
   const [activeMeasure, setActiveMeasure] = useState<number>(0);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
 
@@ -46,7 +46,14 @@ const CartProduct: React.FC<ProductProps> = ({ product, onAmountChange }) => {
           {measureOptions.length > 1 && (
             <div className={`cart__product-select-dropdown ${isOptionsOpen ? 'cart__product-select-dropdown--open' : ''}`}>
               {measureOptions.map((_, idx) => (
-                <span onClick={() => setActiveMeasure(idx)} className="cart__product-select-dropdown-item">
+                <span
+                  key={idx}
+                  onClick={() => {
+                    onCurrentMeasureChange(product.id, idx);
+                    setActiveMeasure(idx);
+                  }}
+                  className="cart__product-select-dropdown-item"
+                >
                   {product[measureOptions[idx]]}
                 </span>
               ))}

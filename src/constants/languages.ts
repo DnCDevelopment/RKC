@@ -260,9 +260,9 @@ export const HAPPY_TO_HELP = {
 
 export const CART = {
   ru: {
-    title: 'оформление заказа',
-    inOrder: 'товары в заказе',
-    totalPay: 'всего к оплате',
+    title: 'Оформление заказа',
+    inOrder: 'Товары в заказе',
+    totalPay: 'Всего к оплате',
     form: {
       namePlaceholder: 'Имя',
       surnamePlaceholder: 'Фамилия',
@@ -270,11 +270,12 @@ export const CART = {
       cityPlaceholder: 'Город',
       payMethodPlaceholder: 'Способ оплаты',
     },
+    orderBtn: 'заказать',
   },
   ua: {
-    title: 'оформлення замовлення',
-    inOrder: 'товари в замовленні',
-    totalPay: 'всього до сплати',
+    title: 'Оформлення замовлення',
+    inOrder: 'Товари в замовленні',
+    totalPay: 'Всього до сплати',
     form: {
       namePlaceholder: "Ім'я",
       surnamePlaceholder: 'Фамілія',
@@ -282,5 +283,6 @@ export const CART = {
       cityPlaceholder: 'Місто',
       payMethodPlaceholder: 'Спосіб оплати',
     },
+    orderBtn: 'замовити',
   },
 };
