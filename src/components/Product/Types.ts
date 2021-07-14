@@ -12,6 +12,7 @@ export interface IInitialProductFormState {
 
 export interface IProductInfoProps {
   name: string;
+  id: string;
   description: string;
   price: string;
   price2: string;
@@ -21,6 +22,7 @@ export interface IProductInfoProps {
   measurment2: string;
   measurment3: string;
   measurment4: string;
+  code: string;
   isAvailable: boolean | null;
   images: IProductPhoto[];
 }

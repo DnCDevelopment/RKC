@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import './CartProductsList.scss';
 
@@ -10,7 +10,7 @@ import { ICardProductListProps } from './Types';
 const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProducts }) => {
   const { language } = useContext(context);
 
-  const handleChangeAmount = (id: number, type: 'dec' | 'inc') => {
+  const handleChangeAmount = useCallback((id: string, type: 'dec' | 'inc') => {
     setProducts(prev =>
       prev.map(product =>
         product.id === id
@@ -21,9 +21,9 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
           : product
       )
     );
-  };
+  }, []);
 
-  const handleCurrentMeasure = (id: number, measure: number) => {
+  const handleCurrentMeasure = useCallback((id: string, measure: number) => {
     setProducts(prev =>
       prev.map(product =>
         product.id === id
@@ -34,21 +34,16 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
           : product
       )
     );
-  };
+  }, []);
+  console.log(products);
 
   const totalSum = products.reduce((acc, current) => {
-    switch (current.currentMeasure) {
-      case 0:
-        return acc + +current.price.value * +current.amount;
-      case 1:
-        return acc + +current.price1.value * +current.amount;
-      case 2:
-        return acc + +current.price2.value * +current.amount;
-      case 3:
-        return acc + +current.price3.value * +current.amount;
-      default:
-        return acc + +current.price.value * +current.amount;
-    }
+    const measurePrice = new Map();
+    measurePrice.set(current.measurment, current.price.replace(',', '.'));
+    measurePrice.set(current.measurment2, current.price2.replace(',', '.'));
+    measurePrice.set(current.measurment3, current.price3.replace(',', '.'));
+    measurePrice.set(current.measurment4, current.price4.replace(',', '.'));
+    return acc + +measurePrice.get(current.currentMeasure) * +current.amount;
   }, 0);
 
   return (
@@ -59,8 +54,8 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
           <CartProduct
             key={product.id}
             product={product}
-            onAmountChange={(id: number, type: 'dec' | 'inc') => handleChangeAmount(id, type)}
-            onCurrentMeasureChange={(id: number, measure: number) => handleCurrentMeasure(id, measure)}
+            onAmountChange={handleChangeAmount}
+            onCurrentMeasureChange={handleCurrentMeasure}
           />
         ))}
         <div className="cart__products-total">

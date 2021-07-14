@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -8,57 +8,6 @@ import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import CartProductsList from './CartProductsList';
 import { IProductTypes } from './Types';
-
-const exampleProduct: IProductTypes[] = [
-  {
-    id: 1,
-    amount: 1,
-    name: 'Техноеласт ЕКП сланец серый',
-    code: '131232',
-    img: '/static/ccf6f40587a000cc6f87ba018c9a6e64/ee604/5fddf621ca2e6-.png',
-    measurment: 'кв.м',
-    measurment1: 'кв.см',
-    measurment2: null,
-    measurment3: null,
-    currentMeasure: 0,
-    price: {
-      value: '167.82',
-    },
-    price1: {
-      value: '16.8',
-    },
-    price2: {
-      value: '16.8',
-    },
-    price3: {
-      value: '16.8',
-    },
-  },
-  {
-    id: 2,
-    amount: 1,
-    name: 'Техноеласт ЕКП сланец серый',
-    code: '131232',
-    img: '/static/ccf6f40587a000cc6f87ba018c9a6e64/ee604/5fddf621ca2e6-.png',
-    measurment: 'кв.м3',
-    measurment1: 'кв.см3',
-    measurment2: null,
-    measurment3: null,
-    currentMeasure: 0,
-    price: {
-      value: '137.82',
-    },
-    price1: {
-      value: '12.8',
-    },
-    price2: {
-      value: '16.8',
-    },
-    price3: {
-      value: '16.8',
-    },
-  },
-];
 
 const phoneRegex = /^\+?3?8?(0\d{9})$/;
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -77,10 +26,8 @@ const formSchema = Yup.object().shape({
 });
 
 const CartForm: React.FC = () => {
-  const [products, setProducts] = useState<IProductTypes[]>(exampleProduct);
-
+  const [products, setProducts] = useState<IProductTypes[]>([]);
   const { language } = useContext(context);
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -97,6 +44,10 @@ const CartForm: React.FC = () => {
     },
     validationSchema: formSchema,
   });
+
+  useEffect(() => {
+    setProducts(JSON.parse(localStorage.getItem('products')));
+  }, []);
 
   return (
     <div className="cart__form-wrapper">
@@ -159,7 +110,7 @@ const CartForm: React.FC = () => {
           onChange={formik.handleChange}
         />
       </form>
-      <CartProductsList products={products} setProducts={setProducts} />
+      {products && products.length > 0 && <CartProductsList products={products} setProducts={setProducts} />}
     </div>
   );
 };
