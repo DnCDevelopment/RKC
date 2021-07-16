@@ -3,7 +3,7 @@ import ProductPhotos from './ProductPhotos';
 import ProductForm from './ProductForm';
 import context from '../../context/context';
 
-import { IProductInfoProps } from './Types';
+import { IProductInfoProps, IProductInStorageProps } from './Types';
 import { TRANSLATE } from '../../constants/languages';
 
 import PlusSVG from '../../assets/icons/plus.svg';
@@ -52,7 +52,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
 
   const handleAddProduct = () => {
     if (localStorage.getItem('products') === null) {
-      localStorage.setItem(
+      return localStorage.setItem(
         'products',
         JSON.stringify([
           {
@@ -74,9 +74,10 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           },
         ])
       );
-    } else {
-      const productsCart = JSON.parse(localStorage.getItem('products'));
-      productsCart.push({
+    }
+    const productsCart: IProductInStorageProps[] = JSON.parse(localStorage.getItem('products'));
+    if (productsCart.findIndex(el => el.code === code) === -1) {
+      return productsCart.push({
         name,
         description,
         price,
@@ -93,8 +94,11 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         code,
         id,
       });
-      localStorage.setItem('products', JSON.stringify(productsCart));
     }
+    return localStorage.setItem(
+      'products',
+      JSON.stringify(productsCart.map(item => (item.code === code ? { ...item, amount: item.amount + 1 } : item)))
+    );
   };
 
   return (

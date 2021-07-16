@@ -143,9 +143,9 @@
     width: 210px;
     height: 40px;
     margin: 25px 0 0 auto;
-    color: #000000;
-    font-weight: bold;
-    font-size: 14px;
+    color: var(--black);
+    font-weight: var(--bold-font);
+    font-size: var(--normal-font-size);
     line-height: 17px;
     text-transform: uppercase;
     background-color: var(--yellow);

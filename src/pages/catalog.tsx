@@ -85,8 +85,6 @@ const CatalogPage: React.FC = (): JSX.Element => {
 
   const { language } = useContext(context);
 
-  console.log(nodes);
-
   return (
     <div className="catalog-page page">
       <Seo

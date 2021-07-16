@@ -23,8 +23,13 @@ export interface IProductInfoProps {
   measurment3: string;
   measurment4: string;
   code: string;
-  isAvailable: boolean | null;
+  isAvailable?: boolean | null;
   images: IProductPhoto[];
+}
+
+export interface IProductInStorageProps extends IProductInfoProps {
+  amount: number;
+  currentMeasure: string;
 }
 
 export interface IProductSpecificationsProps {

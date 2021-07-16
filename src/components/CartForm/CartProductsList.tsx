@@ -35,7 +35,6 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
       )
     );
   }, []);
-  console.log(products);
 
   const totalSum = products.reduce((acc, current) => {
     const measurePrice = new Map();
@@ -47,9 +46,9 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
   }, 0);
 
   return (
-    <div className="cart__products">
-      <h2 className="cart__products-title">{CART[language as 'ru' | 'ua'].inOrder}</h2>
-      <div className="cart__products-wrapper">
+    <div className="cart-products">
+      <h2 className="cart-products-title">{CART[language as 'ru' | 'ua'].inOrder}</h2>
+      <div className="cart-products-wrapper">
         {products.map(product => (
           <CartProduct
             key={product.id}
@@ -58,12 +57,12 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
             onCurrentMeasureChange={handleCurrentMeasure}
           />
         ))}
-        <div className="cart__products-total">
-          <p className="cart__products-total-text">
+        <div className="cart-products-total">
+          <p className="cart-products-total-text">
             {CART[language as 'ru' | 'ua'].totalPay}
-            <span className="cart__products-total-amount">{totalSum.toFixed(2)} грн</span>
+            <span className="cart-products-total-amount">{totalSum.toFixed(2)} грн</span>
           </p>
-          <button type="button" className="cart__products-order-btn">
+          <button type="submit" className="cart-products-order-btn">
             {CART[language as 'ru' | 'ua'].orderBtn}
           </button>
         </div>

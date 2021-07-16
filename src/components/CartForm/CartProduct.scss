@@ -1,5 +1,5 @@
 .cart {
-  &__product {
+  &-product {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 0 7px;
@@ -85,7 +85,7 @@
       color: var(--black);
       font-size: var(--primary-font-size);
       line-height: 21px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--button-shadow);
       border-radius: 10px;
     }
     &-select {
@@ -100,7 +100,7 @@
       color: var(--black);
       font-size: var(--primary-font-size);
       line-height: 21px;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--button-shadow);
       border-radius: 10px;
       cursor: pointer;
       &-measure {
@@ -147,7 +147,7 @@
 
 @media screen and (min-width: 768px) {
   .cart {
-    &__product {
+    &-product {
       grid-template-columns: 1fr 4fr;
       &-code {
         max-width: 110px;
