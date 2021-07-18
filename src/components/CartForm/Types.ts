@@ -1,15 +1,10 @@
 import { FluidObject } from 'gatsby-image';
-import { Dispatch, SetStateAction } from 'react';
 
 export interface IProductProps {
   product: IProductTypes;
   onAmountChange: (id: string, type: 'dec' | 'inc') => void;
   onCurrentMeasureChange: (id: string, measure: number) => void;
-}
-
-export interface ICardProductListProps {
-  products: IProductTypes[];
-  setProducts: Dispatch<SetStateAction<IProductTypes[]>>;
+  handleRemoveProduct: (id: string) => void;
 }
 
 export interface IProductTypes {

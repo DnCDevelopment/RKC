@@ -12,13 +12,19 @@
       object-fit: contain;
     }
     &-title {
+      display: flex;
       grid-row: 1;
       grid-column: 2;
+      justify-content: space-between;
       margin: unset;
       color: var(--black);
       font-weight: var(--hard-font);
       font-size: var(--primary-font-size);
       line-height: 21px;
+    }
+    &-remove {
+      font-size: var(--huge-font-size);
+      cursor: pointer;
     }
     &-code {
       display: flex;
@@ -85,7 +91,7 @@
       color: var(--black);
       font-size: var(--primary-font-size);
       line-height: 21px;
-      border: 1px solid var(--button-shadow);
+      border: 1px solid var(--cart-border-color);
       border-radius: 10px;
     }
     &-select {
@@ -100,7 +106,7 @@
       color: var(--black);
       font-size: var(--primary-font-size);
       line-height: 21px;
-      border: 1px solid var(--button-shadow);
+      border: 1px solid var(--cart-border-color);
       border-radius: 10px;
       cursor: pointer;
       &-measure {

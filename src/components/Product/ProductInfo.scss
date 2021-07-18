@@ -78,7 +78,7 @@
       font-size: var(--primary-font-size);
       line-height: 21px;
       text-align: center;
-      border: 1px solid rgba(0, 0, 0, 0.2);
+      border: 1px solid var(--cart-border-color);
       border-radius: 10px;
     }
   }
@@ -94,7 +94,7 @@
     color: var(--black);
     font-size: var(--primary-font-size);
     line-height: 21px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--cart-border-color);
     border-radius: 10px;
     cursor: pointer;
     &-measure {
@@ -104,7 +104,7 @@
       transform: rotate(-90deg);
       transition: transform 0.3s ease;
       & * {
-        fill: black;
+        fill: var(--black);
       }
     }
     &-dropdown {
@@ -117,7 +117,7 @@
       height: 0px;
       overflow: hidden;
       background-color: var(--white);
-      box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.11);
+      box-shadow: var(--button-shadow);
       &--open {
         height: unset;
         min-height: 42px;

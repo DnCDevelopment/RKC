@@ -5,7 +5,7 @@ import ArrowSVG from '../../assets/icons/arrow.svg';
 import PlusSVG from '../../assets/icons/plus.svg';
 import { IProductProps } from './Types';
 
-const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurrentMeasureChange }) => {
+const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurrentMeasureChange, handleRemoveProduct }) => {
   const [activeMeasure, setActiveMeasure] = useState<number>(0);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
 
@@ -35,7 +35,12 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
   return (
     <div className="cart-product">
       <Image fluid={product.images[0].childImageSharp.fluid} imgStyle={{ objectFit: 'contain' }} />
-      <h4 className="cart-product-title">{product.name}</h4>
+      <h4 className="cart-product-title">
+        {product.name}
+        <span className="cart-product-remove" onClick={() => handleRemoveProduct(product.id)}>
+          x
+        </span>
+      </h4>
       <p className="cart-product-code">код {product.code}</p>
       <p className="cart-product-price">{calcTotalPrice().toFixed(2)} грн</p>
       <div className="cart-product-action">

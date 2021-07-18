@@ -77,7 +77,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
     }
     const productsCart: IProductInStorageProps[] = JSON.parse(localStorage.getItem('products'));
     if (productsCart.findIndex(el => el.code === code) === -1) {
-      return productsCart.push({
+      productsCart.push({
         name,
         description,
         price,
@@ -94,6 +94,8 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         code,
         id,
       });
+
+      return localStorage.setItem('products', JSON.stringify(productsCart));
     }
     return localStorage.setItem(
       'products',

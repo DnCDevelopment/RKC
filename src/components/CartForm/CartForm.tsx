@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import './CartForm.scss';
@@ -8,38 +8,24 @@ import ArrowSVG from '../../assets/icons/arrow.svg';
 import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import CartProductsList from './CartProductsList';
-import { IProductTypes } from './Types';
 import { DELIVERY_OPTIONS } from '../../constants/deliveryOptions';
 
 const phoneRegex = /^\+?3?8?(0\d{9})$/;
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const formSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2)
-    .required(),
-  surname: Yup.string()
-    .min(2)
-    .required(),
-  email: Yup.string()
-    .matches(emailRegex)
-    .required(),
-  country: Yup.string()
-    .min(2)
-    .required(),
-  city: Yup.string()
-    .min(2)
-    .required(),
+  name: Yup.string().min(2),
+  surname: Yup.string().min(2),
+  email: Yup.string().matches(emailRegex),
+  country: Yup.string().min(2),
+  city: Yup.string().min(2),
   phone: Yup.string()
     .matches(phoneRegex)
-    .not(['0000000000'])
-    .required(),
+    .not(['0000000000']),
   ukrPoshtaDepartment: Yup.number().required(),
   address: Yup.string().required(),
   officeAddress: Yup.string().required(),
   flat: Yup.number().required(),
-  deliveryMethod: Yup.string().required(),
-  payMethod: Yup.string().required(),
 });
 
 const CartForm: React.FC = () => {
@@ -48,9 +34,10 @@ const CartForm: React.FC = () => {
       address: { value: office },
     },
     offices,
+    products,
+    setProducts,
   } = useContext(context);
 
-  const [products, setProducts] = useState<IProductTypes[]>([]);
   const [isPaymethodOpen, setPayMethodOpen] = useState<boolean>(false);
   const [isDeliveryOpen, setDeliveryOpen] = useState<boolean>(false);
   const [isOfficesOpen, setOfficesOpen] = useState<boolean>(false);
@@ -239,7 +226,7 @@ const CartForm: React.FC = () => {
           </div>
         )}
       </form>
-      {products?.length > 0 && <CartProductsList products={products} setProducts={setProducts} />}
+      {products?.length > 0 && <CartProductsList />}
     </div>
   );
 };

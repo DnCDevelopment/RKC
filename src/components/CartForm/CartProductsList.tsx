@@ -5,10 +5,15 @@ import './CartProductsList.scss';
 import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import CartProduct from './CartProduct';
-import { ICardProductListProps } from './Types';
 
-const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProducts }) => {
-  const { language } = useContext(context);
+const CartProductsList: React.FC = () => {
+  const { language, setProducts, products } = useContext(context);
+
+  const handleRemoveProduct = useCallback((id: string) => {
+    const updatedProducts = products.filter(product => product.id !== id);
+    setProducts(updatedProducts);
+    localStorage.setItem('products', JSON.stringify(updatedProducts));
+  }, []);
 
   const handleChangeAmount = useCallback((id: string, type: 'dec' | 'inc') => {
     setProducts(prev =>
@@ -42,6 +47,9 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
     measurePrice.set(current.measurment2, current.price2.replace(',', '.'));
     measurePrice.set(current.measurment3, current.price3.replace(',', '.'));
     measurePrice.set(current.measurment4, current.price4.replace(',', '.'));
+    console.log(measurePrice);
+    console.log(current);
+
     return acc + +measurePrice.get(current.currentMeasure) * +current.amount;
   }, 0);
 
@@ -55,6 +63,7 @@ const CartProductsList: React.FC<ICardProductListProps> = ({ products, setProduc
             product={product}
             onAmountChange={handleChangeAmount}
             onCurrentMeasureChange={handleCurrentMeasure}
+            handleRemoveProduct={handleRemoveProduct}
           />
         ))}
         <div className="cart-products-total">

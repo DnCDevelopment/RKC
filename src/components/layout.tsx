@@ -12,6 +12,7 @@ import { REALMS_OFFICES, OFFICES_ID } from '../constants/realmsOffices';
 import context from '../context/context';
 
 import './styles/layout.scss';
+import { IProductTypes } from './CartForm/Types';
 
 const OFFICES_QUERY = graphql`
   {
@@ -46,6 +47,8 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   const offices = nodes.filter(({ lang }) => lang === language);
 
   const [office, setOffice] = useState<IOffice>(offices[0]);
+
+  const [products, setProducts] = useState<IProductTypes[]>([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && navigator.geolocation) {
@@ -94,7 +97,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   }, [language]);
 
   return (
-    <context.Provider value={{ language, office, offices, pathname, setLanguage, setOffice }}>
+    <context.Provider value={{ language, office, offices, pathname, setLanguage, setOffice, products, setProducts }}>
       <Header />
       <main>{children}</main>
       <Footer />
