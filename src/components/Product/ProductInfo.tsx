@@ -1,15 +1,16 @@
-import React, { useContext, useState, useMemo } from 'react';
+import React, { useContext, useState } from 'react';
 import ProductPhotos from './ProductPhotos';
 import ProductForm from './ProductForm';
 import context from '../../context/context';
 
-import { IProductInfoProps, IProductInStorageProps } from './Types';
+import { IProductInfoProps } from './Types';
 import { TRANSLATE } from '../../constants/languages';
 
 import PlusSVG from '../../assets/icons/plus.svg';
 import ArrowSVG from '../../assets/icons/arrow.svg';
 
 import './ProductInfo.scss';
+import { IProductTypes } from '../CartForm/Types';
 
 const priceFormat = Intl.NumberFormat('ru', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -75,7 +76,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         ])
       );
     }
-    const productsCart: IProductInStorageProps[] = JSON.parse(localStorage.getItem('products'));
+    const productsCart: IProductTypes[] = JSON.parse(localStorage.getItem('products'));
     if (productsCart.findIndex(el => el.code === code) === -1) {
       productsCart.push({
         name,

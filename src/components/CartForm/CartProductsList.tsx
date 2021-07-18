@@ -28,7 +28,7 @@ const CartProductsList: React.FC = () => {
     );
   }, []);
 
-  const handleCurrentMeasure = useCallback((id: string, measure: number) => {
+  const handleCurrentMeasure = useCallback((id: string, measure: string) => {
     setProducts(prev =>
       prev.map(product =>
         product.id === id
@@ -47,8 +47,6 @@ const CartProductsList: React.FC = () => {
     measurePrice.set(current.measurment2, current.price2.replace(',', '.'));
     measurePrice.set(current.measurment3, current.price3.replace(',', '.'));
     measurePrice.set(current.measurment4, current.price4.replace(',', '.'));
-    console.log(measurePrice);
-    console.log(current);
 
     return acc + +measurePrice.get(current.currentMeasure) * +current.amount;
   }, 0);

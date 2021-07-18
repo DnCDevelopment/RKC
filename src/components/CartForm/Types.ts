@@ -3,7 +3,7 @@ import { FluidObject } from 'gatsby-image';
 export interface IProductProps {
   product: IProductTypes;
   onAmountChange: (id: string, type: 'dec' | 'inc') => void;
-  onCurrentMeasureChange: (id: string, measure: number) => void;
+  onCurrentMeasureChange: (id: string, measure: string) => void;
   handleRemoveProduct: (id: string) => void;
 }
 
@@ -20,7 +20,7 @@ export interface IProductTypes {
   name: string;
   code: string;
   images: IProductImagesTypes[];
-  currentMeasure: number;
+  currentMeasure: string;
   measurment: string | null;
   measurment2: string | null;
   measurment3: string | null;
@@ -32,6 +32,6 @@ export interface IProductTypes {
 }
 
 export interface IProductImagesTypes {
-  id: number;
+  id: string;
   childImageSharp: { fluid: FluidObject };
 }

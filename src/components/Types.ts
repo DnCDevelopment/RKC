@@ -29,7 +29,7 @@ export interface IContext {
   setLanguage: React.Dispatch<React.SetStateAction<string>>;
   setOffice: React.Dispatch<React.SetStateAction<IOffice>>;
   products: IProductTypes[];
-  setProducts: React.Dispatch<React.SetStateAction<any[]>>;
+  setProducts: React.Dispatch<React.SetStateAction<IProductTypes[]>>;
 }
 
 export interface IGoods {

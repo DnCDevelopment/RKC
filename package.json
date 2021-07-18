@@ -33,6 +33,7 @@
 		"node": ">=10.0.0"
 	},
 	"dependencies": {
+		"@types/react-input-mask": "^3.0.1",
 		"classnames": "^2.2.6",
 		"dotenv": "^8.2.0",
 		"firebase": "^7.13.2",
@@ -62,6 +63,7 @@
 		"react-dom": "^16.13.1",
 		"react-helmet": "^5.2.1",
 		"react-inlinesvg": "^2.0.1",
+		"react-input-mask": "2.0.4",
 		"react-phone-input-2": "^2.13.8",
 		"yup": "^0.32.9"
 	},

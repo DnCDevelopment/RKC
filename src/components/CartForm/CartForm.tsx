@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-
+import InputMask from 'react-input-mask';
 import './CartForm.scss';
 import ArrowSVG from '../../assets/icons/arrow.svg';
 
@@ -9,8 +9,9 @@ import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import CartProductsList from './CartProductsList';
 import { DELIVERY_OPTIONS } from '../../constants/deliveryOptions';
+import EmptyCart from './EmptyCart';
 
-const phoneRegex = /^\+?3?8?(0\d{9})$/;
+const phoneRegex = /^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$/;
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const formSchema = Yup.object().shape({
@@ -118,10 +119,11 @@ const CartForm: React.FC = () => {
           />
         </div>
         <div className="cart-form-row">
-          <input
+          <InputMask
             className={`cart-form-input ${formik.errors.phone ? 'cart-form-input--error' : ''}`}
             name="phone"
-            placeholder="+ 380"
+            alwaysShowMask
+            mask="+38(099)-999-99-99"
             value={formik.values.phone}
             onChange={formik.handleChange}
           />
@@ -145,7 +147,9 @@ const CartForm: React.FC = () => {
           />
         </div>
         <div className={`cart-form-row ${isPaymethodOpen ? 'cart-form-row--open' : ''}`} onClick={handlePayMethod}>
-          <p className="cart-form-row-placeholder">{formik.values.payMethod ? formik.values.payMethod : 'Способ оплаты'}</p>
+          <p className="cart-form-row-placeholder">
+            {formik.values.payMethod ? formik.values.payMethod : CART[language as 'ru' | 'ua'].form.payMethodPlaceholder}
+          </p>
           <div className={`cart-form-input ${formik.errors.payMethod ? 'cart-form-input--error' : ''}`} />
           <ArrowSVG />
           <div className={`cart-form-row-select ${isPaymethodOpen ? 'cart-form-row-select--open' : ''}`}>
@@ -156,12 +160,12 @@ const CartForm: React.FC = () => {
         </div>
         <div className={`cart-form-row ${isDeliveryOpen ? 'cart-form-row--open' : ''}`} onClick={handleDeliveryOpen}>
           <p className="cart-form-row-placeholder">
-            {formik.values.deliveryMethod ? DELIVERY_OPTIONS[formik.values.deliveryMethod] : 'Доставка'}
+            {formik.values.deliveryMethod ? DELIVERY_OPTIONS[language][formik.values.deliveryMethod] : 'Доставка'}
           </p>
           <div className={`cart-form-input ${formik.errors.deliveryMethod ? 'cart-form-input--error' : ''}`} />
           <ArrowSVG />
           <div className={`cart-form-row-select ${isDeliveryOpen ? 'cart-form-row-select--open' : ''}`}>
-            {Object.keys(DELIVERY_OPTIONS).map(key => (
+            {Object.keys(DELIVERY_OPTIONS[language]).map(key => (
               <p
                 key={key}
                 className="cart-form-row-select-value"
@@ -169,7 +173,7 @@ const CartForm: React.FC = () => {
                   formik.setFieldValue('deliveryMethod', key);
                 }}
               >
-                {DELIVERY_OPTIONS[key]}
+                {DELIVERY_OPTIONS[language][key]}
               </p>
             ))}
           </div>
@@ -177,7 +181,7 @@ const CartForm: React.FC = () => {
         {formik.values.deliveryMethod === 'ukrPoshta' && (
           <div className="cart-form-row">
             <input
-              placeholder="Отделение"
+              placeholder={CART[language as 'ru' | 'ua'].ukrPoshtaPlaceholder}
               onChange={formik.handleChange}
               value={formik.values.ukrPoshtaDepartment}
               name="ukrPoshtaDepartment"
@@ -190,7 +194,7 @@ const CartForm: React.FC = () => {
             <div className="cart-form-row">
               <div className="cart-form-row">
                 <input
-                  placeholder="Адрес"
+                  placeholder={CART[language as 'ru' | 'ua'].address}
                   onChange={formik.handleChange}
                   value={formik.values.address}
                   name="address"
@@ -226,7 +230,7 @@ const CartForm: React.FC = () => {
           </div>
         )}
       </form>
-      {products?.length > 0 && <CartProductsList />}
+      {products?.length > 0 ? <CartProductsList /> : <EmptyCart />}
     </div>
   );
 };

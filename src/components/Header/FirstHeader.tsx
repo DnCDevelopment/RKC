@@ -16,6 +16,7 @@ import Phone from '../../assets/icons/phone.svg';
 import './FirstHeader.scss';
 import Modal from '../Modal/Modal';
 import Searcher from './Searcher';
+import HeaderCart from './HeaderCart';
 
 const FirstHeader: React.FC = (): JSX.Element => {
   const {
@@ -55,6 +56,7 @@ const FirstHeader: React.FC = (): JSX.Element => {
           type="primary"
           width={205}
         />
+        <HeaderCart />
       </div>
       {showModal &&
         createPortal(

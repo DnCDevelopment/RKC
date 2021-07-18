@@ -271,6 +271,8 @@ export const CART = {
       payMethodPlaceholder: 'Способ оплаты',
     },
     orderBtn: 'заказать',
+    address: 'Адрес',
+    ukrPoshtaPlaceholder: 'Отделение',
   },
   ua: {
     title: 'Оформлення замовлення',
@@ -284,5 +286,7 @@ export const CART = {
       payMethodPlaceholder: 'Спосіб оплати',
     },
     orderBtn: 'замовити',
+    address: 'Адреса',
+    ukrPoshtaPlaceholder: 'Відділення',
   },
 };

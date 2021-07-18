@@ -51,6 +51,10 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   const [products, setProducts] = useState<IProductTypes[]>([]);
 
   useEffect(() => {
+    setProducts(JSON.parse(localStorage.getItem('products')));
+  }, []);
+
+  useEffect(() => {
     if (typeof window !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         const {

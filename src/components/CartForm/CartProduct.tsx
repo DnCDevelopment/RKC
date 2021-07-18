@@ -6,7 +6,7 @@ import PlusSVG from '../../assets/icons/plus.svg';
 import { IProductProps } from './Types';
 
 const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurrentMeasureChange, handleRemoveProduct }) => {
-  const [activeMeasure, setActiveMeasure] = useState<number>(0);
+  const [activeMeasure, setActiveMeasure] = useState<string>(product.measurment);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
 
   const measureOptions = useMemo(
@@ -21,15 +21,13 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
     if (measureOptions.length > 1) setOptionsOpen(prev => !prev);
   };
 
-  const measurePrice: { [key: number]: string } = {
-    0: product.price.replace(',', '.'),
-    2: product.price2.replace(',', '.'),
-    3: product.price3.replace(',', '.'),
-    4: product.price4.replace(',', '.'),
-  };
-
-  const calcTotalPrice = (): number => {
-    return measurePrice[activeMeasure] ? product.amount * +measurePrice[activeMeasure] : product.amount;
+  const calcTotalPrice = () => {
+    const measurePrice = new Map();
+    measurePrice.set(product.measurment, product.price.replace(',', '.'));
+    measurePrice.set(product.measurment2, product.price2.replace(',', '.'));
+    measurePrice.set(product.measurment3, product.price3.replace(',', '.'));
+    measurePrice.set(product.measurment4, product.price4.replace(',', '.'));
+    return product.amount * +measurePrice.get(activeMeasure);
   };
 
   return (
@@ -55,9 +53,7 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
           <PlusSVG />
         </button>
         <div className={`cart-product-select ${isOptionsOpen ? 'cart-product-select--open' : ''}`} onClick={handleOptionsOpen}>
-          <span className="cart-product-select-measure">
-            {activeMeasure === 0 ? product[measureOptions[activeMeasure]] : product[measureOptions[activeMeasure - 1]]}
-          </span>
+          <span className="cart-product-select-measure">{activeMeasure}</span>
           <ArrowSVG />
           {measureOptions.length > 1 && (
             <div className={`cart-product-select-dropdown ${isOptionsOpen ? 'cart-product-select-dropdown--open' : ''}`}>
@@ -65,8 +61,8 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
                 <span
                   key={idx}
                   onClick={() => {
-                    onCurrentMeasureChange(product.id, idx === 0 ? idx : idx + 1);
-                    setActiveMeasure(idx === 0 ? idx : idx + 1);
+                    onCurrentMeasureChange(product.id, idx === 0 ? product.measurment : product[`measurment${idx + 1}`]);
+                    setActiveMeasure(idx === 0 ? product.measurment : product[`measurment${idx + 1}`]);
                   }}
                   className="cart-product-select-dropdown-item"
                 >
