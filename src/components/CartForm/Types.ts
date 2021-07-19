@@ -35,3 +35,8 @@ export interface IProductImagesTypes {
   id: string;
   childImageSharp: { fluid: FluidObject };
 }
+
+export interface ICurrentWarehousesTypes {
+  address: string;
+  settlement: string;
+}

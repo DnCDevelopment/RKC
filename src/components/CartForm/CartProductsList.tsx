@@ -6,7 +6,11 @@ import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import CartProduct from './CartProduct';
 
-const CartProductsList: React.FC = () => {
+interface CardProductsInteface {
+  callback?: () => void;
+}
+
+const CartProductsList: React.FC<CardProductsInteface> = ({ callback }) => {
   const { language, setProducts, products } = useContext(context);
 
   const handleRemoveProduct = useCallback((id: string) => {
@@ -69,7 +73,7 @@ const CartProductsList: React.FC = () => {
             {CART[language as 'ru' | 'ua'].totalPay}
             <span className="cart-products-total-amount">{totalSum.toFixed(2)} грн</span>
           </p>
-          <button type="submit" className="cart-products-order-btn">
+          <button type="button" className="cart-products-order-btn" onClick={callback}>
             {CART[language as 'ru' | 'ua'].orderBtn}
           </button>
         </div>

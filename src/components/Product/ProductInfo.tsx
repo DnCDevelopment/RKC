@@ -30,7 +30,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   isAvailable,
   code,
 }): JSX.Element => {
-  const { language } = useContext(context);
+  const { language, setProducts } = useContext(context);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
   const [currentMeasure, setCurrentMeasure] = useState<string>(measurment);
   const [amount, setAmount] = useState<number>(1);
@@ -53,6 +53,27 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
 
   const handleAddProduct = () => {
     if (localStorage.getItem('products') === null) {
+      setProducts(prev => [
+        ...prev,
+        {
+          name,
+          description,
+          price,
+          price2,
+          price3,
+          price4,
+          measurment2,
+          measurment3,
+          measurment4,
+          images,
+          measurment,
+          amount,
+          currentMeasure,
+          code,
+          id,
+        },
+      ]);
+
       return localStorage.setItem(
         'products',
         JSON.stringify([
@@ -76,6 +97,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         ])
       );
     }
+
     const productsCart: IProductTypes[] = JSON.parse(localStorage.getItem('products'));
     if (productsCart.findIndex(el => el.code === code) === -1) {
       productsCart.push({
@@ -95,9 +117,11 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         code,
         id,
       });
-
+      setProducts(productsCart);
       return localStorage.setItem('products', JSON.stringify(productsCart));
     }
+
+    setProducts(productsCart.map(item => (item.code === code ? { ...item, amount: item.amount + 1 } : item)));
     return localStorage.setItem(
       'products',
       JSON.stringify(productsCart.map(item => (item.code === code ? { ...item, amount: item.amount + 1 } : item)))

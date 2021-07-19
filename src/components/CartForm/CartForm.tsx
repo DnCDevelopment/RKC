@@ -3,13 +3,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import InputMask from 'react-input-mask';
 import './CartForm.scss';
+import Fuse from 'fuse.js';
 import ArrowSVG from '../../assets/icons/arrow.svg';
 
 import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import CartProductsList from './CartProductsList';
-import { DELIVERY_OPTIONS } from '../../constants/deliveryOptions';
 import EmptyCart from './EmptyCart';
+
+import npWarehouses from '../../../npWarehouses.json';
 
 const phoneRegex = /^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$/;
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -23,10 +25,24 @@ const formSchema = Yup.object().shape({
   phone: Yup.string()
     .matches(phoneRegex)
     .not(['0000000000']),
-  ukrPoshtaDepartment: Yup.number().required(),
-  address: Yup.string().required(),
+  ukrPoshtaDepartment: Yup.number().when('deliveryMethod', {
+    is: 'ukrPoshta',
+    then: Yup.number().required(),
+  }),
+  novaPoshtaDepartment: Yup.string().when('deliveryMethod', {
+    is: 'novaPoshta',
+    then: Yup.string().required(),
+  }),
+  address: Yup.string().when('deliveryMethod', {
+    is: 'сourier',
+    then: Yup.string().required(),
+  }),
+  deliveryMethod: Yup.string(),
   officeAddress: Yup.string().required(),
-  flat: Yup.number().required(),
+  flat: Yup.number().when('deliveryMethod', {
+    is: 'сourier',
+    then: Yup.number().required(),
+  }),
 });
 
 const CartForm: React.FC = () => {
@@ -42,6 +58,11 @@ const CartForm: React.FC = () => {
   const [isPaymethodOpen, setPayMethodOpen] = useState<boolean>(false);
   const [isDeliveryOpen, setDeliveryOpen] = useState<boolean>(false);
   const [isOfficesOpen, setOfficesOpen] = useState<boolean>(false);
+  const [isNovaPoshtaOpen, setNovaPoshtaOpen] = useState<boolean>(false);
+
+  const handleNovaPoshtaOpen = () => {
+    setNovaPoshtaOpen(prev => !prev);
+  };
 
   const handleOfficesOpen = () => {
     setOfficesOpen(prev => !prev);
@@ -69,6 +90,7 @@ const CartForm: React.FC = () => {
       payMethod: '',
       deliveryMethod: '',
       ukrPoshtaDepartment: '',
+      novaPoshtaDepartment: '',
       address: '',
       officeAddress: office,
       flat: '',
@@ -86,6 +108,39 @@ const CartForm: React.FC = () => {
   useEffect(() => {
     setProducts(JSON.parse(localStorage.getItem('products')));
   }, []);
+
+  const options = {
+    includeScore: false,
+    keys: ['settlement'],
+  };
+
+  const handleSearchWarehouses = () => {
+    const fuse = new Fuse(npWarehouses, options);
+
+    return (
+      <div className={`cart-form-row ${isNovaPoshtaOpen ? 'cart-form-row--open' : ''}`} onClick={handleNovaPoshtaOpen}>
+        <p className="cart-form-row-placeholder">
+          {formik.values.novaPoshtaDepartment ? formik.values.novaPoshtaDepartment : CART[language as 'ru' | 'ua'].poshtaPlaceholder}
+        </p>
+        <div className={`cart-form-input ${formik.errors.deliveryMethod ? 'cart-form-input--error' : ''}`} />
+        <ArrowSVG />
+        <div className={`cart-form-row-select ${isNovaPoshtaOpen ? 'cart-form-row-select--open' : ''}`}>
+          {isNovaPoshtaOpen &&
+            fuse.search(formik.values.city || '').map(({ address }) => (
+              <p
+                key={address}
+                className="cart-form-row-select-value"
+                onClick={() => {
+                  formik.setFieldValue('novaPoshtaDepartment', address);
+                }}
+              >
+                {address}
+              </p>
+            ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="cart-form-wrapper">
@@ -160,12 +215,16 @@ const CartForm: React.FC = () => {
         </div>
         <div className={`cart-form-row ${isDeliveryOpen ? 'cart-form-row--open' : ''}`} onClick={handleDeliveryOpen}>
           <p className="cart-form-row-placeholder">
-            {formik.values.deliveryMethod ? DELIVERY_OPTIONS[language][formik.values.deliveryMethod] : 'Доставка'}
+            {formik.values.deliveryMethod
+              ? CART[language as 'ua' | 'ru'].deliveryOptions[
+                  formik.values.deliveryMethod as 'novaPoshta' | 'ukrPoshta' | 'pickup' | 'сourier'
+                ]
+              : 'Доставка'}
           </p>
           <div className={`cart-form-input ${formik.errors.deliveryMethod ? 'cart-form-input--error' : ''}`} />
           <ArrowSVG />
           <div className={`cart-form-row-select ${isDeliveryOpen ? 'cart-form-row-select--open' : ''}`}>
-            {Object.keys(DELIVERY_OPTIONS[language]).map(key => (
+            {Object.keys(CART[language as 'ru' | 'ua'].deliveryOptions).map(key => (
               <p
                 key={key}
                 className="cart-form-row-select-value"
@@ -173,7 +232,7 @@ const CartForm: React.FC = () => {
                   formik.setFieldValue('deliveryMethod', key);
                 }}
               >
-                {DELIVERY_OPTIONS[language][key]}
+                {CART[language as 'ru' | 'ua'].deliveryOptions[key as 'novaPoshta' | 'ukrPoshta' | 'pickup' | 'сourier']}
               </p>
             ))}
           </div>
@@ -181,7 +240,7 @@ const CartForm: React.FC = () => {
         {formik.values.deliveryMethod === 'ukrPoshta' && (
           <div className="cart-form-row">
             <input
-              placeholder={CART[language as 'ru' | 'ua'].ukrPoshtaPlaceholder}
+              placeholder={CART[language as 'ru' | 'ua'].poshtaPlaceholder}
               onChange={formik.handleChange}
               value={formik.values.ukrPoshtaDepartment}
               name="ukrPoshtaDepartment"
@@ -208,7 +267,7 @@ const CartForm: React.FC = () => {
                   placeholder="Квартира"
                   onChange={formik.handleChange}
                   value={formik.values.flat}
-                  name="address"
+                  name="flat"
                   className={`cart-form-input ${formik.errors.flat ? 'cart-form-input--error' : ''}`}
                 />
               </div>
@@ -229,8 +288,22 @@ const CartForm: React.FC = () => {
             </div>
           </div>
         )}
+        {formik.values.deliveryMethod === 'novaPoshta' &&
+          (!formik.values.city.length ? (
+            <div className="cart-form-row">
+              <input
+                placeholder={CART[language as 'ru' | 'ua'].poshtaPlaceholder}
+                onChange={formik.handleChange}
+                value={formik.values.novaPoshtaDepartment}
+                name="novaPoshtaDepartment"
+                className={`cart-form-input ${formik.errors.ukrPoshtaDepartment ? 'cart-form-input--error' : ''}`}
+              />
+            </div>
+          ) : (
+            handleSearchWarehouses()
+          ))}
       </form>
-      {products?.length > 0 ? <CartProductsList /> : <EmptyCart />}
+      {products?.length > 0 ? <CartProductsList callback={() => formik.handleSubmit()} /> : <EmptyCart />}
     </div>
   );
 };

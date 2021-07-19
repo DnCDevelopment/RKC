@@ -270,9 +270,15 @@ export const CART = {
       cityPlaceholder: 'Город',
       payMethodPlaceholder: 'Способ оплаты',
     },
+    deliveryOptions: {
+      novaPoshta: 'Нова Пошта',
+      ukrPoshta: 'Укр Пошта',
+      pickup: 'Самовывоз',
+      сourier: 'Курьером',
+    },
     orderBtn: 'заказать',
     address: 'Адрес',
-    ukrPoshtaPlaceholder: 'Отделение',
+    poshtaPlaceholder: 'Отделение',
   },
   ua: {
     title: 'Оформлення замовлення',
@@ -285,8 +291,14 @@ export const CART = {
       cityPlaceholder: 'Місто',
       payMethodPlaceholder: 'Спосіб оплати',
     },
+    deliveryOptions: {
+      novaPoshta: 'Нова Пошта',
+      ukrPoshta: 'Укр Пошта',
+      pickup: 'Самовивіз',
+      сourier: "Кур'єром",
+    },
     orderBtn: 'замовити',
     address: 'Адреса',
-    ukrPoshtaPlaceholder: 'Відділення',
+    poshtaPlaceholder: 'Відділення',
   },
 };
