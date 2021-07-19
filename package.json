@@ -4,7 +4,9 @@
 	"version": "1.0.0",
 	"private": true,
 	"author": "https://dnc.net.ua/",
-	"keywords": [ "gatsby" ],
+	"keywords": [
+		"gatsby"
+	],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
@@ -13,11 +15,11 @@
 		"clean": "rimraf public",
 		"deploy": "rm -rf .cache public && gatsby build && firebase deploy",
 		"deploy-prod": "rm -rf .cache public node-modules && npm i && gatsby build && firebase deploy",
-		"dev": "gatsby develop -H 0.0.0.0",
+		"dev": "GATSBY_CONCURRENT_DOWNLOAD=5 gatsby develop -H 0.0.0.0",
 		"format": "prettier --write \"src/**/*.{ts,tsx}\"",
 		"lint-css": "stylelint \"src/**/*.{scss,css}\" --fix",
 		"lint": "eslint  \"src/**/*.{ts,tsx}\"",
-		"start": "export GATSBY_STALL_TIMEOUT=100000 GATSBY_CONNECTION_TIMEOUT=100000 && npm run dev",
+		"start": "export GATSBY_STALL_TIMEOUT=1000000 GATSBY_CONNECTION_TIMEOUT=1000000 && npm run dev",
 		"test": "npm run type-check && npm run lint",
 		"type-check": "tsc"
 	},
@@ -91,7 +93,10 @@
 		"typescript": "^3.8.3"
 	},
 	"stylelint": {
-		"extends": [ "stylelint-config-recommended", "stylelint-config-rational-order" ],
+		"extends": [
+			"stylelint-config-recommended",
+			"stylelint-config-rational-order"
+		],
 		"plugins": [
 			"stylelint-order",
 			"stylelint-scss",
@@ -113,9 +118,18 @@
 				}
 			],
 			"sh-waqar/declaration-use-variable": [
-				[ "/color/", "font-size", "font-family", "font-weight" ],
+				[
+					"/color/",
+					"font-size",
+					"font-family",
+					"font-weight"
+				],
 				{
-					"ignoreValues": [ "transparent", "inherit", "/regexForspecialFunc/" ]
+					"ignoreValues": [
+						"transparent",
+						"inherit",
+						"/regexForspecialFunc/"
+					]
 				}
 			],
 			"order/properties-order": [],
@@ -129,7 +143,9 @@
 			"selector-type-no-unknown": [
 				true,
 				{
-					"ignore": [ "custom-elements" ]
+					"ignore": [
+						"custom-elements"
+					]
 				}
 			],
 			"no-descending-specificity": true,
