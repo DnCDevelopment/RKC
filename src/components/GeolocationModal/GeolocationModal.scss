@@ -1,0 +1,35 @@
+.geolocation {
+  padding-bottom: 30px;
+  &-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+  .button {
+    display: block;
+    height: 30px;
+  }
+  &-select {
+    position: relative;
+    margin-bottom: 15px;
+    &-input {
+      display: flex;
+      align-items: center;
+      height: 30px;
+      padding: 0 15px;
+      border: var(--black) solid 2px;
+      border-radius: 30px;
+    }
+    &-options {
+      position: absolute;
+      width: 100%;
+      padding: 15px;
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: var(--button-shadow);
+    }
+  }
+  &-button {
+    width: 100%;
+  }
+}
