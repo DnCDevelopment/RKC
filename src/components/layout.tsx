@@ -5,6 +5,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 
 import { ILayoutProps, IOffice, IOfficeQuery } from './Types';
+import { IProductTypes } from './CartForm/Types';
 
 import { LANGUAGES } from '../constants/languages';
 import { REALMS_OFFICES, OFFICES_ID } from '../constants/realmsOffices';
@@ -12,7 +13,6 @@ import { REALMS_OFFICES, OFFICES_ID } from '../constants/realmsOffices';
 import context from '../context/context';
 
 import './styles/layout.scss';
-import { IProductTypes } from './CartForm/Types';
 
 const OFFICES_QUERY = graphql`
   {

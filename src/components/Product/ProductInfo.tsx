@@ -3,15 +3,17 @@ import ProductPhotos from './ProductPhotos';
 import ProductForm from './ProductForm';
 import context from '../../context/context';
 
+import Modal from '../Modal/Modal';
+
 import { IProductInfoProps } from './Types';
+import { IProductTypes } from '../CartForm/Types';
+
 import { TRANSLATE } from '../../constants/languages';
 
 import PlusSVG from '../../assets/icons/plus.svg';
 import ArrowSVG from '../../assets/icons/arrow.svg';
 
 import './ProductInfo.scss';
-import { IProductTypes } from '../CartForm/Types';
-import Modal from '../Modal/Modal';
 
 const priceFormat = Intl.NumberFormat('ru', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 

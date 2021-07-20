@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'gatsby';
-import './EmptyCart.scss';
+
 import context from '../../context/context';
+
+import './EmptyCart.scss';
 
 const EmptyCart: React.FC = () => {
   const { language } = useContext(context);

@@ -2,20 +2,23 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import InputMask from 'react-input-mask';
-import './CartForm.scss';
 import Fuse from 'fuse.js';
 import { navigate } from 'gatsby';
-import ArrowSVG from '../../assets/icons/arrow.svg';
+
+import CartProductsList from './CartProductsList';
+import EmptyCart from './EmptyCart';
+import Modal from '../Modal/Modal';
+import CartModal from './CartModal';
 
 import context from '../../context/context';
 import { CART } from '../../constants/languages';
 import { OFFICES_BOT_ID } from '../../constants/realmsOffices';
-import CartProductsList from './CartProductsList';
-import EmptyCart from './EmptyCart';
 
 import npWarehouses from '../../../npWarehouses.json';
-import Modal from '../Modal/Modal';
-import CartModal from './CartModal';
+
+import ArrowSVG from '../../assets/icons/arrow.svg';
+
+import './CartForm.scss';
 
 const phoneRegex = /^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$/;
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -29,9 +32,9 @@ const formSchema = Yup.object().shape({
   phone: Yup.string()
     .matches(phoneRegex)
     .not(['0000000000']),
-  ukrPoshtaDepartment: Yup.number().when('deliveryMethod', {
+  ukrPoshtaDepartment: Yup.string().when('deliveryMethod', {
     is: 'ukrPoshta',
-    then: Yup.number().required(),
+    then: Yup.string().required(),
   }),
   novaPoshtaDepartment: Yup.string().when('deliveryMethod', {
     is: 'novaPoshta',
@@ -135,7 +138,6 @@ const CartForm: React.FC = () => {
         mode: 'no-cors',
         body: JSON.stringify(body),
       });
-      console.log(response.ok);
 
       setModalStatus(response.status === 200 ? 'success' : 'failure');
     },

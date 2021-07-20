@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'gatsby';
-import CartIcon from '../../assets/icons/cart.svg';
-import './HeaderCart.scss';
+
 import context from '../../context/context';
+
+import CartIcon from '../../assets/icons/cart.svg';
+
+import './HeaderCart.scss';
 
 const HeaderCart = () => {
   const { language, products } = useContext(context);

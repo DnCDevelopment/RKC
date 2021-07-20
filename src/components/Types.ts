@@ -1,4 +1,5 @@
 import { FluidObject } from 'gatsby-image';
+
 import { IProductTypes } from './CartForm/Types';
 
 export interface IChildren {

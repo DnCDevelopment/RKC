@@ -7,16 +7,16 @@ import Form from '../Form/Form';
 import Languages from './Languages';
 import Offices from './Offices';
 
-import { TRANSLATE } from '../../constants/languages';
+import Modal from '../Modal/Modal';
+import Searcher from './Searcher';
+import HeaderCart from './HeaderCart';
 
+import { TRANSLATE } from '../../constants/languages';
 import context from '../../context/context';
 
 import Phone from '../../assets/icons/phone.svg';
 
 import './FirstHeader.scss';
-import Modal from '../Modal/Modal';
-import Searcher from './Searcher';
-import HeaderCart from './HeaderCart';
 
 const FirstHeader: React.FC = (): JSX.Element => {
   const {
