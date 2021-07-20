@@ -13,11 +13,14 @@ interface CardProductsInteface {
 const CartProductsList: React.FC<CardProductsInteface> = ({ callback }) => {
   const { language, setProducts, products } = useContext(context);
 
-  const handleRemoveProduct = useCallback((id: string) => {
-    const updatedProducts = products.filter(product => product.id !== id);
-    setProducts(updatedProducts);
-    localStorage.setItem('products', JSON.stringify(updatedProducts));
-  }, []);
+  const handleRemoveProduct = useCallback(
+    (id: string) => {
+      const updatedProducts = products.filter(product => product.id !== id);
+      setProducts(() => updatedProducts);
+      localStorage.setItem('products', JSON.stringify(updatedProducts));
+    },
+    [products]
+  );
 
   const handleChangeAmount = useCallback((id: string, type: 'dec' | 'inc') => {
     setProducts(prev =>

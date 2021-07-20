@@ -1,10 +1,15 @@
 import { FluidObject } from 'gatsby-image';
+import { Link } from 'gatsby';
 
 export interface IProductProps {
   product: IProductTypes;
   onAmountChange: (id: string, type: 'dec' | 'inc') => void;
   onCurrentMeasureChange: (id: string, measure: string) => void;
   handleRemoveProduct: (id: string) => void;
+}
+
+export interface ICartModalProps {
+  status: 'success' | 'failure';
 }
 
 export interface IProductTypes {
@@ -25,6 +30,7 @@ export interface IProductTypes {
   measurment2: string | null;
   measurment3: string | null;
   measurment4: string | null;
+  link: string;
   price: string;
   price2: string;
   price3: string;

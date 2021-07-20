@@ -4,14 +4,18 @@ import * as Yup from 'yup';
 import InputMask from 'react-input-mask';
 import './CartForm.scss';
 import Fuse from 'fuse.js';
+import { navigate } from 'gatsby';
 import ArrowSVG from '../../assets/icons/arrow.svg';
 
 import context from '../../context/context';
 import { CART } from '../../constants/languages';
+import { OFFICES_BOT_ID } from '../../constants/realmsOffices';
 import CartProductsList from './CartProductsList';
 import EmptyCart from './EmptyCart';
 
 import npWarehouses from '../../../npWarehouses.json';
+import Modal from '../Modal/Modal';
+import CartModal from './CartModal';
 
 const phoneRegex = /^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$/;
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -48,6 +52,7 @@ const formSchema = Yup.object().shape({
 const CartForm: React.FC = () => {
   const {
     office: {
+      id: officeId,
       address: { value: office },
     },
     offices,
@@ -59,6 +64,7 @@ const CartForm: React.FC = () => {
   const [isDeliveryOpen, setDeliveryOpen] = useState<boolean>(false);
   const [isOfficesOpen, setOfficesOpen] = useState<boolean>(false);
   const [isNovaPoshtaOpen, setNovaPoshtaOpen] = useState<boolean>(false);
+  const [modalStatus, setModalStatus] = useState<'hidden' | 'success' | 'failure'>('hidden');
 
   const handleNovaPoshtaOpen = () => {
     setNovaPoshtaOpen(prev => !prev);
@@ -95,8 +101,43 @@ const CartForm: React.FC = () => {
       officeAddress: office,
       flat: '',
     },
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: async values => {
+      const realm = OFFICES_BOT_ID[officeId.slice(0, -3)];
+
+      const formattedProducts = products.map(({ code, name, currentMeasure, amount, ...data }) => {
+        const measurePrice = new Map();
+        measurePrice.set(data.measurment, data.price.replace(',', '.'));
+        measurePrice.set(data.measurment2, data.price2.replace(',', '.'));
+        measurePrice.set(data.measurment3, data.price3.replace(',', '.'));
+        measurePrice.set(data.measurment4, data.price4.replace(',', '.'));
+        const currentPrice = measurePrice.get(currentMeasure);
+        return {
+          name,
+          code,
+          measure: currentMeasure,
+          amount,
+          price: currentPrice,
+          total: currentPrice * amount,
+        };
+      });
+      const body = {
+        userData: {
+          ...values,
+        },
+        products: formattedProducts,
+        total: formattedProducts.reduce((acc, current) => acc + current.total, 0),
+      };
+      const response = await fetch(`http://localhost:5001/rkc-roof/us-central1/sendOrder?realm=${realm}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        mode: 'no-cors',
+        body: JSON.stringify(body),
+      });
+      console.log(response.ok);
+
+      setModalStatus(response.status === 200 ? 'success' : 'failure');
     },
     validationSchema: formSchema,
   });
@@ -112,6 +153,15 @@ const CartForm: React.FC = () => {
   const options = {
     includeScore: false,
     keys: ['settlement'],
+  };
+
+  const handleModalClose = () => {
+    if (modalStatus === 'success') {
+      localStorage.removeItem('products');
+      setProducts([]);
+      navigate('/');
+    }
+    setModalStatus('hidden');
   };
 
   const handleSearchWarehouses = () => {
@@ -304,6 +354,11 @@ const CartForm: React.FC = () => {
           ))}
       </form>
       {products?.length > 0 ? <CartProductsList callback={() => formik.handleSubmit()} /> : <EmptyCart />}
+      {modalStatus !== 'hidden' && (
+        <Modal close={handleModalClose}>
+          <CartModal status={modalStatus} />
+        </Modal>
+      )}
     </div>
   );
 };

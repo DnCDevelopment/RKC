@@ -1,12 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import './CartProduct.scss';
 import Image from 'gatsby-image';
+import { Link } from 'gatsby';
 import ArrowSVG from '../../assets/icons/arrow.svg';
 import PlusSVG from '../../assets/icons/plus.svg';
 import { IProductProps } from './Types';
 
 const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurrentMeasureChange, handleRemoveProduct }) => {
-  const [activeMeasure, setActiveMeasure] = useState<string>(product.measurment);
+  const [activeMeasure, setActiveMeasure] = useState<string>(product.currentMeasure);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
 
   const measureOptions = useMemo(
@@ -34,7 +35,7 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
     <div className="cart-product">
       <Image fluid={product.images[0].childImageSharp.fluid} imgStyle={{ objectFit: 'contain' }} />
       <h4 className="cart-product-title">
-        {product.name}
+        <Link to={product.link}>{product.name}</Link>
         <span className="cart-product-remove" onClick={() => handleRemoveProduct(product.id)}>
           x
         </span>
@@ -54,22 +55,24 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
         </button>
         <div className={`cart-product-select ${isOptionsOpen ? 'cart-product-select--open' : ''}`} onClick={handleOptionsOpen}>
           <span className="cart-product-select-measure">{activeMeasure}</span>
-          <ArrowSVG />
           {measureOptions.length > 1 && (
-            <div className={`cart-product-select-dropdown ${isOptionsOpen ? 'cart-product-select-dropdown--open' : ''}`}>
-              {measureOptions.map((_, idx) => (
-                <span
-                  key={idx}
-                  onClick={() => {
-                    onCurrentMeasureChange(product.id, idx === 0 ? product.measurment : product[`measurment${idx + 1}`]);
-                    setActiveMeasure(idx === 0 ? product.measurment : product[`measurment${idx + 1}`]);
-                  }}
-                  className="cart-product-select-dropdown-item"
-                >
-                  {product[measureOptions[idx]]}
-                </span>
-              ))}
-            </div>
+            <>
+              <ArrowSVG />
+              <div className={`cart-product-select-dropdown ${isOptionsOpen ? 'cart-product-select-dropdown--open' : ''}`}>
+                {measureOptions.map((_, idx) => (
+                  <span
+                    key={idx}
+                    onClick={() => {
+                      onCurrentMeasureChange(product.id, (idx === 0 ? product.measurment : product[`measurment${idx + 1}`]) as string);
+                      setActiveMeasure((idx === 0 ? product.measurment : product[`measurment${idx + 1}`]) as string);
+                    }}
+                    className="cart-product-select-dropdown-item"
+                  >
+                    {product[measureOptions[idx]]}
+                  </span>
+                ))}
+              </div>
+            </>
           )}
         </div>
       </div>

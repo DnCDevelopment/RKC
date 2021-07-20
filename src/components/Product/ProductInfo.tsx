@@ -11,6 +11,7 @@ import ArrowSVG from '../../assets/icons/arrow.svg';
 
 import './ProductInfo.scss';
 import { IProductTypes } from '../CartForm/Types';
+import Modal from '../Modal/Modal';
 
 const priceFormat = Intl.NumberFormat('ru', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -33,8 +34,10 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   const { language, setProducts } = useContext(context);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
   const [currentMeasure, setCurrentMeasure] = useState<string>(measurment);
+  const [modalStatus, setModalStatus] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>(1);
-  const measureOptions = [measurment, measurment2, measurment3, measurment4];
+
+  const measureOptions = [measurment, measurment2, measurment3, measurment4].filter(e => e);
 
   const handleProductAmount = (type: 'dec' | 'inc') => {
     if (type === 'inc') return setAmount(prev => prev + 1);
@@ -56,6 +59,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
       setProducts(prev => [
         ...prev,
         {
+          link: window.location.pathname,
           name,
           description,
           price,
@@ -73,11 +77,12 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           id,
         },
       ]);
-
+      setModalStatus(true);
       return localStorage.setItem(
         'products',
         JSON.stringify([
           {
+            link: window.location.pathname,
             name,
             description,
             price,
@@ -101,6 +106,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
     const productsCart: IProductTypes[] = JSON.parse(localStorage.getItem('products'));
     if (productsCart.findIndex(el => el.code === code) === -1) {
       productsCart.push({
+        link: window.location.pathname,
         name,
         description,
         price,
@@ -118,8 +124,10 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         id,
       });
       setProducts(productsCart);
+      setModalStatus(true);
       return localStorage.setItem('products', JSON.stringify(productsCart));
     }
+    setModalStatus(true);
 
     setProducts(productsCart.map(item => (item.code === code ? { ...item, amount: item.amount + 1 } : item)));
     return localStorage.setItem(
@@ -183,15 +191,17 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           {measurment && (
             <div className={`product-info-select ${isOptionsOpen ? 'product-info-select--open' : ''}`} onClick={handleOptionsOpen}>
               <span className="product-info-select-measure">{currentMeasure}</span>
-              <ArrowSVG />
-              {measurment2 && (
-                <div className={`product-info-select-dropdown ${isOptionsOpen ? 'product-info-select-dropdown--open' : ''}`}>
-                  {measureOptions.map((el, idx) => (
-                    <span key={idx} className="product-info-select-dropdown-item" onClick={() => handleActiveMeasure(el)}>
-                      {el}
-                    </span>
-                  ))}
-                </div>
+              {measureOptions.length > 1 && (
+                <>
+                  <ArrowSVG />
+                  <div className={`product-info-select-dropdown ${isOptionsOpen ? 'product-info-select-dropdown--open' : ''}`}>
+                    {measureOptions.map((el, idx) => (
+                      <span key={idx} className="product-info-select-dropdown-item" onClick={() => handleActiveMeasure(el)}>
+                        {el}
+                      </span>
+                    ))}
+                  </div>
+                </>
               )}
             </div>
           )}
@@ -204,6 +214,11 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         <span className="product-info-warning">{TRANSLATE[language as 'ru' | 'ua'].productBigPrice}</span>
         <ProductForm title={name} />
       </div>
+      {modalStatus && (
+        <Modal close={() => setModalStatus(false)}>
+          <h2>{TRANSLATE[language as 'ru' | 'ua'].productAdded}</h2>
+        </Modal>
+      )}
     </div>
   );
 };

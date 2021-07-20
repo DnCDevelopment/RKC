@@ -25,11 +25,17 @@
         &-placeholder {
           position: absolute;
           top: calc(50% - 8px);
+          right: 30px;
           left: 20px;
+          display: -webkit-box;
           margin: unset;
+          overflow: hidden;
           color: var(--ya-dark-grey);
           font-size: var(--normal-font-size);
           line-height: var(--primary-font-size);
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
         }
         & svg {
           position: absolute;
