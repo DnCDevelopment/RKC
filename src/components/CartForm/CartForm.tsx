@@ -127,7 +127,7 @@ const CartForm: React.FC = () => {
         products: formattedProducts,
         total: formattedProducts.reduce((acc, current) => acc + current.total, 0),
       };
-      const response = await fetch(`http://localhost:5001/rkc-roof/us-central1/sendOrder?realm=${realm}`, {
+      const response = await fetch(`/sendOrder?realm=${realm}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
