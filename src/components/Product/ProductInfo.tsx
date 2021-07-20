@@ -1,10 +1,17 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import ProductPhotos from './ProductPhotos';
 import ProductForm from './ProductForm';
 import context from '../../context/context';
 
+import Modal from '../Modal/Modal';
+
 import { IProductInfoProps } from './Types';
+import { IProductTypes } from '../CartForm/Types';
+
 import { TRANSLATE } from '../../constants/languages';
+
+import PlusSVG from '../../assets/icons/plus.svg';
+import ArrowSVG from '../../assets/icons/arrow.svg';
 
 import './ProductInfo.scss';
 
@@ -16,6 +23,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   price,
   price2,
   price3,
+  id,
   price4,
   measurment2,
   measurment3,
@@ -23,8 +31,112 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   images,
   measurment,
   isAvailable,
+  code,
 }): JSX.Element => {
-  const { language } = useContext(context);
+  const { language, setProducts } = useContext(context);
+  const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
+  const [currentMeasure, setCurrentMeasure] = useState<string>(measurment);
+  const [modalStatus, setModalStatus] = useState<boolean>(false);
+  const [amount, setAmount] = useState<number>(1);
+
+  const measureOptions = [measurment, measurment2, measurment3, measurment4].filter(e => e);
+
+  const handleProductAmount = (type: 'dec' | 'inc') => {
+    if (type === 'inc') return setAmount(prev => prev + 1);
+    return setAmount(prev => prev - 1);
+  };
+
+  const handleActiveMeasure = (el: string) => {
+    setCurrentMeasure(el);
+  };
+
+  const handleOptionsOpen = (): void => {
+    if (measurment2) {
+      setOptionsOpen(prev => !prev);
+    }
+  };
+
+  const handleAddProduct = () => {
+    if (localStorage.getItem('products') === null) {
+      setProducts(prev => [
+        ...prev,
+        {
+          link: window.location.pathname,
+          name,
+          description,
+          price,
+          price2,
+          price3,
+          price4,
+          measurment2,
+          measurment3,
+          measurment4,
+          images,
+          measurment,
+          amount,
+          currentMeasure,
+          code,
+          id,
+        },
+      ]);
+      setModalStatus(true);
+      return localStorage.setItem(
+        'products',
+        JSON.stringify([
+          {
+            link: window.location.pathname,
+            name,
+            description,
+            price,
+            price2,
+            price3,
+            price4,
+            measurment2,
+            measurment3,
+            measurment4,
+            images,
+            measurment,
+            amount,
+            currentMeasure,
+            code,
+            id,
+          },
+        ])
+      );
+    }
+
+    const productsCart: IProductTypes[] = JSON.parse(localStorage.getItem('products'));
+    if (productsCart.findIndex(el => el.code === code) === -1) {
+      productsCart.push({
+        link: window.location.pathname,
+        name,
+        description,
+        price,
+        price2,
+        price3,
+        price4,
+        measurment2,
+        measurment3,
+        measurment4,
+        images,
+        measurment,
+        amount,
+        currentMeasure,
+        code,
+        id,
+      });
+      setProducts(productsCart);
+      setModalStatus(true);
+      return localStorage.setItem('products', JSON.stringify(productsCart));
+    }
+    setModalStatus(true);
+
+    setProducts(productsCart.map(item => (item.code === code ? { ...item, amount: item.amount + 1 } : item)));
+    return localStorage.setItem(
+      'products',
+      JSON.stringify(productsCart.map(item => (item.code === code ? { ...item, amount: item.amount + 1 } : item)))
+    );
+  };
 
   return (
     <div className="product-info" id="product-info">
@@ -68,9 +180,47 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
             )}
           </span>
         </div>
+        <div className="product-info-add">
+          <button disabled={amount === 1} type="button" className="product-info-add-dec" onClick={() => handleProductAmount('dec')} />
+          <input
+            className="product-info-add-amount"
+            onChange={e => !Number.isNaN(+e.target.value) && setAmount(+e.target.value)}
+            value={amount}
+          />
+          <button type="button" className="product-info-add-inc" onClick={() => handleProductAmount('inc')}>
+            <PlusSVG />
+          </button>
+          {measurment && (
+            <div className={`product-info-select ${isOptionsOpen ? 'product-info-select--open' : ''}`} onClick={handleOptionsOpen}>
+              <span className="product-info-select-measure">{currentMeasure}</span>
+              {measureOptions.length > 1 && (
+                <>
+                  <ArrowSVG />
+                  <div className={`product-info-select-dropdown ${isOptionsOpen ? 'product-info-select-dropdown--open' : ''}`}>
+                    {measureOptions.map((el, idx) => (
+                      <span key={idx} className="product-info-select-dropdown-item" onClick={() => handleActiveMeasure(el)}>
+                        {el}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+        </div>
+        {isAvailable && (
+          <button className="product-info-btn-add" type="button" onClick={handleAddProduct}>
+            добавить в корзину
+          </button>
+        )}
         <span className="product-info-warning">{TRANSLATE[language as 'ru' | 'ua'].productBigPrice}</span>
         <ProductForm title={name} />
       </div>
+      {modalStatus && (
+        <Modal close={() => setModalStatus(false)}>
+          <h2>{TRANSLATE[language as 'ru' | 'ua'].productAdded}</h2>
+        </Modal>
+      )}
     </div>
   );
 };

@@ -1,0 +1,33 @@
+.header-cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &-count {
+    position: absolute;
+    top: -7px;
+    right: -5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 17px;
+    color: var(--black);
+    font-weight: var(--bold-font);
+    font-size: var(--very-small-font-size);
+    line-height: 12px;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: var(--white);
+    border-radius: 50%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .header-cart {
+    &-count {
+      top: 3px;
+      right: -5px;
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import { FluidObject } from 'gatsby-image';
 
+import { IProductTypes } from './CartForm/Types';
+
 export interface IChildren {
   children?: React.ReactNode;
 }
@@ -27,6 +29,8 @@ export interface IContext {
   pathname: string;
   setLanguage: React.Dispatch<React.SetStateAction<string>>;
   setOffice: React.Dispatch<React.SetStateAction<IOffice>>;
+  products: IProductTypes[];
+  setProducts: React.Dispatch<React.SetStateAction<IProductTypes[]>>;
 }
 
 export interface IGoods {

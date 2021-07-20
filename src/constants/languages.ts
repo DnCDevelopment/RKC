@@ -54,6 +54,7 @@ export const TRANSLATE = {
     available: 'Есть в наличии',
     unavailable: 'Нету в наличии',
     stockPage: 'Акции и скидки',
+    productAdded: 'Товар добавлен в корзину',
     downloadPriceList: 'Скачать прайс-лист',
     sendRequest: 'Заказать',
     selectYourCity: 'Выберите ваш город',
@@ -130,6 +131,7 @@ export const TRANSLATE = {
     productBigPrice: 'Ціну при великому обсязі замовлення уточнюйте',
     productGallery: 'Фотогалерея товару',
     productCode: 'Код товару:',
+    productAdded: 'Товар доданий до кошику',
     primaryPage: 'Головна',
     stockPage: 'Акції та знижки',
     sendRequest: 'Замовити',
@@ -266,4 +268,49 @@ export const HAPPY_TO_HELP = {
     `Наша спеціалізація - комплексний підбір і постачання будівельних рішень кожному кліенту.`,
     `РКЦ- це ваш надійний партнер для якісного будівництва.`,
   ],
+};
+
+export const CART = {
+  ru: {
+    title: 'Оформление заказа',
+    inOrder: 'Товары в заказе',
+    totalPay: 'Всего к оплате',
+    form: {
+      namePlaceholder: 'Имя',
+      surnamePlaceholder: 'Фамилия',
+      countryPlaceholder: 'Страна',
+      cityPlaceholder: 'Город',
+      payMethodPlaceholder: 'Способ оплаты',
+    },
+    deliveryOptions: {
+      novaPoshta: 'Нова Пошта',
+      ukrPoshta: 'Укр Пошта',
+      pickup: 'Самовывоз',
+      сourier: 'Курьером',
+    },
+    orderBtn: 'заказать',
+    address: 'Адрес',
+    poshtaPlaceholder: 'Отделение',
+  },
+  ua: {
+    title: 'Оформлення замовлення',
+    inOrder: 'Товари в замовленні',
+    totalPay: 'Всього до сплати',
+    form: {
+      namePlaceholder: "Ім'я",
+      surnamePlaceholder: 'Фамілія',
+      countryPlaceholder: 'Країна',
+      cityPlaceholder: 'Місто',
+      payMethodPlaceholder: 'Спосіб оплати',
+    },
+    deliveryOptions: {
+      novaPoshta: 'Нова Пошта',
+      ukrPoshta: 'Укр Пошта',
+      pickup: 'Самовивіз',
+      сourier: "Кур'єром",
+    },
+    orderBtn: 'замовити',
+    address: 'Адреса',
+    poshtaPlaceholder: 'Відділення',
+  },
 };

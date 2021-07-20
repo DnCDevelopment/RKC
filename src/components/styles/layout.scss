@@ -8,6 +8,8 @@
   --border-color: #cfcfcf;
   --black: #212122;
   --dark-grey: #212121;
+  --ya-dark-grey: #9c9c9c;
+  --very-light-gray: #f4f4f4;
   --grey: #323232;
   --grey-transparent: rgba(50, 50, 50, 0.1);
   --grey-low-transparent: rgba(50, 50, 50, 0.7);
@@ -23,6 +25,7 @@
   --ya-gray-transparent: rgba(33, 33, 34, 0.65);
   --yellow: #ffca08;
   --light-yellow: #ffe278;
+  --cart-border-color: rgba(0, 0, 0, 0.2);
 
   --yellow-shadow: rgba(255, 202, 8, 0.25);
   --offices-shadow: 0px 4px 15px rgba(0, 0, 0, 0.77);
@@ -32,11 +35,12 @@
   --primary-radius: 10px;
   --button-radius: 40px;
   --button-transition: background-color 0.3s ease-in;
-
+  --very-small-font-size: 10px;
   --small-font-size: 12px;
   --normal-font-size: 14px;
   --primary-font-size: 16px;
   --common-font-size: 18px;
+  --huge-font-size: 20px;
   --massive-font-size: 24px;
   --big-font-size: 30px;
   --little-bigger-than-big-font: 36px;

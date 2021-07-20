@@ -19,6 +19,7 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
   const {
     name: { value: name },
     lang,
+    id,
     link: { value: productLink },
     description: { value: description },
     price: { value: price },
@@ -117,6 +118,8 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
         measurment4={measurment4?.value || ''}
         images={images}
         isAvailable={isAvailable?.value || null}
+        code={code}
+        id={id}
       />
       {!!commonProducts?.value?.length && <ProductCommons products={commonProducts?.value} />}
       {specifications?.value?.data && <ProductSpecifications data={specifications.value.data} title={name} />}
@@ -148,6 +151,7 @@ export const productQuery = graphql`
   query($path: String!) {
     cockpitProduct(link: { value: { eq: $path } }, lang: { ne: "any" }) {
       lang
+      id
       link {
         value
       }
