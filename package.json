@@ -15,11 +15,11 @@
 		"clean": "rimraf public",
 		"deploy": "rm -rf .cache public && gatsby build && firebase deploy",
 		"deploy-prod": "rm -rf .cache public node-modules && npm i && gatsby build && firebase deploy",
-		"dev": "gatsby develop -H 0.0.0.0",
+		"dev": "GATSBY_CONCURRENT_DOWNLOAD=5 gatsby develop -H 0.0.0.0",
 		"format": "prettier --write \"src/**/*.{ts,tsx}\"",
 		"lint-css": "stylelint \"src/**/*.{scss,css}\" --fix",
 		"lint": "eslint  \"src/**/*.{ts,tsx}\"",
-		"start": "export GATSBY_STALL_TIMEOUT=100000 GATSBY_CONNECTION_TIMEOUT=100000 && npm run dev",
+		"start": "export GATSBY_STALL_TIMEOUT=1000000 GATSBY_CONNECTION_TIMEOUT=1000000 && npm run dev",
 		"test": "npm run type-check && npm run lint",
 		"type-check": "tsc"
 	},

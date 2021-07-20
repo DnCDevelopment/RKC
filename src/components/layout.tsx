@@ -13,6 +13,8 @@ import { REALMS_OFFICES, OFFICES_ID } from '../constants/realmsOffices';
 import context from '../context/context';
 
 import './styles/layout.scss';
+import Modal from './Modal/Modal';
+import GeolocationModal from './GeolocationModal/GeolocationModal';
 
 const OFFICES_QUERY = graphql`
   {
@@ -47,13 +49,17 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   const offices = nodes.filter(({ lang }) => lang === language);
 
   const [office, setOffice] = useState<IOffice>(offices[0]);
-
   const [products, setProducts] = useState<IProductTypes[]>([]);
+  const [isGeolocationModalOpen, changeGeolocationModalOpen] = useState(false);
 
   useEffect(() => {
     setProducts(JSON.parse(localStorage.getItem('products')));
   }, []);
 
+  const closeGeolocationModal = () => {
+    changeGeolocationModalOpen(false);
+  };
+  
   useEffect(() => {
     if (typeof window !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -72,6 +78,10 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
                 setOffice(offices.find(val => val.id === `${OFFICES_ID[realmOffice]}_${language}`));
               }
             });
+            if (!localStorage.getItem('geolocationModalShown')) {
+              changeGeolocationModalOpen(true);
+              localStorage.setItem('geolocationModalShown', '1');
+            }
           })
           .catch(err => console.error(err));
       });
@@ -105,6 +115,11 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
       <Header />
       <main>{children}</main>
       <Footer />
+      {isGeolocationModalOpen && (
+        <Modal close={closeGeolocationModal}>
+          <GeolocationModal office={office} offices={offices} changeOffice={setOffice} close={closeGeolocationModal} />
+        </Modal>
+      )}
     </context.Provider>
   );
 };
