@@ -53,7 +53,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   const [isGeolocationModalOpen, changeGeolocationModalOpen] = useState(false);
 
   useEffect(() => {
-    setProducts(JSON.parse(localStorage.getItem('products')));
+    setProducts(JSON.parse(localStorage.getItem('products')) || []);
   }, []);
 
   const closeGeolocationModal = () => {
