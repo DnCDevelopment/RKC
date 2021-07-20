@@ -6,6 +6,10 @@
       {
         "source": "/sendMessage",
         "function": "sendMessage"
+      },
+      {
+        "source": "/sendOrder",
+        "function": "sendOrder"
       }
     ],
     "headers": [
