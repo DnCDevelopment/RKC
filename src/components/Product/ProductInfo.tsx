@@ -33,13 +33,13 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   isAvailable,
   code,
 }): JSX.Element => {
+  const measureOptions = [measurment, measurment2, measurment3, measurment4].filter(e => e);
+
   const { language, setProducts } = useContext(context);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
-  const [currentMeasure, setCurrentMeasure] = useState<string>(measurment);
   const [modalStatus, setModalStatus] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>(1);
-
-  const measureOptions = [measurment, measurment2, measurment3, measurment4].filter(e => e);
+  const [currentMeasure, setCurrentMeasure] = useState<string>((measureOptions.length && measureOptions[0]) || '');
 
   const handleProductAmount = (type: 'dec' | 'inc') => {
     if (type === 'inc') return setAmount(prev => prev + 1);
@@ -181,16 +181,20 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           </span>
         </div>
         <div className="product-info-add">
-          <button disabled={amount === 1} type="button" className="product-info-add-dec" onClick={() => handleProductAmount('dec')} />
-          <input
-            className="product-info-add-amount"
-            onChange={e => !Number.isNaN(+e.target.value) && setAmount(+e.target.value)}
-            value={amount}
-          />
-          <button type="button" className="product-info-add-inc" onClick={() => handleProductAmount('inc')}>
-            <PlusSVG />
-          </button>
-          {measurment && (
+          {isAvailable && (
+            <>
+              <button disabled={amount === 1} type="button" className="product-info-add-dec" onClick={() => handleProductAmount('dec')} />
+              <input
+                className="product-info-add-amount"
+                onChange={e => !Number.isNaN(+e.target.value) && setAmount(+e.target.value)}
+                value={amount}
+              />
+              <button type="button" className="product-info-add-inc" onClick={() => handleProductAmount('inc')}>
+                <PlusSVG />
+              </button>
+            </>
+          )}
+          {isAvailable && measureOptions.length && (
             <div className={`product-info-select ${isOptionsOpen ? 'product-info-select--open' : ''}`} onClick={handleOptionsOpen}>
               <span className="product-info-select-measure">{currentMeasure}</span>
               {measureOptions.length > 1 && (
@@ -208,10 +212,12 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
             </div>
           )}
         </div>
-        {isAvailable && (
+        {isAvailable ? (
           <button className="product-info-btn-add" type="button" onClick={handleAddProduct}>
-            добавить в корзину
+            {TRANSLATE[language as 'ru' | 'ua'].addToCart}
           </button>
+        ) : (
+          <h2>{TRANSLATE[language as 'ru' | 'ua'].outOfStock}</h2>
         )}
         <span className="product-info-warning">{TRANSLATE[language as 'ru' | 'ua'].productBigPrice}</span>
         <ProductForm title={name} />

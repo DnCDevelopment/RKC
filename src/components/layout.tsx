@@ -59,7 +59,7 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   const closeGeolocationModal = () => {
     changeGeolocationModalOpen(false);
   };
-  
+
   useEffect(() => {
     if (typeof window !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {

@@ -7,6 +7,7 @@ export const LANGUAGES = {
 
 export const TRANSLATE = {
   ru: {
+    addToCart: 'Добавить в корзину',
     contactFormTitle: 'Ваше уникальное предложение',
     contactFormText: 'Оставьте свои контакты и мы свяжемся с Вами в самое ближайшее время.',
     contactFormAgreement: 'Я согласен с условиями обработки персональных данных.',
@@ -76,6 +77,7 @@ export const TRANSLATE = {
     stockProducts: 'Акционные товары',
     stocksHeader: 'Все акции',
     ourPartners: 'Наши партнеры',
+    outOfStock: 'Нету в наличии',
     buttonDetails: 'Подробнее',
     stockDeadline: 'Акция действует до:',
     happyToHelpTitle: 'мы всегда рады вам помочь!',
@@ -87,6 +89,7 @@ export const TRANSLATE = {
   ua: {
     downloadPriceList: 'Завантажити прайс-ліст',
     available: 'Є в наявності',
+    addToCart: 'Додати до кошика',
     unavailable: 'Немає в наявності',
     contactFormTitle: 'Ваша унікальна пропозиція',
     contactFormText: 'Залиште свої контакти і ми звяжемося з Вами в самий найближчий час.',
@@ -154,6 +157,7 @@ export const TRANSLATE = {
     stockProducts: 'Акційні товари',
     stocksHeader: 'Всі акції',
     ourPartners: 'Наші партнери',
+    outOfStock: 'Немає в наявності',
     buttonDetails: 'Детальніше',
     stockDeadline: 'Акція діє до:',
     happyToHelpTitle: 'ми завжди раді вам допомогти!',
