@@ -78,12 +78,14 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
                 setOffice(offices.find(val => val.id === `${OFFICES_ID[realmOffice]}_${language}`));
               }
             });
+          })
+          .catch(err => console.error(err))
+          .finally(() => {
             if (!localStorage.getItem('geolocationModalShown')) {
               changeGeolocationModalOpen(true);
               localStorage.setItem('geolocationModalShown', '1');
             }
-          })
-          .catch(err => console.error(err));
+          });
       });
     }
   }, []);
