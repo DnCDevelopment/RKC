@@ -28,7 +28,7 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
     measurePrice.set(product.measurment2, product.price2.replace(',', '.'));
     measurePrice.set(product.measurment3, product.price3.replace(',', '.'));
     measurePrice.set(product.measurment4, product.price4.replace(',', '.'));
-    return product.amount * +measurePrice.get(activeMeasure);
+    return product.amount * (+measurePrice.get(activeMeasure) || +product.price);
   };
 
   return (
@@ -53,9 +53,9 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
         <button type="button" className="cart-product-inc" onClick={() => onAmountChange(product.id, 'inc')}>
           <PlusSVG />
         </button>
-        <div className={`cart-product-select ${isOptionsOpen ? 'cart-product-select--open' : ''}`} onClick={handleOptionsOpen}>
-          <span className="cart-product-select-measure">{activeMeasure}</span>
-          {measureOptions.length > 1 && (
+        {measureOptions.length > 1 && (
+          <div className={`cart-product-select ${isOptionsOpen ? 'cart-product-select--open' : ''}`} onClick={handleOptionsOpen}>
+            <span className="cart-product-select-measure">{activeMeasure}</span>
             <>
               <ArrowSVG />
               <div className={`cart-product-select-dropdown ${isOptionsOpen ? 'cart-product-select-dropdown--open' : ''}`}>
@@ -73,8 +73,8 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
                 ))}
               </div>
             </>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

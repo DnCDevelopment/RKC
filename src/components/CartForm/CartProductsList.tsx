@@ -55,7 +55,7 @@ const CartProductsList: React.FC<CardProductsInteface> = ({ callback }) => {
     measurePrice.set(current.measurment3, current.price3.replace(',', '.'));
     measurePrice.set(current.measurment4, current.price4.replace(',', '.'));
 
-    return acc + +measurePrice.get(current.currentMeasure) * +current.amount;
+    return acc + (+measurePrice.get(current.currentMeasure) || +current.price) * +current.amount;
   }, 0);
 
   return (

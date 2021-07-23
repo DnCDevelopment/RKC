@@ -113,7 +113,7 @@ const CartForm: React.FC = () => {
         measurePrice.set(data.measurment2, data.price2.replace(',', '.'));
         measurePrice.set(data.measurment3, data.price3.replace(',', '.'));
         measurePrice.set(data.measurment4, data.price4.replace(',', '.'));
-        const currentPrice = measurePrice.get(currentMeasure);
+        const currentPrice = measurePrice.get(currentMeasure) || +data.price.replace(',', '.');
         return {
           name,
           code,
@@ -135,7 +135,6 @@ const CartForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        mode: 'no-cors',
         body: JSON.stringify(body),
       });
 

@@ -103,6 +103,9 @@ export interface ICommonProduct {
 
 export interface IProductFormProps {
   title: string;
+  measurment: string;
+  price: number;
+  amount: number;
 }
 
 export interface IProductPairsProps {
