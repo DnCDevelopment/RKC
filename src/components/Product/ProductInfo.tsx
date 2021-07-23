@@ -23,8 +23,8 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   price,
   price2,
   price3,
-  id,
   price4,
+  id,
   measurment2,
   measurment3,
   measurment4,
@@ -34,9 +34,15 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   code,
 }): JSX.Element => {
   const measureOptions = [measurment, measurment2, measurment3, measurment4].filter(e => e);
+  const measurePrice = new Map();
+  measurePrice.set(measurment, +price.replace(',', '.'));
+  measurePrice.set(measurment2, +price2.replace(',', '.'));
+  measurePrice.set(measurment3, +price3.replace(',', '.'));
+  measurePrice.set(measurment4, +price4.replace(',', '.'));
 
   const { language, setProducts } = useContext(context);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
+  const [oneClickBuy, setOneClickBuy] = useState<boolean>(false);
   const [modalStatus, setModalStatus] = useState<boolean>(false);
   const [amount, setAmount] = useState<number>(1);
   const [currentMeasure, setCurrentMeasure] = useState<string>((measureOptions.length && measureOptions[0]) || '');
@@ -194,7 +200,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
               </button>
             </>
           )}
-          {isAvailable && measureOptions.length && (
+          {isAvailable && !!measureOptions.length && (
             <div className={`product-info-select ${isOptionsOpen ? 'product-info-select--open' : ''}`} onClick={handleOptionsOpen}>
               <span className="product-info-select-measure">{currentMeasure}</span>
               {measureOptions.length > 1 && (
@@ -212,15 +218,28 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
             </div>
           )}
         </div>
+
         {isAvailable ? (
-          <button className="product-info-btn-add" type="button" onClick={handleAddProduct}>
-            {TRANSLATE[language as 'ru' | 'ua'].addToCart}
-          </button>
+          <div className="product-info-buttons">
+            <button className="product-info-btn-add" type="button" onClick={() => setOneClickBuy(true)}>
+              {TRANSLATE[language as 'ru' | 'ua'].oneClickBuy}
+            </button>
+            <button className="product-info-btn-add" type="button" onClick={handleAddProduct}>
+              {TRANSLATE[language as 'ru' | 'ua'].addToCart}
+            </button>
+          </div>
         ) : (
           <h2>{TRANSLATE[language as 'ru' | 'ua'].outOfStock}</h2>
         )}
-        <span className="product-info-warning">{TRANSLATE[language as 'ru' | 'ua'].productBigPrice}</span>
-        <ProductForm title={name} />
+        <br />
+        {oneClickBuy && (
+          <ProductForm
+            title={name}
+            measurment={currentMeasure}
+            price={measurePrice.get(currentMeasure) || +price.replace(',', '.')}
+            amount={amount}
+          />
+        )}
       </div>
       {modalStatus && (
         <Modal close={() => setModalStatus(false)}>

@@ -8,6 +8,7 @@ export const LANGUAGES = {
 export const TRANSLATE = {
   ru: {
     addToCart: 'Добавить в корзину',
+    oneClickBuy: 'Купить в 1 клик',
     contactFormTitle: 'Ваше уникальное предложение',
     contactFormText: 'Оставьте свои контакты и мы свяжемся с Вами в самое ближайшее время.',
     contactFormAgreement: 'Я согласен с условиями обработки персональных данных.',
@@ -90,6 +91,7 @@ export const TRANSLATE = {
     downloadPriceList: 'Завантажити прайс-ліст',
     available: 'Є в наявності',
     addToCart: 'Додати до кошика',
+    oneClickBuy: 'Придбати в 1 клік',
     unavailable: 'Немає в наявності',
     contactFormTitle: 'Ваша унікальна пропозиція',
     contactFormText: 'Залиште свої контакти і ми звяжемося з Вами в самий найближчий час.',
