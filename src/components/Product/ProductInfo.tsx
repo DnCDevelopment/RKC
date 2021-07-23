@@ -200,7 +200,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
               </button>
             </>
           )}
-          {isAvailable && measureOptions.length > 0 && (
+          {isAvailable && !!measureOptions.length && (
             <div className={`product-info-select ${isOptionsOpen ? 'product-info-select--open' : ''}`} onClick={handleOptionsOpen}>
               <span className="product-info-select-measure">{currentMeasure}</span>
               {measureOptions.length > 1 && (
