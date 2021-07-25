@@ -5,7 +5,9 @@
   width: 100%;
   &-buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
   }
   &-is-available {
     color: var(--white-grey);
@@ -191,6 +193,11 @@
     grid-column-gap: 80px;
     grid-template-columns: 574px auto;
     width: var(--medium-container);
+    &-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+    }
     &-rb {
       padding: 30px 0;
     }
