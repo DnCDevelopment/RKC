@@ -60,6 +60,13 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
     changeGeolocationModalOpen(false);
   };
 
+  const showGeolocationModal = () => {
+    if (!localStorage.getItem('geolocationModalShown')) {
+      changeGeolocationModalOpen(true);
+      localStorage.setItem('geolocationModalShown', '1');
+    }
+  };
+
   useEffect(() => {
     if (typeof window !== 'undefined' && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -80,13 +87,8 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
             });
           })
           .catch(err => console.error(err))
-          .finally(() => {
-            if (!localStorage.getItem('geolocationModalShown')) {
-              changeGeolocationModalOpen(true);
-              localStorage.setItem('geolocationModalShown', '1');
-            }
-          });
-      });
+          .finally(showGeolocationModal);
+      }, showGeolocationModal);
     }
   }, []);
 
