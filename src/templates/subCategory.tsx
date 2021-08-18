@@ -126,6 +126,9 @@ export const query = graphql`
         price {
           value
         }
+        stock {
+          value
+        }
         name {
           value
         }

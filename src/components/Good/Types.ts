@@ -5,4 +5,5 @@ export interface IGoodProps {
   price: string;
   link: string;
   title: string;
+  stock: string;
 }
