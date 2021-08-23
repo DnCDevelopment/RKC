@@ -115,6 +115,8 @@ const CartForm: React.FC = () => {
       officeAddress: office,
       flat: '',
     },
+    validateOnBlur: false,
+    validateOnChange: false,
     onSubmit: async values => {
       const realm = OFFICES_BOT_ID[officeId.slice(0, -3)];
 
