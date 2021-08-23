@@ -2,6 +2,7 @@ import React from 'react';
 
 import HeaderLogo from './HeaderLogo';
 import NavBtn from './NavBtn';
+import HeaderCart from './HeaderCart';
 
 import { IMobileHeaderProps } from './Types';
 
@@ -13,6 +14,7 @@ const MobileHeader: React.FC<IMobileHeaderProps> = ({ isMenuOpen, setMenuOpen })
   <div className="mobile-header">
     <PhoneIcon />
     <HeaderLogo />
+    <HeaderCart />
     <NavBtn isMenuOpen={isMenuOpen} setMenuOpen={setMenuOpen} />
   </div>
 );

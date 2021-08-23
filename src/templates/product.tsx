@@ -19,9 +19,18 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
   const {
     name: { value: name },
     lang,
+    id,
     link: { value: productLink },
     description: { value: description },
     price: { value: price },
+    price2,
+    price3,
+    price4,
+    measurment,
+    measurment2,
+    measurment3,
+    measurment4,
+    isAvailable,
     images: { value: images },
     galleryTitle,
     galleryText,
@@ -96,10 +105,25 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
       />
       <Subheader crumbs={productCrumbs} />
       <ProductBar />
-      <ProductInfo name={name} description={description} price={price} images={images} />
+      <ProductInfo
+        name={name}
+        description={description}
+        price={price}
+        price2={price2?.value || ''}
+        price3={price3?.value || ''}
+        price4={price4?.value || ''}
+        measurment={measurment?.value || ''}
+        measurment2={measurment2?.value || ''}
+        measurment3={measurment3?.value || ''}
+        measurment4={measurment4?.value || ''}
+        images={images}
+        isAvailable={isAvailable?.value || null}
+        code={code}
+        id={id}
+      />
       {!!commonProducts?.value?.length && <ProductCommons products={commonProducts?.value} />}
       {specifications?.value?.data && <ProductSpecifications data={specifications.value.data} title={name} />}
-      {galleryImages && (
+      {galleryImages && galleryBackground && galleryBackground && galleryTitle && (
         <ProductGallery
           title={galleryTitle?.value}
           description={galleryText?.value}
@@ -127,6 +151,7 @@ export const productQuery = graphql`
   query($path: String!) {
     cockpitProduct(link: { value: { eq: $path } }, lang: { ne: "any" }) {
       lang
+      id
       link {
         value
       }
@@ -136,7 +161,31 @@ export const productQuery = graphql`
       description {
         value
       }
+      isAvailable {
+        value
+      }
+      measurment {
+        value
+      }
+      measurment2 {
+        value
+      }
+      measurment3 {
+        value
+      }
+      measurment4 {
+        value
+      }
       price {
+        value
+      }
+      price2 {
+        value
+      }
+      price3 {
+        value
+      }
+      price4 {
         value
       }
       specifications {

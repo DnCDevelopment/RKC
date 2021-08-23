@@ -69,6 +69,75 @@ const addNewUser = (req, res, realm) => {
   }
 };
 
+const formatUserData = (userData) => {
+  const deliveryOptions = {
+    novaPoshta: 'Нова Пошта',
+    ukrPoshta: 'Укр Пошта',
+    pickup: 'Самовывоз',
+    сourier: 'Курьером',
+  }
+  const template = {
+    'Имя': userData.name,
+    'Фамилия':userData.surname,
+    'E-mail':userData.email,
+    'Телефон':userData.phone,
+    'Страна': userData.country,
+    'Город': userData.city,
+    'Метод оплаты': userData.payMethod,
+    'Доставка': deliveryOptions[userData.deliveryMethod],
+    'Адрес офиса':userData.officeAddress,
+    'Отделение новой почты':userData.novaPoshtaDepartment,
+    'Отделение укр почты':userData.ukrPoshtaDepartment,
+    'Адрес':userData.address,
+    'Этаж':userData.flat
+  }
+  return Object.keys(template).filter(k=>!!template[k]).map((k)=>`${k}: ${template[k]}`).join('\n')
+}
+
+const formatProduct = (product) => {
+  const template = {
+    'Название': product.name,
+    'Код':product.code,
+    'Количество': `${product.amount} ${product.measure}`,
+    'Цена': product.price,
+    'Сумма': product.total
+  }
+  return Object.keys(template).filter(k=>!!template[k]).map((k)=>`${k}: ${template[k]}`).join('\n')
+}
+
+exports.sendOrder = functions.https.onRequest(async (req,res)=> {
+  if (!req.query && !req.query.realm && !req.body ) {
+    return res.status(400).end();
+  }
+  const bot = new telegraf.Telegram(relamsBots[req.query.realm]);
+  const separtator = '\n------------\n'
+  const {userData,products,total} = JSON.parse(req.body) 
+
+  try {
+    const userInfo = formatUserData(userData)
+    const productsInfo = products.map((product)=>formatProduct(product)).join(separtator)
+    const totalInfo = `Сумма: ${total}`
+    const message = [userInfo,productsInfo,totalInfo].join(separtator)
+    const users = await admin
+      .firestore()
+      .collection('users')
+      .where('realm', '==', req.query.realm)
+      .get();
+    if (users.size) {
+      users.forEach(doc => {
+         bot.sendMessage(doc.data().id, message);
+       });
+       return res.status(200).send('OK');
+    } else {
+      return res
+        .status(400).end();
+    }
+  } catch(e) {
+    return res.status(400).end()
+  }
+  
+})
+
 exports.sendMessage = functions.https.onRequest(async (req, res) => {
   if (!req.query && !req.query.realm && !req.body) {
     return res.status(400).end();
@@ -83,7 +152,7 @@ exports.sendMessage = functions.https.onRequest(async (req, res) => {
       .collection('users')
       .where('realm', '==', req.query.realm)
       .get();
-      
+
     if (users.size) {
       users.forEach(doc => {
         const message = Object.keys(body).reduce((acc, key) => {
@@ -136,4 +205,9 @@ exports.newUserKharkiv = functions.https.onRequest((req, res) => {
 exports.newUserPoltava = functions.https.onRequest((req, res) => {
   return addNewUser(req, res, 'Poltava');
 });
+
+exports.newUserOdessa = functions.https.onRequest((req, res) => {
+  return addNewUser(req, res, 'Odessa');
+});
+
 

@@ -4,4 +4,5 @@ export interface ICategoryBannerProps {
   description: string;
   fluid: FluidObject;
   title: string;
+  priceList?: string;
 }

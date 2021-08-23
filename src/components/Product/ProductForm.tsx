@@ -50,7 +50,7 @@ const formReducer = (state: IInitialProductFormState, { type = 'change', name, v
   }
 };
 
-const ProductForm: React.FC<IProductFormProps> = ({ title }): JSX.Element => {
+const ProductForm: React.FC<IProductFormProps> = ({ title, amount, measurment, price }): JSX.Element => {
   const [{ name, phone, agree }, dispatch] = useReducer(formReducer, initialState);
   const { language, office } = useContext(context);
 
@@ -72,6 +72,9 @@ const ProductForm: React.FC<IProductFormProps> = ({ title }): JSX.Element => {
         Название: title,
         Имя: name.value,
         Телефон: phone.value,
+        Количество: `${amount} ${measurment}`,
+        Цена: `${price} грн`,
+        Сумма: `${price * amount} грн`,
       };
       sendMessage(body, realm, handleShowModal);
     }

@@ -1,11 +1,13 @@
 .mobile-header {
   display: flex;
+  align-items: center;
   justify-content: space-around;
   width: 100%;
   height: 85px;
   background-color: var(--grey);
 
-  & svg, & .logo-link {
+  & svg,
+  & .logo-link {
     margin: auto 0;
   }
 }

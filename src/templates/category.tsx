@@ -25,6 +25,7 @@ const Category: React.FC<ICategoriesProps> = ({ data }): JSX.Element => {
       link: { value: linkValue },
       title: { value: titleValue },
       lang,
+      videoLink,
     },
   } = data;
 
@@ -46,11 +47,16 @@ const Category: React.FC<ICategoriesProps> = ({ data }): JSX.Element => {
   ];
 
   return (
-    <div className="catalog-page page">
+    <div className="catalog-page page big-container">
       <Seo breadcrumbs={crumbs} description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
       <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
       <Catalog nodes={nodes} title={TRANSLATE[language as 'ua' | 'ru'].subCategory} />
+      {videoLink && videoLink.value && (
+        <div className="catalog-page-video-wrapper">
+          <iframe className="catalog-page-video" title="Catalog video" src={videoLink.value} />
+        </div>
+      )}
     </div>
   );
 };
@@ -77,6 +83,9 @@ export const query = graphql`
         value
       }
       title {
+        value
+      }
+      videoLink {
         value
       }
     }

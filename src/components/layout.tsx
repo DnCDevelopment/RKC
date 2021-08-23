@@ -5,6 +5,7 @@ import Header from './Header/Header';
 import Footer from './Footer/Footer';
 
 import { ILayoutProps, IOffice, IOfficeQuery } from './Types';
+import { IProductTypes } from './CartForm/Types';
 
 import { LANGUAGES } from '../constants/languages';
 import { REALMS_OFFICES, OFFICES_ID } from '../constants/realmsOffices';
@@ -12,6 +13,8 @@ import { REALMS_OFFICES, OFFICES_ID } from '../constants/realmsOffices';
 import context from '../context/context';
 
 import './styles/layout.scss';
+import Modal from './Modal/Modal';
+import GeolocationModal from './GeolocationModal/GeolocationModal';
 
 const OFFICES_QUERY = graphql`
   {
@@ -46,6 +49,23 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   const offices = nodes.filter(({ lang }) => lang === language);
 
   const [office, setOffice] = useState<IOffice>(offices[0]);
+  const [products, setProducts] = useState<IProductTypes[]>([]);
+  const [isGeolocationModalOpen, changeGeolocationModalOpen] = useState(false);
+
+  useEffect(() => {
+    setProducts(JSON.parse(localStorage.getItem('products')) || []);
+  }, []);
+
+  const closeGeolocationModal = () => {
+    changeGeolocationModalOpen(false);
+  };
+
+  const showGeolocationModal = () => {
+    if (!localStorage.getItem('geolocationModalShown')) {
+      changeGeolocationModalOpen(true);
+      localStorage.setItem('geolocationModalShown', '1');
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined' && navigator.geolocation) {
@@ -66,8 +86,9 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
               }
             });
           })
-          .catch(err => console.error(err));
-      });
+          .catch(err => console.error(err))
+          .finally(showGeolocationModal);
+      }, showGeolocationModal);
     }
   }, []);
 
@@ -94,10 +115,15 @@ const Layout: React.FC<ILayoutProps> = ({ children, location: { pathname } }): J
   }, [language]);
 
   return (
-    <context.Provider value={{ language, office, offices, pathname, setLanguage, setOffice }}>
+    <context.Provider value={{ language, office, offices, pathname, setLanguage, setOffice, products, setProducts }}>
       <Header />
       <main>{children}</main>
       <Footer />
+      {isGeolocationModalOpen && (
+        <Modal close={closeGeolocationModal}>
+          <GeolocationModal office={office} offices={offices} changeOffice={setOffice} close={closeGeolocationModal} />
+        </Modal>
+      )}
     </context.Provider>
   );
 };

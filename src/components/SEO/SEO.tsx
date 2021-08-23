@@ -180,6 +180,45 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
     >
       <link rel="canonical" href={path} />
       <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-368235489" />
+      <script>{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-368235489');
+      `}</script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-WRCRVNLS9M" />
+      <script>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-WRCRVNLS9M');
+      `}
+      </script>
+      <script src="//code-ya.jivosite.com/widget/0L1T4wN5dF" async />
+      <script>
+        {`
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:2436918,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+        `}
+      </script>
+      <script>
+        {`
+        window.smartlook||(function(d) {
+          var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+          var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+          c.charset='utf-8';c.src='https://rec.smartlook.com/recorder.js';h.appendChild(c);
+          })(document);
+          smartlook('init', '9a0b24afbc93737b5eac99fcb7bec95446370661');
+        `}
+      </script>
     </Helmet>
   );
 };

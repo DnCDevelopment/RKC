@@ -136,6 +136,13 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: 'gatsby-plugin-google-tagmanager',
+      options: {
+        id: 'GTM-MWDQPCJ',
+        includeInDevelopment: false,
+      },
+    },
     'gatsby-plugin-sass',
     'gatsby-plugin-typescript',
     'gatsby-plugin-sharp',

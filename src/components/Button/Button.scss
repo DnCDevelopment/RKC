@@ -7,7 +7,7 @@
 
   &-primary {
     background-color: var(--yellow);
-    border: none;
+    border: var(--yellow) solid 2px;
   }
 
   &-stock {

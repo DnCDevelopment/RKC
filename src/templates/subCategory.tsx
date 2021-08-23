@@ -20,6 +20,7 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
           title: { value: categoryTitle },
         },
       },
+      videoLink,
       description: { value: descriptionValue },
       image: {
         value: {
@@ -27,6 +28,7 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
         },
       },
       lang,
+      priceList,
       link: { value: linkValue },
       title: { value: titleValue },
     },
@@ -55,8 +57,13 @@ const SubCategory: React.FC<ISubCategoriesProps> = ({ data }): JSX.Element => {
     <div className="big-container catalog-page">
       <Seo breadcrumbs={crumbs} description={descriptionValue} lang={lang as 'ru' | 'ua'} path={linkValue} title={titleValue} />
       <Subheader crumbs={crumbs} />
-      <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} />
+      <CategoryBanner description={descriptionValue} fluid={fluid} title={titleValue} priceList={priceList?.value.publicURL || null} />
       <Goods goods={nodes} />
+      {videoLink && videoLink.value && (
+        <div className="catalog-page-video-wrapper">
+          <iframe className="catalog-page-video" title="Catalog video" src={videoLink.value} />
+        </div>
+      )}
     </div>
   );
 };
@@ -77,6 +84,11 @@ export const query = graphql`
       description {
         value
       }
+      priceList {
+        value {
+          publicURL
+        }
+      }
       image {
         value {
           childImageSharp {
@@ -91,6 +103,9 @@ export const query = graphql`
         value
       }
       title {
+        value
+      }
+      videoLink {
         value
       }
     }
