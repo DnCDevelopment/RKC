@@ -130,6 +130,7 @@
         overflow: visible;
       }
       &-item {
+        padding: 5px;
         cursor: pointer;
         &:hover {
           background-color: var(--yellow);
