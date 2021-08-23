@@ -24,14 +24,25 @@ const phoneRegex = /^\+38\(0\d{2}\)-\d{3}-\d{2}-\d{2}$/;
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const formSchema = Yup.object().shape({
-  name: Yup.string().min(2),
-  surname: Yup.string().min(2),
-  email: Yup.string().matches(emailRegex),
-  country: Yup.string().min(2),
-  city: Yup.string().min(2),
+  name: Yup.string()
+    .min(2)
+    .required(),
+  surname: Yup.string()
+    .min(2)
+    .required(),
+  email: Yup.string()
+    .matches(emailRegex)
+    .required(),
+  country: Yup.string()
+    .min(2)
+    .required(),
+  city: Yup.string()
+    .min(2)
+    .required(),
   phone: Yup.string()
     .matches(phoneRegex)
-    .not(['0000000000']),
+    .not(['0000000000'])
+    .required(),
   ukrPoshtaDepartment: Yup.string().when('deliveryMethod', {
     is: 'ukrPoshta',
     then: Yup.string().required(),
@@ -44,7 +55,7 @@ const formSchema = Yup.object().shape({
     is: 'сourier',
     then: Yup.string().required(),
   }),
-  deliveryMethod: Yup.string(),
+  deliveryMethod: Yup.string().required(),
   officeAddress: Yup.string().required(),
   flat: Yup.number().when('deliveryMethod', {
     is: 'сourier',
@@ -177,7 +188,7 @@ const CartForm: React.FC = () => {
         <ArrowSVG />
         <div className={`cart-form-row-select ${isNovaPoshtaOpen ? 'cart-form-row-select--open' : ''}`}>
           {isNovaPoshtaOpen &&
-            fuse.search(formik.values.city || '').map(({ address }) => (
+            (fuse.search(formik.values.city || '') as { address: string }[]).map(({ address }) => (
               <p
                 key={address}
                 className="cart-form-row-select-value"
