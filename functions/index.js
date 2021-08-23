@@ -111,7 +111,8 @@ exports.sendOrder = functions.https.onRequest(async (req,res)=> {
   }
   const bot = new telegraf.Telegram(relamsBots[req.query.realm]);
   const separtator = '\n------------\n'
-  const {userData,products,total} = JSON.parse(req.body) 
+  console.log(req.body);
+  const {userData,products,total} = req.body 
 
   try {
     const userInfo = formatUserData(userData)
