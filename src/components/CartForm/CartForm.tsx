@@ -126,14 +126,15 @@ const CartForm: React.FC = () => {
         measurePrice.set(data.measurment2, data.price2.replace(',', '.'));
         measurePrice.set(data.measurment3, data.price3.replace(',', '.'));
         measurePrice.set(data.measurment4, data.price4.replace(',', '.'));
-        const currentPrice = measurePrice.get(currentMeasure) || +data.price.replace(',', '.');
+        const finalStock = !Number.isNaN(+data.stock) ? +data.stock : 1;
+        const currentPrice = (measurePrice.get(currentMeasure) || +data.price.replace(',', '.')) * finalStock;
         return {
           name,
           code,
           measure: currentMeasure,
           amount,
-          price: currentPrice,
-          total: currentPrice * amount,
+          price: currentPrice.toFixed(2),
+          total: (currentPrice * amount).toFixed(2),
         };
       });
       const body = {
@@ -141,13 +142,14 @@ const CartForm: React.FC = () => {
           ...values,
         },
         products: formattedProducts,
-        total: formattedProducts.reduce((acc, current) => acc + current.total, 0),
+        total: formattedProducts.reduce((acc, current) => acc + +current.total, 0).toFixed(2),
       };
       const response = await fetch(`/sendOrder?realm=${realm}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'no-cors',
         body: JSON.stringify(body),
       });
 

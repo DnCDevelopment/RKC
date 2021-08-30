@@ -50,10 +50,11 @@ const CartProductsList: React.FC<CardProductsInteface> = ({ callback }) => {
 
   const totalSum = products.reduce((acc, current) => {
     const measurePrice = new Map();
-    measurePrice.set(current.measurment, current.price.replace(',', '.'));
-    measurePrice.set(current.measurment2, current.price2.replace(',', '.'));
-    measurePrice.set(current.measurment3, current.price3.replace(',', '.'));
-    measurePrice.set(current.measurment4, current.price4.replace(',', '.'));
+    const { stock } = current;
+    measurePrice.set(current.measurment, +current.price.replace(',', '.') * stock);
+    measurePrice.set(current.measurment2, +current.price2.replace(',', '.') * stock);
+    measurePrice.set(current.measurment3, +current.price3.replace(',', '.') * stock);
+    measurePrice.set(current.measurment4, +current.price4.replace(',', '.') * stock);
 
     return acc + (+measurePrice.get(current.currentMeasure) || +current.price) * +current.amount;
   }, 0);

@@ -25,6 +25,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    &-stock-old {
+      margin-right: 5px;
+      color: var(--red);
+      font-size: var(--primary-font-size);
+      text-decoration: line-through;
+    }
     &-wrapper {
       display: flex;
       align-items: center;

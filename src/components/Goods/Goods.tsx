@@ -18,8 +18,9 @@ const Goods: React.FC<IGoodsProps> = ({ goods }): JSX.Element => (
         link: { value: linkValue },
         price: { value: priceValue },
         name: { value: titleValue },
+        stock,
       }) => (
-        <Good fluid={fluid} key={linkValue} link={linkValue} price={priceValue} title={titleValue} />
+        <Good fluid={fluid} key={linkValue} link={linkValue} price={priceValue} title={titleValue} stock={stock?.value || ''} />
       )
     )}
   </div>

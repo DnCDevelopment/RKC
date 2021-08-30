@@ -25,6 +25,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   price3,
   price4,
   id,
+  stock,
   measurment2,
   measurment3,
   measurment4,
@@ -35,10 +36,12 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
 }): JSX.Element => {
   const measureOptions = [measurment, measurment2, measurment3, measurment4].filter(e => e);
   const measurePrice = new Map();
+  const finalStock = !Number.isNaN(+stock?.replace(',', '.')) ? 1 - +stock.replace(',', '.') / 100 : 1;
+
   measurePrice.set(measurment, +price.replace(',', '.'));
-  measurePrice.set(measurment2, +price2.replace(',', '.'));
-  measurePrice.set(measurment3, +price3.replace(',', '.'));
-  measurePrice.set(measurment4, +price4.replace(',', '.'));
+  if (!measurePrice.has(measurment2)) measurePrice.set(measurment2, +price2.replace(',', '.'));
+  if (!measurePrice.has(measurment3)) measurePrice.set(measurment3, +price3.replace(',', '.'));
+  if (!measurePrice.has(measurment4)) measurePrice.set(measurment4, +price4.replace(',', '.'));
 
   const { language, setProducts } = useContext(context);
   const [isOptionsOpen, setOptionsOpen] = useState<boolean>(false);
@@ -77,6 +80,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           measurment2,
           measurment3,
           measurment4,
+          stock: finalStock,
           images,
           measurment,
           amount,
@@ -97,6 +101,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
             price2,
             price3,
             price4,
+            stock: finalStock,
             measurment2,
             measurment3,
             measurment4,
@@ -121,6 +126,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         price2,
         price3,
         price4,
+        stock: finalStock,
         measurment2,
         measurment3,
         measurment4,
@@ -158,32 +164,27 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
         <div className="product-info-price-wrapper">
           <span className="product-info-price-title">{TRANSLATE[language as 'ru' | 'ua'].productPrice}</span>
           <span className="product-info-price">
-            <span>
-              {!Number.isNaN(+price.replace(',', '.')) ? (
-                `${priceFormat.format(+price.replace(',', '.'))} грн`
-              ) : (
-                <span className="product-info-price-not-a-number">{price}</span>
-              )}
-              {measurment && <span className="product-info-measurment"> / за {measurment}</span>}
-            </span>
-            {!Number.isNaN(+price2.replace(',', '.')) && measurment2 && (
-              <span>
-                {`${priceFormat.format(+price2.replace(',', '.'))} грн`}{' '}
-                <span className="product-info-measurment"> / за {measurment2}</span>
-              </span>
-            )}
-            {!Number.isNaN(+price3.replace(',', '.')) && measurment3 && (
-              <span>
-                {`${priceFormat.format(+price3.replace(',', '.'))} грн`}{' '}
-                <span className="product-info-measurment"> / за {measurment3}</span>
-              </span>
-            )}
-            {!Number.isNaN(+price4.replace(',', '.')) && measurment4 && (
-              <span>
-                {`${priceFormat.format(+price4.replace(',', '.'))} грн`}{' '}
-                <span className="product-info-measurment"> / за {measurment4}</span>
-              </span>
-            )}
+            {Array.from(measurePrice)
+              .filter(([_, value]) => +value)
+              .map(([key, value]) => (
+                <span>
+                  {!Number.isNaN(+value) ? (
+                    <>
+                      {finalStock !== 1 ? (
+                        <span className="product-info-price-stock">
+                          <span className="product-info-price-stock-old">{priceFormat.format(value)}</span>
+                          {priceFormat.format(value * finalStock)} грн
+                        </span>
+                      ) : (
+                        <>{priceFormat.format(value)} грн</>
+                      )}
+                    </>
+                  ) : (
+                    <span className="product-info-price-not-a-number">{value}</span>
+                  )}
+                  {key && <span className="product-info-measurment"> / за {key}</span>}
+                </span>
+              ))}
           </span>
         </div>
         <div className="product-info-add">
@@ -236,7 +237,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           <ProductForm
             title={name}
             measurment={currentMeasure}
-            price={measurePrice.get(currentMeasure) || +price.replace(',', '.')}
+            price={(measurePrice.get(currentMeasure) || +price.replace(',', '.')) * finalStock}
             amount={amount}
           />
         )}
