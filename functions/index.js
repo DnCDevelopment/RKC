@@ -111,12 +111,11 @@ exports.sendOrder = functions.https.onRequest(async (req,res)=> {
   }
   const bot = new telegraf.Telegram(relamsBots[req.query.realm]);
   const separtator = '\n------------\n'
-  console.log(req.body);
-  const {userData,products,total} = req.body 
+  const { userData, products, total } = JSON.parse(req.body); 
 
   try {
     const userInfo = formatUserData(userData)
-    const productsInfo = products.map((product)=>formatProduct(product)).join(separtator)
+    const productsInfo = products.map((product) => formatProduct(product)).join(separtator)
     const totalInfo = `Сумма: ${total}`
     const message = [userInfo,productsInfo,totalInfo].join(separtator)
     const users = await admin
@@ -133,7 +132,7 @@ exports.sendOrder = functions.https.onRequest(async (req,res)=> {
       return res
         .status(400).end();
     }
-  } catch(e) {
+  } catch(err) {
     return res.status(400).end()
   }
   
