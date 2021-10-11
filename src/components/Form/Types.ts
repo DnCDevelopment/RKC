@@ -5,4 +5,5 @@ export interface IFormProps {
   positionFieldValue?: string;
   type?: string;
   modal?: boolean;
+  dataLayerEvent?: string;
 }

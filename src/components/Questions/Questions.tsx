@@ -19,7 +19,7 @@ const Questions: React.FC = (): JSX.Element => {
           <p dangerouslySetInnerHTML={{ __html: TRANSLATE[language as 'ru' | 'ua'].questionsText }} />
         </div>
         <div className="form-container">
-          <Form />
+          <Form dataLayerEvent="sendform" />
         </div>
       </div>
       <div className="arc-container">

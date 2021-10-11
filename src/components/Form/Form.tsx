@@ -29,6 +29,7 @@ const Form: React.FC<IFormProps> = ({
   positionFieldValue = undefined,
   type = '',
   modal = false,
+  dataLayerEvent = '',
 }): JSX.Element => {
   const [checkBoxChecked, setCheckBoxChecked] = useState(false);
   const [tel, setTel] = useState('');
@@ -73,6 +74,7 @@ const Form: React.FC<IFormProps> = ({
     e => {
       e.preventDefault();
       if (validForm) {
+        typeof window !== 'undefined' && (window as any).dataLayer.push({ event: dataLayerEvent });
         const baseForm = {
           Заявка: positionFieldValue ? 'Отзыв на вакансию' : 'Обратная связь',
           Имя: nameRef.current.value,
