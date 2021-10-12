@@ -74,13 +74,13 @@ const Form: React.FC<IFormProps> = ({
     e => {
       e.preventDefault();
       if (validForm) {
-        typeof window !== 'undefined' && (window as any).dataLayer.push({ event: dataLayerEvent });
         const baseForm = {
           Заявка: positionFieldValue ? 'Отзыв на вакансию' : 'Обратная связь',
           Имя: nameRef.current.value,
           Телефон: tel,
         };
         const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
+        typeof window !== 'undefined' && (window as any).dataLayer.push({ event: dataLayerEvent });
         if (mailRef.current) {
           if (positionFieldValue) {
             return sendMessage({ ...baseForm, Почта: mailRef.current.value, Вакансия: positionFieldValue }, realm, handleShowModal);
