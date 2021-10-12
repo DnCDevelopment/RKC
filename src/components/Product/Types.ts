@@ -24,7 +24,7 @@ export interface IProductInfoProps {
   measurment4: string;
   stock: string;
   code: string;
-  isAvailable?: boolean | null;
+  productAvailable?: string | null;
   images: IProductPhoto[];
 }
 
