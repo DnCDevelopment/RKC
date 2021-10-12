@@ -73,8 +73,8 @@ const ProductForm: React.FC<IProductFormProps> = ({ title, amount, measurment, p
         Имя: name.value,
         Телефон: phone.value,
         Количество: `${amount} ${measurment}`,
-        Цена: `${price} грн`,
-        Сумма: `${price * amount} грн`,
+        Цена: `${price.toFixed(2)} грн`,
+        Сумма: `${(price * amount).toFixed(2)} грн`,
       };
       sendMessage(body, realm, handleShowModal);
     }

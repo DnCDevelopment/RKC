@@ -47,6 +47,9 @@ export interface IGoods {
   name: {
     value: string;
   };
+  stock?: {
+    value: string;
+  };
 }
 
 export interface IGoodsCategory {

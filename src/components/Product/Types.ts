@@ -22,6 +22,7 @@ export interface IProductInfoProps {
   measurment2: string;
   measurment3: string;
   measurment4: string;
+  stock: string;
   code: string;
   isAvailable?: boolean | null;
   images: IProductPhoto[];

@@ -14,10 +14,19 @@
   }
 
   &-price {
+    display: flex;
+    flex-direction: column;
     color: var(--black);
     font-weight: var(--hard-font);
     font-size: var(--normal-font-size);
-    line-height: 2;
+
+    &-old {
+      color: var(--red);
+      font-weight: var(--thin-font);
+      font-size: var(--very-small-font-size);
+      line-height: var(--very-small-font-size);
+      text-decoration: line-through;
+    }
 
     &-container {
       display: flex;

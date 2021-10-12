@@ -22,13 +22,15 @@ const CartProduct: React.FC<IProductProps> = ({ product, onAmountChange, onCurre
     if (measureOptions.length > 1) setOptionsOpen(prev => !prev);
   };
 
+  const { stock = 1 } = product;
+
   const calcTotalPrice = () => {
     const measurePrice = new Map();
-    measurePrice.set(product.measurment, product.price.replace(',', '.'));
-    measurePrice.set(product.measurment2, product.price2.replace(',', '.'));
-    measurePrice.set(product.measurment3, product.price3.replace(',', '.'));
-    measurePrice.set(product.measurment4, product.price4.replace(',', '.'));
-    return product.amount * (+measurePrice.get(activeMeasure) || +product.price);
+    measurePrice.set(product.measurment, +product.price.replace(',', '.') * stock);
+    measurePrice.set(product.measurment2, +product.price2.replace(',', '.') * stock);
+    measurePrice.set(product.measurment3, +product.price3.replace(',', '.') * stock);
+    measurePrice.set(product.measurment4, +product.price4.replace(',', '.') * stock);
+    return product.amount * (+measurePrice.get(activeMeasure) || +product.price * stock);
   };
 
   return (

@@ -1,5 +1,4 @@
 .banner-container {
-
   .banner-img {
     width: 100%;
     object-fit: cover;
@@ -24,7 +23,7 @@
       }
     }
   }
-  
+
   h2 {
     margin: 0;
     font-size: var(--big-font-size);
@@ -41,12 +40,35 @@
     .banner-content-container {
       .banner-content {
         width: 700px;
-        margin-left: 30%;
       }
     }
 
     h2 {
       font-size: var(--large-font-size);
     }
+  }
+}
+
+@media only screen and (min-width: 1030px) {
+  .banner-container .banner-content-container .banner-content {
+    margin-left: 35%;
+  }
+}
+
+@media only screen and (min-width: 1300px) {
+  .banner-container .banner-content-container .banner-content {
+    margin-left: 41%;
+  }
+}
+
+@media only screen and (min-width: 2000px) {
+  .banner-container .banner-content-container .banner-content {
+    margin-left: 43%;
+  }
+}
+
+@media only screen and (min-width: 2500px) {
+  .banner-container .banner-content-container .banner-content {
+    margin-left: 45%;
   }
 }

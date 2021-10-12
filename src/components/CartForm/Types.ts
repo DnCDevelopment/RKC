@@ -30,6 +30,7 @@ export interface IProductTypes {
   measurment2: string | null;
   measurment3: string | null;
   measurment4: string | null;
+  stock: number;
   link: string;
   price: string;
   price2: string;
