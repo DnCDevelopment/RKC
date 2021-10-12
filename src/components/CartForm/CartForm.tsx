@@ -208,10 +208,15 @@ const CartForm: React.FC = () => {
     );
   };
 
+  const handleCartSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    formik.handleSubmit(e);
+    typeof window !== 'undefined' && (window as any).dataLayer.push({ event: 'zakaz' });
+  };
+
   return (
     <div className="cart-form-wrapper">
       <h2 className="cart-form-title">{CART[language as 'ru' | 'ua'].title}</h2>
-      <form className="cart-form" onSubmit={formik.handleSubmit}>
+      <form className="cart-form" onSubmit={handleCartSubmit}>
         <div className="cart-form-row">
           <input
             className={`cart-form-input ${formik.errors.name ? 'cart-form-input--error' : ''}`}

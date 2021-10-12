@@ -31,7 +31,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
   measurment4,
   images,
   measurment,
-  isAvailable,
+  productAvailable,
   code,
 }): JSX.Element => {
   const measureOptions = [measurment, measurment2, measurment3, measurment4].filter(e => e);
@@ -156,9 +156,15 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
       <div className="product-info-rb">
         <h1 className="product-info-title">{name}</h1>
         <div className="product-info-text" dangerouslySetInnerHTML={{ __html: description }} />
-        {isAvailable !== null && (
+        {(productAvailable === 'IN_STOCK' || productAvailable === null) && (
           <div className="product-info-is-available">
-            {isAvailable ? TRANSLATE[language as 'ru' | 'ua'].available : TRANSLATE[language as 'ru' | 'ua'].unavailable}
+            {productAvailable === 'UNAVAILABLE'
+              ? TRANSLATE[language as 'ru' | 'ua'].unavailable
+              : productAvailable === 'UNDER_THE_ORDER'
+              ? TRANSLATE[language as 'ru' | 'ua'].underOrder
+              : productAvailable === 'EXPECTING'
+              ? TRANSLATE[language as 'ru' | 'ua'].expecting
+              : TRANSLATE[language as 'ru' | 'ua'].available}
           </div>
         )}
         <div className="product-info-price-wrapper">
@@ -188,7 +194,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           </span>
         </div>
         <div className="product-info-add">
-          {isAvailable && (
+          {productAvailable && (
             <>
               <button disabled={amount === 1} type="button" className="product-info-add-dec" onClick={() => handleProductAmount('dec')} />
               <input
@@ -201,7 +207,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
               </button>
             </>
           )}
-          {isAvailable && !!measureOptions.length && (
+          {productAvailable && !!measureOptions.length && (
             <div className={`product-info-select ${isOptionsOpen ? 'product-info-select--open' : ''}`} onClick={handleOptionsOpen}>
               <span className="product-info-select-measure">{currentMeasure}</span>
               {measureOptions.length > 1 && (
@@ -220,7 +226,7 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
           )}
         </div>
 
-        {isAvailable ? (
+        {productAvailable === 'IN_STOCK' || productAvailable === null ? (
           <div className="product-info-buttons">
             <button className="product-info-btn-add" type="button" onClick={() => setOneClickBuy(true)}>
               {TRANSLATE[language as 'ru' | 'ua'].oneClickBuy}
@@ -230,7 +236,15 @@ const ProductInfo: React.FC<IProductInfoProps> = ({
             </button>
           </div>
         ) : (
-          <h2>{TRANSLATE[language as 'ru' | 'ua'].outOfStock}</h2>
+          <h2>
+            {productAvailable === 'UNAVAILABLE'
+              ? TRANSLATE[language as 'ru' | 'ua'].unavailable
+              : productAvailable === 'UNDER_THE_ORDER'
+              ? TRANSLATE[language as 'ru' | 'ua'].underOrder
+              : productAvailable === 'EXPECTING'
+              ? TRANSLATE[language as 'ru' | 'ua'].expecting
+              : ''}
+          </h2>
         )}
         <br />
         {oneClickBuy && (

@@ -69,8 +69,8 @@ export interface ICockpitProduct {
       };
     } | null;
   };
-  isAvailable: {
-    value: boolean;
+  productAvailable: {
+    value: string;
   } | null;
   name: {
     value: string;
