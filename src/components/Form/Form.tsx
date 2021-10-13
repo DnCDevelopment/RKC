@@ -80,8 +80,6 @@ const Form: React.FC<IFormProps> = ({
           Телефон: tel,
         };
         const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
-        console.log(dataLayerEvent);
-
         if (dataLayerEvent && typeof window !== 'undefined') {
           (window as any).dataLayer.push({ event: dataLayerEvent });
         }
