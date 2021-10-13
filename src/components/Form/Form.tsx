@@ -29,7 +29,7 @@ const Form: React.FC<IFormProps> = ({
   positionFieldValue = undefined,
   type = '',
   modal = false,
-  dataLayerEvent = '',
+  dataLayerEvent,
 }): JSX.Element => {
   const [checkBoxChecked, setCheckBoxChecked] = useState(false);
   const [tel, setTel] = useState('');
@@ -80,7 +80,9 @@ const Form: React.FC<IFormProps> = ({
           Телефон: tel,
         };
         const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
-        typeof window !== 'undefined' && (window as any).dataLayer.push({ event: dataLayerEvent });
+        if (dataLayerEvent && typeof window !== 'undefined') {
+          (window as any).dataLayer.push({ event: dataLayerEvent });
+        }
         if (mailRef.current) {
           if (positionFieldValue) {
             return sendMessage({ ...baseForm, Почта: mailRef.current.value, Вакансия: positionFieldValue }, realm, handleShowModal);

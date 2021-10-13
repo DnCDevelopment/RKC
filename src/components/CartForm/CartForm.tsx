@@ -208,7 +208,7 @@ const CartForm: React.FC = () => {
     );
   };
 
-  const handleCartSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCartSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
     formik.handleSubmit(e);
     typeof window !== 'undefined' && (window as any).dataLayer.push({ event: 'zakaz' });
   };
@@ -374,7 +374,7 @@ const CartForm: React.FC = () => {
             handleSearchWarehouses()
           ))}
       </form>
-      {products?.length > 0 ? <CartProductsList callback={() => formik.handleSubmit()} /> : <EmptyCart />}
+      {products?.length > 0 ? <CartProductsList callback={() => handleCartSubmit()} /> : <EmptyCart />}
       {modalStatus !== 'hidden' && (
         <Modal close={handleModalClose}>
           <CartModal status={modalStatus} />
