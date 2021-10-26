@@ -183,6 +183,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
         },
       ]}
     >
+      <meta name="title" content={SEO_ITEMS.ru.aboutPage.description} />
       <link rel="canonical" href={path} />
       <script type="application/ld+json">{JSON.stringify(schemaOrgJSONLD)}</script>
       <script async src="https://www.googletagmanager.com/gtag/js?id=AW-368235489" />
