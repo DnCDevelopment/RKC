@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import favicon from '../../assets/images/gm-favicon.png';
 
 import { ISeoProps, ISiteQueryProps } from './Types';
+import { SEO_ITEMS } from '../../constants/SEOItems';
 
 const SITE_QUERY = graphql`
   {
@@ -147,6 +148,10 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
         {
           name: 'description',
           content: seoDescription,
+        },
+        {
+          name: 'title',
+          content: SEO_ITEMS.ru.aboutPage.description,
         },
         {
           property: 'og:title',
