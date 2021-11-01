@@ -151,7 +151,7 @@ const SEO: React.FC<ISeoProps> = ({ article, breadcrumbs, description, lang, pat
         },
         {
           name: 'title',
-          content: SEO_ITEMS.ru.aboutPage.description,
+          content: 'РКЦ — официальный  представитель Технониколь',
         },
         {
           property: 'og:title',
