@@ -66,7 +66,9 @@ const ProductForm: React.FC<IProductFormProps> = ({ title, amount, measurment, p
   const sendRequest: FormEventHandler = e => {
     e.preventDefault();
     if (name.valid && phone.valid && agree.value) {
-      typeof window !== 'undefined' && (window as any).dataLayer.push({ event: 'buy1click' });
+      if (typeof window !== 'undefined') {
+        (window as any).dataLayer.push({ event: 'buy1click' });
+      }
       const realm = OFFICES_BOT_ID[office.id.slice(0, -3)];
       const body = {
         Заявка: 'Заказ',

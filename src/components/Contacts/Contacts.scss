@@ -16,7 +16,7 @@ header {
         height: 20px;
 
         path {
-          fill: #323232 !important;
+          fill: var(--grey) !important;
         }
       }
 
@@ -26,7 +26,7 @@ header {
         line-height: 1.5;
 
         path {
-          fill: #323232 !important;
+          fill: var(--grey) !important;
         }
       }
 
@@ -36,7 +36,7 @@ header {
         line-height: 1.5;
 
         path {
-          fill: #323232 !important;
+          fill: var(--grey) !important;
         }
       }
 

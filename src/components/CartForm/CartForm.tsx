@@ -210,7 +210,9 @@ const CartForm: React.FC = () => {
 
   const handleCartSubmit = (e?: React.FormEvent<HTMLFormElement>) => {
     formik.handleSubmit(e);
-    typeof window !== 'undefined' && (window as any).dataLayer.push({ event: 'zakaz' });
+    if (typeof window !== 'undefined') {
+      (window as any).dataLayer.push({ event: 'zakaz' });
+    }
   };
 
   return (

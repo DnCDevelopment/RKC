@@ -1,6 +1,9 @@
 version: 2
 jobs:
   build:
+    branches:
+      only:
+        - main
     docker:
       - image: circleci/node:14
     working_directory: ~/RKC

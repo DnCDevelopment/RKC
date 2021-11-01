@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useContext, useState } from 'react';
 import ProductPhotos from './ProductPhotos';
 import ProductForm from './ProductForm';
