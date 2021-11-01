@@ -62,7 +62,7 @@ const Banner: React.FC = (): JSX.Element => {
       {showModal &&
         createPortal(
           <Modal close={handleShowModal}>
-            <Form modal type="modal-window" />
+            <Form modal type="modal-window" dataLayerEvent="sendform" />
           </Modal>,
           document.body
         )}

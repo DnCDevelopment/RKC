@@ -30,7 +30,7 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
     measurment2,
     measurment3,
     measurment4,
-    isAvailable,
+    productAvailable,
     stock,
     images: { value: images },
     galleryTitle,
@@ -118,7 +118,7 @@ const Product: React.FC<IProductProps> = ({ data: { cockpitProduct } }): JSX.Ele
         measurment3={measurment3?.value || ''}
         measurment4={measurment4?.value || ''}
         images={images}
-        isAvailable={isAvailable?.value || null}
+        productAvailable={productAvailable?.value || null}
         code={code}
         stock={stock?.value || ''}
         id={id}
@@ -163,7 +163,7 @@ export const productQuery = graphql`
       description {
         value
       }
-      isAvailable {
+      productAvailable {
         value
       }
       measurment {
