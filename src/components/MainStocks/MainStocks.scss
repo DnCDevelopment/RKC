@@ -95,7 +95,7 @@
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 1fr 1fr;
-    height: 550px;
+    min-height: 550px;
     &-info {
       grid-column: 2;
       box-sizing: content-box;
