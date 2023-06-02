@@ -20,10 +20,18 @@
     border-radius: var(--primary-radius);
     transform: translate(-50%, -50%);
 
-    .close {
-      height: 20px;
+    .header {
+      display: flex;
+      justify-content: flex-end;
       margin-bottom: 10px;
-      cursor: pointer;
+
+      &__button {
+        border: none;
+        padding: 4px;
+        margin: 0;
+        background: none;
+        cursor: pointer;
+      }
     }
 
     svg {
