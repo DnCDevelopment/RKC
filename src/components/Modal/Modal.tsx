@@ -10,8 +10,10 @@ const Modal: React.FC<IModalProps> = ({ close, children }): JSX.Element => {
   return (
     <div className="modal-wrapper">
       <div className="modal-window-container">
-        <div className="close" onClick={close}>
-          <Close />
+        <div className="header">
+          <button className="header__button" type="button" onClick={close}>
+            <Close />
+          </button>
         </div>
         {children}
       </div>

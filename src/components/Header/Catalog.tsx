@@ -19,11 +19,11 @@ const Catalog: React.FC<ICatalogProps> = ({ isMobile }): JSX.Element => {
 
   const [isActive, setActive] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.innerWidth >= 1030) {
-      setActive(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined' && window.innerWidth >= 1030) {
+  //     setActive(true);
+  //   }
+  // }, []);
 
   const handleCatalogOpen = useCallback(() => {
     setActive(!isActive);

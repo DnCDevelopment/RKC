@@ -90,6 +90,7 @@ module.exports = {
       resolve: '@fika/gatsby-source-cockpit',
       options: {
         token: process.env.COCKPIT_TOKEN,
+        accessToken: process.env.COCKPIT_ACCESS_TOKEN,
         baseUrl: process.env.COCKPIT_URL,
         locales: ['ru', 'ua'],
         collections: [],
