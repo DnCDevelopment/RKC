@@ -1,6 +1,5 @@
-import React, { useReducer, useState, FormEventHandler, useContext } from 'react';
-
-import ThanksModal from '../ThanksModal/ThanksModal';
+import React, { useReducer, FormEventHandler, useContext } from 'react';
+import { navigate } from 'gatsby';
 
 import { IAction } from '../Types';
 import { IInitialProductFormState, IProductFormProps } from './Types';
@@ -22,7 +21,7 @@ const initialState: IInitialProductFormState = {
   name: {
     value: '',
     isTouched: false,
-    regexp: /^[A-Za-zа-яА-Я ]{2,255}$/,
+    regexp: /^(?=.*[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-])[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-]{2,150}$/,
     valid: false,
   },
   phone: {
@@ -54,13 +53,8 @@ const ProductForm: React.FC<IProductFormProps> = ({ title, amount, measurment, p
   const [{ name, phone, agree }, dispatch] = useReducer(formReducer, initialState);
   const { language, office } = useContext(context);
 
-  const [openModal, setModalOpen] = useState(false);
-  const [isSuccess, setSuccess] = useState(true);
-
   const handleShowModal = (success: boolean = false) => {
-    setModalOpen(!openModal);
-    setSuccess(success);
-    document.body.classList.toggle('fixed');
+    navigate(success ? '/success-order' : '/error');
   };
 
   const sendRequest: FormEventHandler = e => {
@@ -166,7 +160,6 @@ const ProductForm: React.FC<IProductFormProps> = ({ title, amount, measurment, p
           </p>
         </label>
       </form>
-      <ThanksModal isSuccess={isSuccess} handleShowModal={handleShowModal} showModal={openModal} />
     </>
   );
 };

@@ -1,0 +1,23 @@
+.thanks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 0;
+  font-size: var(--common-font-size);
+  text-align: center;
+
+  &-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 20px auto;
+
+    svg {
+      width: inherit;
+      height: inherit;
+    }
+  }
+
+  &-button {
+    margin-top: 40px;
+  }
+}

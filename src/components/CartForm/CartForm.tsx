@@ -7,8 +7,6 @@ import { navigate } from 'gatsby';
 
 import CartProductsList from './CartProductsList';
 import EmptyCart from './EmptyCart';
-import Modal from '../Modal/Modal';
-import CartModal from './CartModal';
 
 import context from '../../context/context';
 import { CART } from '../../constants/languages';
@@ -78,7 +76,6 @@ const CartForm: React.FC = () => {
   const [isDeliveryOpen, setDeliveryOpen] = useState<boolean>(false);
   const [isOfficesOpen, setOfficesOpen] = useState<boolean>(false);
   const [isNovaPoshtaOpen, setNovaPoshtaOpen] = useState<boolean>(false);
-  const [modalStatus, setModalStatus] = useState<'hidden' | 'success' | 'failure'>('hidden');
 
   const handleNovaPoshtaOpen = () => {
     setNovaPoshtaOpen(prev => !prev);
@@ -153,7 +150,13 @@ const CartForm: React.FC = () => {
         body: JSON.stringify(body),
       });
 
-      setModalStatus(response.status === 200 ? 'success' : 'failure');
+      if (response.status === 200) {
+        localStorage.removeItem('products');
+        setProducts([]);
+        navigate('/success-order');
+      } else {
+        navigate('/error');
+      }
     },
     validationSchema: formSchema,
   });
@@ -169,15 +172,6 @@ const CartForm: React.FC = () => {
   const options = {
     includeScore: false,
     keys: ['settlement'],
-  };
-
-  const handleModalClose = () => {
-    if (modalStatus === 'success') {
-      localStorage.removeItem('products');
-      setProducts([]);
-      navigate('/');
-    }
-    setModalStatus('hidden');
   };
 
   const handleSearchWarehouses = () => {
@@ -377,11 +371,6 @@ const CartForm: React.FC = () => {
           ))}
       </form>
       {products?.length > 0 ? <CartProductsList callback={() => handleCartSubmit()} /> : <EmptyCart />}
-      {modalStatus !== 'hidden' && (
-        <Modal close={handleModalClose}>
-          <CartModal status={modalStatus} />
-        </Modal>
-      )}
     </div>
   );
 };

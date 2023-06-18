@@ -43,7 +43,7 @@ const Form: React.FC<IFormProps> = ({
   const nameRef = useRef(null);
   const mailRef = useRef(null);
 
-  const nameRegex = /^(?=.*[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-])[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-]{2,50}$/;
+  const nameRegex = /^(?=.*[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-])[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-]{2,150}$/;
 
   const checkName = () => setValidName(nameRegex.test(nameRef.current.value) ? 1 : 0);
   const checkPhone = () => setValidPhone(tel.length === 13 ? 1 : 0);
