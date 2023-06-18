@@ -7,7 +7,7 @@ import { CART } from '../../constants/languages';
 import CartProduct from './CartProduct';
 
 interface CardProductsInteface {
-  callback?: () => void;
+  callback: () => void;
 }
 
 const CartProductsList: React.FC<CardProductsInteface> = ({ callback }) => {

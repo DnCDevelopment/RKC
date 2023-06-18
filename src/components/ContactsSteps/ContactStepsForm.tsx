@@ -24,7 +24,7 @@ const initialState: IInitialState = {
   name: {
     value: '',
     isTouched: false,
-    regexp: /^[A-Za-zа-яА-Я ]{2,255}$/,
+    regexp: /^(?=.*[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-])[a-zA-ZА-Яа-яіІїЇЄє'ʼ\s-]{2,150}$/,
     valid: false,
   },
   phone: {
